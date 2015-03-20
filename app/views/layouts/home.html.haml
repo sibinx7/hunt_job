@@ -18,14 +18,17 @@
   %title= content_for?(:title) ? yield(:title) : "Untitled"
 
   = stylesheet_link_tag "application"
+  = yield :extra_css
   = javascript_include_tag "vendor/custom.modernizr"
   = csrf_meta_tag
 
 %body
-
-  = yield
+  .home-wrapper
+    = render 'layouts/header'
+    = yield
 
   = javascript_include_tag "application"
-
+  // add page specific
+  = yield :extra_js
 :plain
   </html>

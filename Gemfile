@@ -45,10 +45,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 # Haml support
  gem 'haml', '~> 4.0.6'
+ gem "haml-rails", "~> 0.9"
 
 # Simple form
  gem 'simple_form'
 
 # Foundation gem
  gem 'zurb-foundation', '~> 4.3.2'
+
+# Fontawesome
+ gem "font-awesome-rails"
 

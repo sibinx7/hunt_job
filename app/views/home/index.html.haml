@@ -1,0 +1,43 @@
+= content_for :extra_js do
+  = javascript_include_tag 'home.slides.min'
+  :javascript
+    $(function(){
+      $('.home_slider').slidesjs({
+        width:window.innerWidth,
+        height: $('.home_slider').innerHeight(),
+        navigation:false
+      })
+    })
+
+
+
+// main image slider with content
+=content_for :title,"HuntJobs | Online Job search portal"
+
+.home_slider
+  %a.slidesjs-previous.slidesjs-navigation
+    %i.fa.fa-chevron-circle-left
+  %a.slidesjs-next.slidesjs-navigation
+    %i.fa.fa-chevron-circle-right
+  .each_items{:style => "background:url(#{asset_path 'bg_one.jpg'})"}
+    %h
+      Contents
+    %p
+      This is a simple paragraph
+  .each_items{:style => "background:url(#{asset_path 'bg_two.jpg'})"}
+    %h
+      Contents
+    %p
+      This is a simple paragraph
+  .each_items{:style => "background:url(#{asset_path 'bg_three.jpg'})"}
+    %h
+      Contents
+    %p
+      This is a simple paragraph
+  .each_items{:style => "background:url(#{asset_path 'bg_four.jpg'})"}
+    %h
+      Contents
+    %p
+      This is a simple paragraph
+
+
