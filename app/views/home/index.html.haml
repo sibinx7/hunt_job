@@ -1,5 +1,6 @@
 = content_for :extra_js do
-  = javascript_include_tag 'home.slides.min'
+  = javascript_include_tag 'slides'
+  = javascript_include_tag 'owl.carousel'
   :javascript
     $(function(){
       $('.home_slider').slidesjs({
@@ -8,36 +9,172 @@
         navigation:false
       })
     })
+    $(document).ready(function() {
+      var owl = $(".testimonials_content");
+      owl.owlCarousel({
+        itemsCustom : [
+          [0, 1],
+          [450, 1],
+          [600, 1],
+          [700, 2],
+          [1000, 3],
+          [1200, 3],
+          [1400, 3],
+          [1600, 3]
+        ],
+        navigation : true
+      });
+    });
+
+= content_for :extra_css do
+  = stylesheet_link_tag 'owl.carousel'
+  = stylesheet_link_tag 'owl.theme'
+  = stylesheet_link_tag 'owl.transitions'
+
 
 
 
 // main image slider with content
 =content_for :title,"HuntJobs | Online Job search portal"
-
 .home_slider
   %a.slidesjs-previous.slidesjs-navigation
     %i.fa.fa-chevron-circle-left
   %a.slidesjs-next.slidesjs-navigation
     %i.fa.fa-chevron-circle-right
   .each_items{:style => "background:url(#{asset_path 'bg_one.jpg'})"}
-    %h
-      Contents
-    %p
-      This is a simple paragraph
+    %h1.hd
+      Lorem ipsum dolor sit amet.
+    %p.p
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer faucibus nibh nec turpis lacinia,
+      ac dictum lacus aliquet. Vestibulum scelerisque leo ut nisi suscipit ullamcorper. Nulla in tincidunt est.
+      Nullam erat diam, tincidunt eget lacus non, dictum venenatis magna. Duis quis dolor et velit interdum scelerisque.
+      Integer eget vestibulum magna, ac dictum tortor. Morbi varius est ipsum, id consequat enim iaculis nec.
   .each_items{:style => "background:url(#{asset_path 'bg_two.jpg'})"}
-    %h
-      Contents
-    %p
-      This is a simple paragraph
+    %h1.hd
+      Curabitur blandit tortor
+    %p.p
+      Mauris eleifend ex et arcu auctor pharetra. Pellentesque consectetur efficitur erat,
+      quis semper tortor gravida vitae. Nulla faucibus tellus at massa auctor tincidunt.
+      Cras dapibus nunc nisl. Nam congue dui ut lacus hendrerit bibendum. Integer feugiat fringilla lectus,
+      in cursus augue porta finibus. Donec finibus justo in ante commodo fermentum. Aenean vitae egestas eros.
   .each_items{:style => "background:url(#{asset_path 'bg_three.jpg'})"}
-    %h
-      Contents
-    %p
-      This is a simple paragraph
+    %h1.hd
+      Sed maximus bibendum orci, ac
+    %p.p
+      Nam eros nisl, semper at diam quis, convallis ornare massa. Integer dignissim dolor nisi,
+      at blandit elit facilisis ut. Vestibulum malesuada ligula non tellus ullamcorper accumsan.
+      Curabitur tincidunt, lacus pharetra dignissim faucibus, tellus felis imperdiet leo, eget maximus
+      turpis nisl a lectus. Duis mi dui, sagittis non ultrices non, molestie eu dolor. Vestibulum orci ex,
+      mollis sed finibus ac, molestie eu turpis. In scelerisque justo eget ipsum tempus,
+      sed porttitor libero rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada
+      fames ac turpis egestas. Sed in ante quis est dignissim ultrices. Curabitur facilisis nisl
+      vel finibus varius. Sed mattis nisi vitae nulla volutpat, eget aliquam magna eleifend. Aenean sed ligula arcu.
   .each_items{:style => "background:url(#{asset_path 'bg_four.jpg'})"}
-    %h
-      Contents
-    %p
-      This is a simple paragraph
+    %h1.hd
+      Vestibulum eget ipsum nibh
+    %p.p
+      Nunc ultricies diam at est fermentum viverra. Sed pharetra, leo eget ultricies aliquet,
+      risus sapien imperdiet lorem, nec eleifend ipsum lacus sed lorem. Praesent sit amet vulputate libero.
+      Maecenas fringilla nisl vitae ante faucibus, ut sollicitudin tellus efficitur.
+      Vestibulum vel faucibus diam, eget varius est. Vivamus aliquam tincidunt purus eu maximus.
+      Phasellus a massa volutpat, dignissim tellus sit amet, faucibus enim. Maecenas justo eros,
+      tristique a consequat imperdiet, porttitor sed felis. Integer et suscipit ante,
+      sit amet scelerisque eros. Cras sapien urna, tempus vitae pellentesque id, porta varius ligula.
+      Cras ante sem, pharetra id accumsan sed, mollis at elit. Vivamus euismod sodales nibh,
+      a pulvinar risus mattis nec. Nullam non augue eget tortor laoreet rhoncus non sit amet dolor.
+// features
+%section.features
+  .row
+    .small-12.columns
+      %h2.feature.title.text-center
+        %span
+          Features
+        Lorem ipsum dolor sit amet.
+  .row
+    .small-12.columns
+      %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-3.feature-wrapper
+        %li
+          .each-feature
+            .inner-box
+              %i.fa.fa-paint-brush
+              %h5
+                Web Design
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nulla non volutpat tellus, ut maximus magna. Nam volutpat rutrum quam,
+                a placerat justo auctor id.
+              %a{:href=>""}
+                Learn more
+        %li
+          .each-feature
+            .inner-box
+              %i.fa.fa-code
+              %h5
+                Web Development
+              %p
+                Aliquam nec porttitor lorem, ac viverra mi. Aenean interdum in diam quis tincidunt.
+                Integer mattis metus suscipit, vestibulum purus eu.
+              %a{:href=>""}
+                Learn more
+        %li
+          .each-feature
+            .inner-box
+              %i.fa.fa-bank
+              %h5
+                Marketting
+              %p
+                In vulputate lacus volutpat quam iaculis aliquam. Etiam eleifend quam at laoreet pulvinar.
+                In aliquam metus urna, sed euismod turpis egestas ac.
+              %a{:href=>""}
+                Learn more
 
+
+
+
+
+// browse projects
+%section.browse.text-center
+  %h1
+    Bid your favorite Projects
+  %a.button.alert.radius
+    Browse Projects
+// Testimonials
+%section.testimonials
+  .row
+    .small-12.columns
+      %h2.feature.title.text-center
+        %span
+          Testimonials
+        People said about meminz
+  .row
+    .small-12.columns
+      .testimonials-wrapper
+        .testimonials_content.owl-carousel.owl-theme
+          .customer-feedback
+            .customer-says
+              %i.fa.fa-quote-left
+              Aliquam nec porttitor lorem, ac viverra mi. Aenean interdum in diam quis tincidunt.
+              Integer mattis metus suscipit, vestibulum purus eu, faucibus arcu.
+              %i.fa.fa-quote-left.left_one
+            .customer-name.text-right
+              %a
+                Johns Mathew
+          .customer-feedback
+            .customer-says
+              %i.fa.fa-quote-left
+              Aliquam nec porttitor lorem, ac viverra mi. Aenean interdum in diam quis tincidunt.
+              Integer mattis metus suscipit, vestibulum purus eu, faucibus arcu.
+              %i.fa.fa-quote-left.left_one
+            .customer-name.text-right
+              %a
+                Johns Mathew
+          .customer-feedback
+            .customer-says
+              %i.fa.fa-quote-left
+              Aliquam nec porttitor lorem, ac viverra mi. Aenean interdum in diam quis tincidunt.
+              Integer mattis metus suscipit, vestibulum purus eu, faucibus arcu.
+              %i.fa.fa-quote-left.left_one
+            .customer-name.text-right
+              %a
+                Johns Mathew
 

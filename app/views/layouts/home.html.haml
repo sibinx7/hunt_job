@@ -20,15 +20,16 @@
   = stylesheet_link_tag "application"
   = yield :extra_css
   = javascript_include_tag "vendor/custom.modernizr"
+  = javascript_include_tag "application"
   = csrf_meta_tag
-
+  = yield :extra_js
 %body
   .home-wrapper
     = render 'layouts/header'
     = yield
 
-  = javascript_include_tag "application"
+
   // add page specific
-  = yield :extra_js
+
 :plain
   </html>
