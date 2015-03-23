@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'home/about'
 
+  get 'home/sign_in'
+
   get 'home/contact'
 
   get 'home/maintenance'

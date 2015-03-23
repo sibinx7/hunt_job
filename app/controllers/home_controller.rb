@@ -8,6 +8,9 @@ class HomeController < ApplicationController
   def contact
   end
 
+  def sign_in
+
+  end
   def maintenance
   end
 end
