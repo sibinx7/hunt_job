@@ -69,3 +69,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 # Active Admin
  gem 'activeadmin', '~> 1.0.0.pre1'
+
+# Strong Parameters to replace attr_accessable

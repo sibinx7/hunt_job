@@ -569,3 +569,35 @@ body{
     padding:20px;
   }
 }
+.social_media_login{
+  display: table;
+  margin:15px auto 10px;
+  li{
+    display: inline-block;
+    margin:5px;
+    list-style:none;
+    a{
+      display: block;
+      width:36px;
+      height:36px;
+      text-decoration: none;
+      text-align: center;
+      .fa{
+        font-size:24px;
+        line-height: 38px;
+      }
+    }
+  }
+  li.facebook{
+    a{
+      background:#145c99;
+      color:#fff;
+    }
+  }
+  li.twitter{
+    a{
+      background: #1fbddf;
+      color:#fff;
+    }
+  }
+}
