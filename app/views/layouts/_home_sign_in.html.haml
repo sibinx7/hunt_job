@@ -1,7 +1,13 @@
 // modal for sign in
-.modal.fade#sign-in-modal{"tabindex"=>'-1',"role"=>"dialog",:aria=>{:labelledby=>"SignInModal",:hidden=>"true"}}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{:type=>"button",:data=>{:dismiss=>"modal"},:aria=>{:label=>"close"}}
-          %span{:aria=>{:hidden=>  'true'}} &times;
+#sign-in-modal.reveal-modal.small{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+  %h2#modalTitle Sign In
+  .form-box
+    = form_tag() do
+      = text_field_tag(:q)
+      = password_field_tag(:q)
+      = submit_tag "Sign In", :class=>"button primary small ripple alert right"
+  %p
+    Don't have account,
+    %a{:href=>'#'}Register
+    Here
+  %a.close-reveal-modal{"aria-label" => "Close"} ×

@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
-
+//= require jquery.materialripple
 $(function(){ $(document).foundation(); });

@@ -56,3 +56,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Fontawesome
  gem "font-awesome-rails"
 
+# Authentication with social media
+
+ gem 'omniauth-github', :github => 'intridea/omniauth-github'
+ gem 'omniauth-facebook'
+ gem 'omniauth-twitter'
+ gem 'omniauth-google'
+ gem 'omniauth-google-oauth2'
+ gem 'omniauth-gplus', '~> 2.0'
+ gem 'omniauth-linkedin-oauth2'
+
+
+# Active Admin
+ gem 'activeadmin', '~> 1.0.0.pre1'

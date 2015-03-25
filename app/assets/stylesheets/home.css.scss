@@ -544,3 +544,28 @@ body{
 .about_us{
   padding:50px 0 40px;
 }
+
+// Form
+.form-box{
+  .button.primary{
+    background:lighten($primaryBtnColor,5%);
+    color:#fff;
+    border-color:$primaryHeaderMenuActive;
+  }
+}
+
+// Contact us
+.contact-us{
+  padding:80px 0 100px;
+}
+
+// User sign in - devise 
+.user-signin{
+  background: #f9f9f9 url("login_page.jpg") no-repeat;
+  background-size: cover;
+  padding:160px 0 120px;
+  .user-sign-in-inner{
+    background: rgba(255,255,255,0.8);
+    padding:20px;
+  }
+}

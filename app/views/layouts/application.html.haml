@@ -19,5 +19,8 @@
     = javascript_include_tag "vendor/custom.modernizr"
     = csrf_meta_tags
   %body
+    .home-wrapper
+    = render 'layouts/home.header'
     = yield
+    = render 'layouts/home.footer'
     = javascript_include_tag "application"
