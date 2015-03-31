@@ -1,6 +1,10 @@
 class DashboardController < ApplicationController
-  render layout: "admin_dashboard"
+
+  before_action :authenticate_user!
+
+
   def index
+    puts "I am on Dashobard"
   end
 
   def users

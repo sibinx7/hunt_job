@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :services
+
   mount Ckeditor::Engine => '/ckeditor'
   resources :projects
 

@@ -1,3 +1,27 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// Secondary main menu
+.dashboard-secondary{
+  background:#de6258;
+  .secondary{
+    padding:0;
+    ul{
+      padding:0;
+      margin:0;
+      li{
+        display: inline-block;
+        list-style:none;
+        a{
+          display:block;
+          padding:10px;
+          color:#fff;
+          font-size:18px;
+        }
+      }
+      li.active a,li a:hover,li a:focus{
+        background:darken(#de6258,15%)
+      }
+    }
+  }
+}

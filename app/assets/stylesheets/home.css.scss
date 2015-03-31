@@ -87,6 +87,11 @@ body{
                 text-transform: uppercase;
                 padding-right:10px;
                 padding-left:10px;
+                span.fa{
+                  color:lighten($primaryColor,10%);
+                  font-weight: bold;
+                  margin-right:7px;
+                }
               }
               a.active,a:hover,a:focus{
                 border-color:$primaryColor;
@@ -433,8 +438,18 @@ body{
   padding:20px 0;
   background:#444;
   color:#fff;
+  .contacts{
+    display: table;
+    margin-right: 0;
+    float: right;
+  }
+  .about-box{
+    max-width:240px;
+  }
   .about-box,.links-box,.contacts{
     padding:10px 12px;
+    min-width: 160px;
+    display: table;
     h5{
       color:#fff;
       position: relative;
@@ -462,6 +477,9 @@ body{
   margin-right: -20px;
 }
 .links-box{
+  display: table;
+  margin-left:auto;
+  margin-right:auto;
   ul{
     display: block;
     li{
