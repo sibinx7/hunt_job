@@ -70,4 +70,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Active Admin
  gem 'activeadmin', '~> 1.0.0.pre1'
 
-# Strong Parameters to replace attr_accessable
+# Strong Parameters to replace attr_accessable, no need, strong parameters already exist
+
+# Active payment for payments
+ gem 'activemerchant'
+
+# Footer notes
+
+group :development do
+ gem 'rails-footnotes', '~> 4.0'
+end
+
+ gem 'ckeditor', github: 'galetahub/ckeditor'
+ gem 'paperclip'

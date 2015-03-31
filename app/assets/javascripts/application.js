@@ -15,4 +15,5 @@
 //= require foundation
 //= require turbolinks
 //= require jquery.materialripple
+//= require ckeditor/init
 $(function(){ $(document).foundation(); });

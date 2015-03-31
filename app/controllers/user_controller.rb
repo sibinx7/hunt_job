@@ -1,12 +1,9 @@
 class UserController < ApplicationController
-  def create
-    @user = User.new(user_params)
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  end
+  protected
 
-  private
-
-  def user_params
-    params.require(:user).permit(:email, :provider, :uid,)
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:provider, :uid,:email) }
   end
 end

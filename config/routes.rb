@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :projects
+
+  devise_for :users
+             # :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, controllers:{omniauth_callbacks:'omniauth_callbacks'}
   get 'home/index'
 
   get 'home/about'
@@ -84,4 +89,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # Mount CKEditor
+  # mount Ckeditor::Engine => '/ckeditor'
 end

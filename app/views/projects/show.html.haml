@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @project.title
+%p
+  %b Description:
+  = @project.description.html_safe
+%p
+  %b Creator:
+  = @project.creator
+%p
+  %b Skills:
+  = @project.skills
+%p
+  %b Min budget:
+  = @project.min_budget
+%p
+  %b Max budget:
+  = @project.max_budget
+%p
+  %b Duration:
+  = @project.duration
+%p
+  %b Developer:
+  = @project.assigned_to
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path

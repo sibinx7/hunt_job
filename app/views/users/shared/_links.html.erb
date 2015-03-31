@@ -23,8 +23,11 @@
       <li class="facebook">
         <%= link_to '<span class="fa fa-facebook"></span>'.html_safe, omniauth_authorize_path(resource_name, :facebook) %>
       </li>
-      <li class="twitter">
-        <%= link_to '<span class="fa fa-twitter"></span>'.html_safe, omniauth_authorize_path(resource_name, :twitter) %>
+      <li class="github">
+        <%= link_to '<span class="fa fa-github"></span>'.html_safe, omniauth_authorize_path(resource_name, :github)%>
+      </li>
+      <li class="google">
+        <%= link_to '<span class="fa fa-google"></span>'.html_safe, omniauth_authorize_path(resource_name, :google_oauth2)%>
       </li>
     </ul>
 
