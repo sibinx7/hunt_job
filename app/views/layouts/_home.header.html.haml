@@ -1,31 +1,32 @@
 / header
-.sticky
-  .contain-to-grid
-    %nav.top-bar.my-top-bar{:data => {:topbar=>"", :options=>""}, :role=>""}
-      %ul.title-area
-        %li.name
-          %h1
-            %a{:href=>"#"} HuntJob
-        %li.toggle-topbar.menu-icon
-          %a{:href=>""}
-            %span
-      %section.top-bar-section
-        %ul.right
-          %li.active
-            %a{:href=>'#'}
-              Home
-          %li.active
-            %a{:href=>'#'}
-              About
-          %li.active
-            %a{:href=>'#'}
-              Contact
-          - if  not user_signed_in?
-            %li.sign-in
-              %a{:href=>"/users/sign_in"}
-                Sign In
-          - else
-            %li.sign-in
-              %a{:href=>"/users/sign_out"}
-                Sign Out
+.custom-top-header
+  .sticky
+    .contain-to-grid
+      %nav.top-bar.my-top-bar{:data => {:topbar=>"", :options=>""}, :role=>""}
+        %ul.title-area
+          %li.name
+            %h1
+              %a{:href=>"#"} HuntJob
+          %li.toggle-topbar.menu-icon
+            %a{:href=>""}
+              %span
+        %section.top-bar-section
+          %ul.right
+            %li.active
+              %a{:href=>'#'}
+                Home
+            %li.active
+              %a{:href=>'#'}
+                About
+            %li.active
+              %a{:href=>'#'}
+                Contact
+            - if  not user_signed_in?
+              %li.sign-in
+                %a{:href=>"/users/sign_in"}
+                  Sign In
+            - else
+              %li.sign-in
+                %a{:href=>"/users/sign_out"}
+                  Sign Out
 /end header

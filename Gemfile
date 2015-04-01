@@ -51,7 +51,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
  gem 'simple_form'
 
 # Foundation gem
- gem 'zurb-foundation', '~> 4.3.2'
+ gem 'foundation-rails', '5.4.5'
+ # gem 'foundation-rails'
+ # gem 'zurb-foundation', '~> 4.3.2'
 
 # Fontawesome
  gem "font-awesome-rails"

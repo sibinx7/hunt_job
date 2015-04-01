@@ -39,7 +39,7 @@ body{
       position: relative;
       z-index: 2;
     }
-    .contain-to-grid{
+    .contain-to-grid,.custom-top-header{
       background:#2e2e2e;
       position: relative;
       .my-top-bar{
@@ -47,7 +47,7 @@ body{
         height:80px;
         background:#2e2e2e;
         color:#a0a0a0;
-        display: table;
+//        display: table;
         .title-area{
           display: block;
           vertical-align: middle;
@@ -96,7 +96,11 @@ body{
               a.active,a:hover,a:focus{
                 border-color:$primaryColor;
                 color:$primaryHeaderMenuActive;
+                background:transparent;
               }
+            }
+            li.active,li.sign-in,li.sign-out{
+              background:transparent;
             }
           }
         }
@@ -471,11 +475,24 @@ body{
     }
   }
 }
-.custom-container{
-  display: block;
-  margin-left:-20px;
-  margin-right: -20px;
+@media all and (min-width:768px){
+  .footer{
+    .about-box{
+      padding-left:0px;
+    }
+    .contacts{
+      padding-right: 0;
+    }
+  }
 }
+@media all and (min-width:1192px){
+  .custom-container{
+    display: block;
+    margin-left:-20px;
+    margin-right: -20px;
+  }
+}
+
 .links-box{
   display: table;
   margin-left:auto;
