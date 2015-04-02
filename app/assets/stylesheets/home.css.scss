@@ -460,7 +460,8 @@ body{
     }
     h5:after{
       content:'';
-      width:50%;
+      width:60%;
+      min-width:90px;
       height:2px;
       left:0;
       bottom:-5px;

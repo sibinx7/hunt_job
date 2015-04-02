@@ -25,3 +25,38 @@
     }
   }
 }
+/* Main dashboard */
+.dashboard-wrapper{
+  background:#f9f9f9;
+  padding:40px 0 60px;
+  .quick-view{
+    h6{
+      padding-bottom:3px;
+      border-bottom:2px solid #999;
+    }
+    .quick-money-project{
+      background:lighten(#de6258,20%);
+      color:#fff;
+      .quick-money-view{
+        background:darken(#de6258,5%);
+        font-size:48px;
+        text-align: center;
+        padding:50px 0px;
+        min-height:140px;
+      }
+      >.quick-view-footer{
+        background:#333;
+        color:darken(#de6258,10%);
+        padding:10px;
+        font-size:16px;
+        text-align: center;
+        font-weight: bold;
+        text-shadow:0 1px 0 lighten(#de6258,10%);
+        text-transform: uppercase;
+        b{
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
