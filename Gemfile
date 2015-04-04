@@ -51,7 +51,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
  gem 'simple_form'
 
 # Foundation gem
- gem 'foundation-rails', '5.4.5'
+ gem 'foundation-rails'
  # gem 'foundation-rails'
  # gem 'zurb-foundation', '~> 4.3.2'
 

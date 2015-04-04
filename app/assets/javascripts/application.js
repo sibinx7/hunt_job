@@ -12,9 +12,11 @@
 // about supported directives.
 //= require jquery.js
 //= require jquery_ujs
+//= require jquery-ui.min
 //= require foundation
 //= require turbolinks
 //= require jquery.materialripple
 //= require ckeditor/init
+//= require tag-it.min
 $(function(){ $(document).foundation(); });
 

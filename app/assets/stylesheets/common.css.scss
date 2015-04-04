@@ -56,10 +56,61 @@
 .margin-bottom-15{
   margin-bottom:15px;
 }
+.font-bold{
+  font-weight: bold;
+}
 /** Paginations **/
 ul.custom-pagination{
   li.current a,
   li.current button{
     background: #DE6258;
   }
+}
+/** Tag it customization **/
+.custom-tagit{
+  .tagit.ui-widget.ui-widget-content.ui-corner-all{
+      border-radius:0;
+      background:#fff;
+  }
+  .ui-widget input,.ui-widget select,.ui-widget textarea{
+    font-size:14px;
+  }
+  input[type="text"]{
+    height:auto;
+  }
+  ul.tagit li.tagit-choice{
+    border-radius:0;
+    border-color:#ccc;
+    background:#eee;
+  }
+  ul.tagit li.tagit-choice a.tagit-close{
+    right:.2em;
+    span.text-icon {
+      color: #fff;
+      background: darken(#DE6258, 25%);
+      border-radius: 50%;
+      padding: 1px 3px;
+    }
+  }
+  ul.tagit li.tagit-choice-editable{
+    padding-right:24px;
+  }
+  ul.tagit li.tagit-choice:hover, ul.tagit li.tagit-choice.remove{
+    border-color:#aaa;
+    background:#e7e7e7;
+  }
+}
+.search-form{
+  .custom-submit-btn,.range-slider.round .range-slider-handle{
+    background:lighten(#de6258,5%);
+  }
+  .custom-submit-btn:hover,
+  .custom-submit-btn:focus,
+  .custom-submit-btn:active,
+  .range-slider.round .range-slider-handle:hover,
+  .range-slider.round .range-slider-handle:active,
+  .range-slider.round .range-slider-handle:focus{
+    background:darken(#de6258,10%);
+  }
+
 }

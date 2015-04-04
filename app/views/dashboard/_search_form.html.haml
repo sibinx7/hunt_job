@@ -1,2 +1,36 @@
 .search-form
   %form
+    .row
+      .small-12.columns
+        .custom-tagit
+          %input#search-skills{:type=>"text",:placeholder=>"Skills",:name=>"skills"}
+    .row
+      .small-12.columns
+        %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword"}
+    .row
+      .small-12.columns.medium-6.columns.large-6.columns
+        %h6.font-bold
+          Select Minimum Price
+        .row{:data=>{:equalizer=>""}}
+          .small-10.medium-11.columns{"data-equalizer-watch"=>""}
+            .range-slider.round{:data=>{:slider=>"",:options=>"display_selector:#minimumRange;start:0;end:100"}}
+              %span.range-slider-handle{:role=>"",:tabindex=>"0"}
+              %span.range-slider-active-segment
+              %input{:type=>"hidden",:name=>"min_range"}
+          .small-2.medium-1.columns{"data-equalizer-watch"=>""}
+            %span#minimumRange
+      .small-12.columns.medium-6.columns.large-6.columns
+        %h6.font-bold
+          Select Minimum Price
+        .row
+          .small-10.medium-11.columns
+            .range-slider.round{:data=>{:slider=>"",:options=>"display_selector:#maximumRange;"},:aria=>{:valuemin=>"0",:valuemax=>"100"}}
+              %span.range-slider-handle{:role=>"",:tabindex=>"0"}
+              %span.range-slider-active-segment
+              %input{:type=>"hidden",:name=>"max_range"}
+          .small-2.medium-1.columns
+            %span#maximumRange
+    .row
+      .small-12.medium-10.columns
+      .small-12.medium-2.columns
+        %input.button.alert.tiny.right.custom-submit-btn{:type=>"submit",:value=>"Search"}

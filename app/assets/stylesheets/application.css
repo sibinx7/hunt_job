@@ -23,5 +23,6 @@
  *= require dashboard
  *= require home
  *= require common
+ *= require jquery-ui.min
  */
 

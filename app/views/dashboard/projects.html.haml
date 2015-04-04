@@ -71,3 +71,20 @@
                         %a{:href => ""} 13
                       %li.arrow
                         %a{:href => ""} &raquo;
+- content_for :extra_css do
+  - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
+
+
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      if($('#search-skills').length > 0){
+        $('#search-skills').tagit({
+          allowSpaces:true,
+          availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
+          placeholderText:"Add Your Skills"
+        })
+      }
+    })
+
+
