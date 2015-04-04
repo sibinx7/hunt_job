@@ -37,6 +37,10 @@ Rails.application.routes.draw do
 
   get 'dashboard/payments'
 
+  get 'dashboard/pending_project'
+
+  get 'dashboard/pending_projects'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

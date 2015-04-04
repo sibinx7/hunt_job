@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
   end
 
   def projects
+    @skills = ["PHP","Ruby","Wordpress","Python","Javascript","CSS","HTML"]
   end
 
   def project
@@ -29,5 +30,20 @@ class DashboardController < ApplicationController
   end
 
   def payments
+  end
+
+  def pending_project
+
+  end
+
+  def pending_projects
+
+  end
+
+  def history
+  end
+
+  def my_status
+
   end
 end

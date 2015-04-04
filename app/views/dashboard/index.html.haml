@@ -5,6 +5,28 @@
         .row
           .small-12.medium-8.large-9.columns
             .dashboard-tab-wrapper
+              %h3.db-title
+                Notifications
+              .notification-box
+                .inner-notification
+                  - (1..10).each do |f|
+                    .date-box
+                      .day
+                        = Date.today.day
+                      .month
+                        = Date.today.strftime('%B')
+                    .each-notifications
+                      %h6
+                        This is a heading
+                      %p
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Donec ut mauris a felis pharetra lobortis. Nulla vehicula,
+                        enim vitae volutpat mollis, urna sapien imperdiet mauris, sed vehicula
+                        neque erat vitae eros. Sed vulputate dictum commodo.
+                      %p
+                        Aliquam sodales bibendum arcu. Maecenas vulputate lacus nec
+                        sapien malesuada, nec lacinia enim accumsan. Ut dictum a nibh vel feugiat.
+                      = link_to "More info","#",:class => "right"
           .small-12.medium-4.large-3.columns
             = render 'dashboard/quick_view'
 

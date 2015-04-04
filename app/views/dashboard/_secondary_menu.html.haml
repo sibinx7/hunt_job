@@ -6,13 +6,13 @@
           .small-12.columns
             %ul.secondary-menu
               %li
-                %a{:href=>"#"}
-                  %span.fa.fa-dashboard
-                  Dashboard
+                = link_to '<span class="fa fa-dashboard"></span>&nbsp;Dashboard'.html_safe,dashboard_index_path
+
               %li
-                %a{:href=>"#"}
-                  %span.fa.fa-spinner.fa-spin
-                  Pending Project
+                = link_to '<span class="fa fa-folder-open"></span>&nbsp;Browse Project'.html_safe,dashboard_projects_path
+              %li
+                = link_to '<span class="fa fa-spinner.fa-spin"></span>&nbsp;Pending Projects'.html_safe, dashboard_pending_projects_path
+
               %li
                 %a{:href=>"#"}
                   %span.fa.fa-tasks

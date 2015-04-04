@@ -32,3 +32,34 @@
 .quick-box.with-margin-top{
   margin-top:15px;
 }
+/** Dashboard style, common to many pages **/
+.dashboard-tab-wrapper{
+  h1.db-title,h2.db-title,h3.db-title,h4.db-title,h5.db-title,h6.db-title{
+    margin-top:-9px;
+    border-bottom:2px solid #999;
+  }
+}
+/** Some common margins **/
+.padding-0{
+  padding:0
+}
+.margin-0{
+  margin:0
+}
+.block{
+  display: block;
+  clear: both;
+}
+.margin-top-15{
+  margin-top:15px;
+}
+.margin-bottom-15{
+  margin-bottom:15px;
+}
+/** Paginations **/
+ul.custom-pagination{
+  li.current a,
+  li.current button{
+    background: #DE6258;
+  }
+}

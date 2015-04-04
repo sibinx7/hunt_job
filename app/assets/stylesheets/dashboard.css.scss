@@ -60,3 +60,73 @@
     }
   }
 }
+/** Dashboard special but can be used in other place **/
+.notification-box{
+  display: block;
+  margin-top:30px;
+  .inner-notification{
+    margin-left:100px;
+    display: block;
+    position: relative;
+    .each-notifications{
+      display: table;
+      padding:0 10px 10px;
+      border-bottom:1px solid darken(#eee,5%);
+      width:100%;
+      margin-bottom:20px;
+      h6{
+        margin-top:0;
+        font-weight: bold;
+        color:#333;
+        font-size:1.1em;
+      }
+    }
+    .each-notifications:last-child{
+      border-bottom-color:transparent;
+    }
+  }
+  .inner-notification:after{
+    content:'';
+    position: absolute;
+    width:2px;
+    height:100%;
+    top:0;
+    bottom:0;
+    background:#777;
+    left:-20px;
+  }
+  .date-box{
+    display: block;
+    position:absolute;
+    width:65px;
+    min-height:65px;
+    height:auto;
+    background:#de6258;
+    color:#fff;
+    left:-100px;
+    .day{
+      position: relative;
+      text-align:center;
+      padding:5px 0;
+      font-size:32px;
+      color:inherit;
+    }
+    .month{
+      background:darken(#de6258,20%);
+      padding:3px 0px;
+      font-size:12px;
+      text-transform: uppercase;
+      text-align:center;
+    }
+  }
+}
+/** Table use to show projects, search results **/
+.result-table{
+  width:100%;
+  display: table;
+  max-width: 100%;
+  height: auto;
+  table{
+    width:100%;
+  }
+}
