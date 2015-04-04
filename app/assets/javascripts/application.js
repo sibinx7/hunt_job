@@ -18,4 +18,3 @@
 //= require ckeditor/init
 $(function(){ $(document).foundation(); });
 
-$(function(){ $(document).foundation(); });
