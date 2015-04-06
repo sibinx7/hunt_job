@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'skills/index'
+
+  get 'skills/create'
+
+  get 'skills/store'
+
+  get 'skills/edit'
+
+  get 'skills/update'
+
+  get 'skills/delete'
+
+  get 'skills/json_view'
+
   resources :services
 
   mount Ckeditor::Engine => '/ckeditor'

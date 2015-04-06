@@ -17,13 +17,11 @@
                 %section.top-bar-section
                   %ul.right
                     %li.active
-                      %a{:href=>'#'}
-                        %span.fa.fa-plus
-                        Post Project
+                      = link_to '<span class="fa fa-plus"></span>&nbsp;Post Project'.html_safe,new_project_path
                     %li.active
                       %a{:href=>'#'}
                         %span.fa.fa-folder-o
-                        Browse Project
+                        My Projects
                     %li.active
                       %a{:href=>'#'}
                         %span.fa.fa-book

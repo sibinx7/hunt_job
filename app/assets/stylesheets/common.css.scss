@@ -112,5 +112,21 @@ ul.custom-pagination{
   .range-slider.round .range-slider-handle:focus{
     background:darken(#de6258,10%);
   }
+}
 
+/** Backend errors form rails **/
+ul.backend-errors{
+  margin:0;
+  padding:0 0 10px 0;
+  display: block;
+  clear: both;
+  border-bottom:2px solid darken(#de6258,20%);
+  li{
+    list-style:none;
+    display: block;
+    padding:5px 10px;
+    background:#de6258;
+    color:#fff;
+    margin-bottom:5px;
+  }
 }

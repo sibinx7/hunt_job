@@ -78,13 +78,31 @@
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){
-      if($('#search-skills').length > 0){
-        $('#search-skills').tagit({
-          allowSpaces:true,
-          availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
-          placeholderText:"Add Your Skills"
-        })
-      }
+      var skills = []
+      $.ajax({
+          url:"#{skills_json_view_url}.json",
+          success:function(data){
+            $.each(data,function(index,value){
+              skills.push(value.name)
+            })
+            if($('#search-skills').length > 0){
+              $('#search-skills').tagit({
+                allowSpaces:true,
+                availableTags: typeof (skills)!="undefined"?skills:["PHP","Wordpress","Laravel"],
+                placeholderText:"Add Your Skills"
+              })
+            }
+          },
+          error:function(){
+            if($('#search-skills').length > 0){
+              $('#search-skills').tagit({
+                allowSpaces:true,
+                availableTags: ["PHP","Wordpress","Laravel"],
+                placeholderText:"Add Your Skills"
+              })
+            }
+          }
+      })
     })
 
 
