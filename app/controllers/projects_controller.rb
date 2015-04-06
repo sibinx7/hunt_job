@@ -9,9 +9,16 @@ class ProjectsController < InheritedResources::Base
   # end
 
   def create
-    @project
+
   end
 
+  def edit
+    @skillArray = []
+    @project = Project.find_by(params[:id])
+    @project.skills.each do |s|
+      @skillArray << s.name
+    end
+  end
 
   private
 

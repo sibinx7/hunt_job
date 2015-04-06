@@ -1,35 +1,43 @@
-%h1 Listing projects
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.columns
+            %h1
+              Listing projects
+              = link_to 'New Project', new_project_path,:class => 'button alert tiny round right'
+        .row
+          .small-12.columns
+            %table
+              %thead
+                %tr
+                  %th Title
+                  %th Description
+                  %th Creator
+                  %th Skills
+                  %th Min budget
+                  %th Max budget
+                  %th Duration
+                  %th Developer
+                  %th
+                  %th
+                  %th
 
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Creator
-      %th Skills
-      %th Min budget
-      %th Max budget
-      %th Duration
-      %th Developer
-      %th
-      %th
-      %th
+              %tbody
+                - @projects.each do |project|
+                  %tr
+                    %td= project.title
+                    %td= project.description.html_safe
+                    %td= project.creator
+                    %td= project.skill
+                    %td= project.min_budget
+                    %td= project.max_budget
+                    %td= project.duration
+                    %td= project.assigned_to
+                    %td= link_to 'Show', project
+                    %td= link_to 'Edit', edit_project_path(project)
+                    %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        .row
+          .small-12.columns
 
-  %tbody
-    - @projects.each do |project|
-      %tr
-        %td= project.title
-        %td= project.description.html_safe
-        %td= project.creator
-        %td= project.skill
-        %td= project.min_budget
-        %td= project.max_budget
-        %td= project.duration
-        %td= project.assigned_to
-        %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project)
-        %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Project', new_project_path

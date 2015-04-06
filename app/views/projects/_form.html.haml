@@ -18,7 +18,10 @@
   .field.block.margin-top-15
     = f.label :skills
     .custom-tagit
-      = f.text_field :skill
+      - if not defined? @skillArray
+        = f.text_field :skill
+      - else
+        = f.text_field :skill,:value=>@skillArray.to_sentence
   .field
     = f.label :min_budget
     = f.number_field :min_budget,:placeholder=>"Budget in Dollar"

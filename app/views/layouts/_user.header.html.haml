@@ -19,9 +19,7 @@
                     %li.active
                       = link_to '<span class="fa fa-plus"></span>&nbsp;Post Project'.html_safe,new_project_path
                     %li.active
-                      %a{:href=>'#'}
-                        %span.fa.fa-folder-o
-                        My Projects
+                      = link_to '<span class="fa fa-folder-o"></span>&nbsp;My Projects'.html_safe,projects_path
                     %li.active
                       %a{:href=>'#'}
                         %span.fa.fa-book
