@@ -11,6 +11,7 @@
               = link_to 'Show', @project
               \|
               = link_to 'Back', projects_path
+= @current_user.inspect
 - content_for :extra_css do
   - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
 - content_for :extra_js do

@@ -13,10 +13,11 @@
 //= require jquery.js
 //= require jquery_ujs
 //= require jquery-ui.min
-//= require foundation
+//= require tag-it.min
 //= require turbolinks
 //= require jquery.materialripple
 //= require ckeditor/init
-//= require tag-it.min
+
+//= require foundation
 $(function(){ $(document).foundation(); });
 

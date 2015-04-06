@@ -33,11 +33,12 @@
                     %td= project.skill
                     %td= project.min_budget
                     %td= project.max_budget
-                    %td= project.duration
+                    %td= project.close_date
                     %td= project.assigned_to
                     %td= link_to 'Show', project
                     %td= link_to 'Edit', edit_project_path(project)
                     %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
         .row
           .small-12.columns
+            = current_user.id
 

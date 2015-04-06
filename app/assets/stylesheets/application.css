@@ -14,7 +14,7 @@
  *= require_self
  *= require foundation_and_overrides
  *= require font-awesome
-
+ *= require jquery-ui.min
  *= require owl.carousel
  *= require owl.theme
  *= require owl.transitions
@@ -23,6 +23,7 @@
  *= require dashboard
  *= require home
  *= require common
- *= require jquery-ui.min
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  */
 

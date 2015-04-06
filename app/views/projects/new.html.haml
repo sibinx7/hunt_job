@@ -8,11 +8,32 @@
           .search-form
             = render 'form'
             = link_to 'Back', projects_path
+          = current_user.id
 - content_for :extra_css do
   - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
 - content_for :extra_js do
   :javascript
-
+    $(window).error(function(e){
+      e.preventDefault();
+      var skills = []
+      $.ajax({
+        url:"#{skills_json_view_url}.json",
+      success:function(data){
+         $.each(data,function(index,value){
+          skills.push(value.name)
+         })
+         if($('#project_skill').length > 0){
+              $('#project_skill').tagit({
+                allowSpaces:true,
+                availableTags: typeof (skills)!="undefined"?skills:["PHP","Wordpress","Laravel"],
+                placeholderText:"Add Your Skills"
+              })
+            }
+      },
+      error:function(){
+      }
+      })
+    })
     $(document).ready(function(){
       var skills = []
       $.ajax({
