@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   validates_presence_of  :close_date
 
   has_and_belongs_to_many :skills
-  has_and_belongs_to_many :users
+  has_one :user
   attr_reader :skill
 
 

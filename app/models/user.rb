@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :email
   has_and_belongs_to_many :projects
+  belongs_to :project
 end
