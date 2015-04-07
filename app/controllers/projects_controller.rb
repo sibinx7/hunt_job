@@ -14,22 +14,20 @@ class ProjectsController < InheritedResources::Base
 
     @my_skills = params[:project][:skill].split(",")
 
-
     project = Project.new(project_params)
+    saved = project.save
     # puts YAML::dump(params)
-    if project.save!
+    if saved
       # Check existence  of skills, if exist update relation table
-      @my_skills.each_with_index  do |f,index|
-        if not (Skill.where(name:f).exists?)
-          skill = Skill.new(:name=>f)
-          # project.skills << skill
+      @my_skills.each  do |skills|
+        if not (Skill.where(name:skills).exists?)
+          project.skills <<  Skill.new(:name => skills)
         else
-          skill = Skill.where(:name => f)
-          # project.skills << skill
+         project.skills <<  Skill.where(name:skills)
         end
       end
       redirect_to projects_path
-      # Other wise create and update existence table
+
     else
       render 'projects/new'
     end
@@ -50,9 +48,9 @@ class ProjectsController < InheritedResources::Base
     def project_params
       params.require(:project).permit(:title, :description, :creator, :min_budget, :max_budget, :close_date,:assigned_to,:status,:close)
     end
-    
-    # def skill_params
-    #   params.require(:skill).permit(:name)
-    # end
+
+    def skill_params
+      params.require(:skill).permit(:id,:name)
+    end
 end
 

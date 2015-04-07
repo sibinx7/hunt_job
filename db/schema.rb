@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406045936) do
+ActiveRecord::Schema.define(version: 20150406174406) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -76,10 +76,12 @@ ActiveRecord::Schema.define(version: 20150406045936) do
     t.boolean  "close"
   end
 
-  create_table "projects_skills", force: true do |t|
+  create_table "projects_skills", id: false, force: true do |t|
     t.integer "project_id"
     t.integer "skill_id"
   end
+
+  add_index "projects_skills", ["project_id", "skill_id"], name: "index_projects_skills_on_project_id_and_skill_id", using: :btree
 
   create_table "projects_users", force: true do |t|
     t.integer "project_id"

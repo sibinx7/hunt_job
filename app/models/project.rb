@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   attr_reader :skill
 
+
   def skill=(id)
     self.skill = id.split(',')
   end
