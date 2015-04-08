@@ -1,7 +1,7 @@
 .user-info-sidebar
   .user-image
-    - if current_user.profile_image?
-      = image_tag("/users/#{current_user.profile_image}")
+    - if current_user.profile_image_file_name?
+      = image_tag @user.profile_image.url
     -else
       %img{:src=>"#{image_path("default_profile.png")}"}
     .user-upload-img
@@ -9,8 +9,10 @@
   .user-edit-info
     %ul
       %li
-        = link_to "<span class='fa fa-eye'></span>&nbsp;View Profile".html_safe,'#'
+        = link_to "<span class='fa fa-eye'></span>&nbsp;View Profile".html_safe,user_extras_user_info_path(:id => current_user.id)
       %li
-        = link_to "<span class='fa fa-edit'></span>&nbsp;Edit Prodile".html_safe,'#'
+        = link_to "<span class='fa fa-edit'></span>&nbsp;Edit Prodile".html_safe,user_extras_add_user_info_path(:id => current_user.id)
       %li
         = link_to "<span class='fa fa-tags'></span>&nbsp;Add Skills".html_safe, '#'
+      %li
+        = link_to "<span class='fa fa-briefcase'></span>&nbsp;Change Password".html_safe,'#'

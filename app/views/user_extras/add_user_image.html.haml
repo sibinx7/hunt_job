@@ -30,6 +30,13 @@
         acceptedFiles :"image/*",
         dictMaxFilesExceeded :function(){
 
+        },
+        success:function(file,data){
+          $.each(data,function(index,value){
+            if(value.profile_image_file_name!=""){
+              window.location.reload()
+            }
+          })
         }
       });
     })

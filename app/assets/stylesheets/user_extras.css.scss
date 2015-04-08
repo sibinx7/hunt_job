@@ -2,10 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 // Here include styles for user information pages
+.user-side-border {
+  position: relative;
+}
+.user-side-border:after{
+    content:'';
+    position: absolute;
+    top:0;
+    right:-5px;
+    bottom:0;
+    width:1px;
+    height:100%;
+    background:#ccc;
+}
 .user-info-sidebar{
   display: block;
   padding:5px;
-  border:1px solid #f7f7f7;
+  position: relative;
   .user-image{
     display: block;
     overflow:hidden;
@@ -47,7 +60,8 @@
         }
         a:hover,a:focus{
           text-decoration: none;
-          border-bottom:1px solid #ccc;
+          color:#444;
+          border-bottom:1px solid transparent;
         }
       }
     }
@@ -55,7 +69,27 @@
 }
 .edit-info-section{
   display: block;
-  border-left:1px solid #ccc;
+
   padding-left:15px;
   min-height:200px;
+  .user-header{
+  }
+  table.user-info-table{
+    border:none;
+    background: transparent;
+    tbody{
+      background: transparent;
+    }
+    tr,td{
+      background: transparent;
+      position: relative;
+    }
+    td:first-child:after{
+      content:':';
+      position: absolute;
+      right:0;
+      top:9px;
+      z-index:101;
+    }
+  }
 }

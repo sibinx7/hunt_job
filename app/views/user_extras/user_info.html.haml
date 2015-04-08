@@ -1,0 +1,54 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row{"data-equalizer"=>""}
+          .small-12.medium-3.large-3.user-side-border.columns{"data-equalizer-watch"=>""}
+            = render 'sidebar'
+          .small-12.medium-5.large-6.columns{"data-equalizer-watch"=>""}
+            .edit-info-section
+              %h4.user-header
+                = "#{@user.name}'s Profile"
+              .quick-view
+                %h6
+                  Personal Detail
+                %table.user-info-table
+                  %tr
+                    %td
+                      Name
+                    %td
+                      = @user.name
+                  %tr
+                    %td
+                      Username
+                    %td
+                      = @user.username
+                  %tr
+                    %td
+                      Email
+                    %td
+                      = @user.email
+                  %tr
+                    %td
+                      Country
+                    %td
+                      = ISO3166::Country[@user.country]
+              .quick-view
+                %h6
+                  Bank Detail
+                %table.user-info-table
+                  %tr
+                    %td
+                      Bank Name
+                    %td
+                  %tr
+                    %td
+                      Account No
+                    %td
+                  %tr
+                    %td
+                      Branch
+                    %td
+                      d
+          .small-12.medium-4.large-3.columns{"data-equalizer-watch"=>""}
+            = render 'dashboard/quick_view'

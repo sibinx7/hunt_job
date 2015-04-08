@@ -2,7 +2,7 @@ class UserExtrasController < ApplicationController
   layout 'dashboard'
 
   def user_info
-
+    @user = User.find(params[:id])
   end
   def add_user_info
     @user = User.find(params[:id])
