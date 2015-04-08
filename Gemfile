@@ -84,4 +84,6 @@ group :development do
 end
 
  gem 'ckeditor', github: 'galetahub/ckeditor'
- gem 'paperclip'
+ gem 'paperclip', '~> 4.2'
+
+ gem 'country_select', github: 'stefanpenner/country_select'

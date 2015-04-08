@@ -1,5 +1,5 @@
 / header
-.custom-top-header
+.custom-top-header.user-header
   .sticky
     .row
       .small-12.columns
@@ -18,9 +18,9 @@
                   %ul.right
                     %li.active
                       = link_to '<span class="fa fa-plus"></span>&nbsp;Post Project'.html_safe,new_project_path
-                    %li.active
+                    %li
                       = link_to '<span class="fa fa-folder-o"></span>&nbsp;My Projects'.html_safe,projects_path
-                    %li.active
+                    %li
                       %a{:href=>'#'}
                         %span.fa.fa-book
                         Income

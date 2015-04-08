@@ -1,0 +1,61 @@
+// Place all the styles related to the UserExtras controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// Here include styles for user information pages
+.user-info-sidebar{
+  display: block;
+  padding:5px;
+  border:1px solid #f7f7f7;
+  .user-image{
+    display: block;
+    overflow:hidden;
+    img{
+      width:100%;
+      background:#f7f7f7;
+    }
+  }
+  .user-upload-img{
+    display: block;
+    position: relative;
+    margin-top:-2px;
+    padding:5px 10px;
+    background:#de6258;
+    color:#fff;
+    text-align: center;
+    cursor: pointer;
+    a{
+      color:#fff;
+    }
+  }
+  .user-edit-info{
+    display: block;
+    margin-top:10px;
+    ul{
+      display: block;
+      padding:0;
+      margin:0;
+      li{
+        list-style:none;
+        display: block;
+        margin:0 0 5px 0;
+        a{
+          color:#777;
+          letter-spacing: 1px;
+          display: block;
+          padding:2px 5px;
+          border-bottom:1px solid transparent;
+        }
+        a:hover,a:focus{
+          text-decoration: none;
+          border-bottom:1px solid #ccc;
+        }
+      }
+    }
+  }
+}
+.edit-info-section{
+  display: block;
+  border-left:1px solid #ccc;
+  padding-left:15px;
+  min-height:200px;
+}

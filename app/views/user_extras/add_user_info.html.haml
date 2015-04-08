@@ -1,0 +1,27 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.medium-3.large-3.columns
+            = render 'sidebar'
+          .small-12.medium-9.large-9.columns
+            .edit-info-section
+              %h3
+                We want to know more about you!!
+              %p
+                We want to here your name, username and your resident country.
+              = form_for @user, url:{controller: 'user_extras', action: 'save_user_info',id:current_user.id} do |f|
+                .row
+                  .small-12.medium-6.large-6.columns
+                    =f.text_field :name,:placeholder=>"Name"
+                .row
+                  .small-12.medium-6.large-6.columns
+                    =f.text_field :username,:placeholder => "Username"
+                .row
+                  .small-12.medium-6.large-6.columns
+                    =f.country_select :country, :placeholder => "Country"
+                .row
+                  .small-12.medium-6.large-6.columns
+                    =f.submit "Save", :class => "button tiny right alert"
+

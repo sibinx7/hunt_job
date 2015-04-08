@@ -1,0 +1,16 @@
+.user-info-sidebar
+  .user-image
+    - if current_user.profile_image?
+      = image_tag("/users/#{current_user.profile_image}")
+    -else
+      %img{:src=>"#{image_path("default_profile.png")}"}
+    .user-upload-img
+      = link_to "Upload Image",user_extras_add_user_image_path(:id => current_user.id)
+  .user-edit-info
+    %ul
+      %li
+        = link_to "<span class='fa fa-eye'></span>&nbsp;View Profile".html_safe,'#'
+      %li
+        = link_to "<span class='fa fa-edit'></span>&nbsp;Edit Prodile".html_safe,'#'
+      %li
+        = link_to "<span class='fa fa-tags'></span>&nbsp;Add Skills".html_safe, '#'

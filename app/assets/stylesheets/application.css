@@ -25,5 +25,7 @@
  *= require common
  *= require jquery.tagit
  *= require tagit.ui-zendesk
+ *= require user_extras
+ *= require dropzone
  */
 

@@ -1,0 +1,35 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.medium-3.large-3.columns
+            = render 'sidebar'
+          .small-12.medium-9.large-9.columns
+            .edit-info-section
+              %h3
+                Upload your Profile Image
+              %p
+                It is good show who you are!!
+              = form_for @user, url:{controller: 'user_extras', action: 'save_user_image',id:current_user.id},html: {:class=>'dropzone',:id=>"upload-user-image","data-paramName"=>"done"} do |f|
+                .row
+                  .small-12.medium-6.large-6.columns
+                    .fallback
+                      = f.file_field :profile_image
+= content_for :extra_js do
+  = javascript_include_tag 'dropzone.min'
+  :javascript
+    $(document).ready(function(){
+      Dropzone.autoDiscover = false;
+      $("form#upload-user-image").dropzone({
+        paramName :  "user[profile_image]",
+        maxFileSize :  3,
+        addRemoveLinks : true,
+        uploadMultiple :  false,
+        maxFiles : 1,
+        acceptedFiles :"image/*",
+        dictMaxFilesExceeded :function(){
+
+        }
+      });
+    })

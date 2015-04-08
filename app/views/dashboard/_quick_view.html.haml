@@ -43,8 +43,8 @@
       Edit Info
     %ul
       %li
-        = link_to "Edit Profile",""
+        = link_to "Edit Profile",user_extras_add_user_info_path(:id=>current_user.id)
       %li
-        = link_to "Change Password",""
+        = link_to "Change Password",edit_user_registration_path(:id => current_user.id)
       %li
-        = link_to "Change Profile Image", ""
+        = link_to "Change Profile Image", user_extras_add_user_image_path(:id => current_user.id)

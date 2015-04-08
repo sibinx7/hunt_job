@@ -7,7 +7,7 @@ $primaryHeaderMenuLink : #a0a0a0;
 $primaryHeaderMenuActive : #d53a2e;
 $primaryBtnColor : #f55e25;
 $secondaryBtnColor : #2e2e2e;
-
+$topBarBackground :#111;
 
 // Keyframes
 
@@ -40,12 +40,13 @@ body{
       z-index: 2;
     }
     .contain-to-grid,.custom-top-header{
-      background:#2e2e2e;
+      background:$topBarBackground;
       position: relative;
+      border-bottom:2px solid $primaryColor;
       .my-top-bar{
         z-index:10;
         height:80px;
-        background:#2e2e2e;
+        background:$topBarBackground;
         color:#a0a0a0;
 //        display: table;
         .title-area{
@@ -75,13 +76,14 @@ body{
             li{
               display: inline-table;
               height: 100%;
+              background: transparent;
               a{
                 display: table-cell;
                 vertical-align: middle;
                 background:transparent;
                 border-top:2px solid transparent;
                 color:$primaryHeaderMenuLink;
-                transition:all 0.1s linear 0.1s;
+                transition:all 0.1s linear 0.05s;
                 font-size:14px;
                 font-weight: 300;
                 text-transform: uppercase;
@@ -101,12 +103,29 @@ body{
             }
             li.active,li.sign-in,li.sign-out{
               background:transparent;
+
+            }
+            li.active{
+              a{
+                background:$primaryColor;
+                color:#fff;
+              }
             }
           }
         }
       }
     }
-
+    .custom-top-header.user-header{
+      border-bottom:none;
+      .top-bar-section{
+        ul{
+          li.active a{
+            background: transparent;
+            color:$primaryHeaderMenuLink;
+          }
+        }
+      }
+    }
   }
 }
 //when expand menu

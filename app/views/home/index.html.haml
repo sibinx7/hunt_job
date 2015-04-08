@@ -4,12 +4,13 @@
   :javascript
     $(function(){
       $('.home_slider').slidesjs({
-        width:window.innerWidth,
-        height: $('.home_slider').innerHeight(),
+        width: $(window).width(),
+        height:600,
         navigation:false
       })
     })
     $(document).ready(function() {
+
       var owl = $(".testimonials_content");
       owl.owlCarousel({
         itemsCustom : [

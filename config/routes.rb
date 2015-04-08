@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 
   get 'skills/json_view'
 
+  # Add Extra information  for users table
+  get 'user_extras/user_info'
+  get 'user_extras/add_user_info'
+  patch 'user_extras/save_user_info'
+  get 'user_extras/add_user_image'
+  patch 'user_extras/save_user_image'
   resources :services
 
   mount Ckeditor::Engine => '/ckeditor'
@@ -57,7 +63,6 @@ Rails.application.routes.draw do
 
   # Edit users info
 
-  get 'user/update_info'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
