@@ -130,3 +130,16 @@ ul.backend-errors{
     margin-bottom:5px;
   }
 }
+.ul-skills{
+  margin:0;
+  padding:0;
+  li{
+    border:1px solid #de6258;
+    padding:2px;
+    border-radius: 3px;
+    list-style:none;
+    font-size:11px;
+    margin-bottom:5px;
+    display: inline-table;
+  }
+}

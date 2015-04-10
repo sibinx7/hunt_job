@@ -10,67 +10,8 @@
               / Render search form
               = render 'dashboard/search_form'
             .result-area
-              .row
-                .small-12.columns
-                  .result-table.margin-bottom-15
-                    %table
-                      %thead
-                        %tr
-                          %th
-                            Project Name
-                          %th{:class=>"hide-for-small-only"}
-                            Description
-                          %th
-                            Bids
-                          %th
-                            Skills
-                          %th
-                            Price
-                          %th
-                            End
-                      %tbody
-                      -(1..10).each_with_index do |d,index|
-                        %tr
-                          %td{:width=>'200px'}
-                            Lorem ipsum dolor sit amet.
-                          %td{:class=>"hide-for-small-only"}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed luctus velit.
-                            Donec eget ultrices nunc. Pellentesque vel sem eget quam pulvinar volutpat ut non lorem.
-                            Proin molestie consectetur tellus id luctus. Quisque vel risus id lectus vulputate
-                            hendrerit porta eget quam. Pellentesque imperdiet hendrerit turpis.
-                            Suspendisse elementum sollicitudin posuere. Donec ante purus,
-                            dapibus id congue et, rutrum at dolor. Duis sit amet libero nec lorem
-                            sollicitudin mollis vitae facilisis lorem. Aliquam iaculis euismod leo,
-                            ut tempor lorem iaculis faucibus
-                          %td
-                            = (index * 20)
-                          %td
-                            = @skills.sample
-                          %td
-                            140$
-                          %td{:width=>"100px"}
-                            = Date.today
-                  .clearfix
-                  .pagination-centered
-                    %ul.pagination.custom-pagination
-                      %li.arrow.unavailable
-                        %a{:href => ""} &laquo;
-                      %li.current
-                        %a{:href => ""} 1
-                      %li
-                        %a{:href => ""} 2
-                      %li
-                        %a{:href => ""} 3
-                      %li
-                        %a{:href => ""} 4
-                      %li.unavailable
-                        %a{:href => ""} &hellip;
-                      %li
-                        %a{:href => ""} 12
-                      %li
-                        %a{:href => ""} 13
-                      %li.arrow
-                        %a{:href => ""} &raquo;
+              = render 'dashboard/results'
+
 - content_for :extra_css do
   - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
 
@@ -102,6 +43,15 @@
               })
             }
           }
+      })
+    })
+    $(document).ready(function(){
+      $('#submit-keyword').on('keyup',function(){
+        $('form[data-remote=true]').submit()
+        $(document).on("submit", "form[data-remote=true]", function(e){
+          e.preventDefault();
+          $.getScript($('form').attr(action))
+        });
       })
     })
 

@@ -21,7 +21,7 @@
       - if not defined? @skillArray
         = f.text_field :skill
       - else
-        = f.text_field :skill,:value=>@skillArray.to_sentence
+        = f.text_field :skill,:value=>@skillArray.to_sentence(two_words_connector: ',')
   .field
     = f.label :min_budget
     = f.number_field :min_budget,:placeholder=>"Budget in Dollar"

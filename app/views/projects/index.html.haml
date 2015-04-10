@@ -19,26 +19,32 @@
                   %th Min budget
                   %th Max budget
                   %th Duration
-                  %th Developer
-                  %th
-                  %th
-                  %th
+                  %th{:colspan=>3}
+                    Action
 
               %tbody
-                - @projects.each do |project|
+                - if @projects
+                  - @projects.each_with_index do |project,index|
+                    %tr
+                      %td= project.title
+                      %td= project.description.first(100).html_safe
+                      %td= @projectArray[index]['creator']
+                      %td{:width=>140}
+                        %ul.ul-skills
+                          - @projectArray[index]['skills'].each_with_index do |s,index|
+                            %li
+                              = s.name
+                      %td= project.min_budget
+                      %td= project.max_budget
+                      %td= project.close_date
+                      %td= link_to 'Show', project
+                      %td= link_to 'Edit', edit_project_path(project)
+                      %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                - else
                   %tr
-                    %td= project.title
-                    %td= project.description.first(100).html_safe
-                    %td= project.creator
-                    %td= project.skill
-                    %td= project.min_budget
-                    %td= project.max_budget
-                    %td= project.close_date
-                    %td= project.assigned_to
-                    %td= link_to 'Show', project
-                    %td= link_to 'Edit', edit_project_path(project)
-                    %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                    %td{:colspan => 11}
+                      Nothing found Please create/ add Projects....
         .row
           .small-12.columns
-            = current_user.id
+            = will_paginate @projects, renderer: FoundationPagination::Rails
 

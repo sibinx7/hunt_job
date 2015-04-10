@@ -1,0 +1,40 @@
+= @params.inspect
+.row
+  .small-12.columns
+    .result-table.margin-bottom-15
+      %table
+        %thead
+          %tr
+            %th
+              Project Name
+            %th{:class=>"hide-for-small-only"}
+              Description
+            %th
+              Bids
+            %th
+              Skills
+            %th
+              Price
+            %th
+              End
+        %tbody
+          %tr
+            %td{:width=>'200px'}
+              Lorem ipsum dolor sit amet.
+            %td{:class=>"hide-for-small-only"}
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed luctus velit.
+              Donec eget ultrices nunc. Pellentesque vel sem eget quam pulvinar volutpat ut non lorem.
+              Proin molestie consectetur tellus id luctus. Quisque vel risus id lectus vulputate
+              hendrerit porta eget quam. Pellentesque imperdiet hendrerit turpis.
+              Suspendisse elementum sollicitudin posuere. Donec ante purus,
+              dapibus id congue et, rutrum at dolor. Duis sit amet libero nec lorem
+              sollicitudin mollis vitae facilisis lorem. Aliquam iaculis euismod leo,
+              ut tempor lorem iaculis faucibus
+            %td
+              = 20
+            %td
+              = @skills.sample
+            %td
+              140$
+            %td{:width=>"100px"}
+              = Date.today

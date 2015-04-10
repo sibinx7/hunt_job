@@ -87,3 +87,4 @@ end
  gem 'paperclip', '~> 4.2'
 
  gem 'country_select', github: 'stefanpenner/country_select'
+ gem 'will_paginate-foundation'

@@ -1,12 +1,12 @@
 .search-form
-  %form
+  %form{:data=>{:remote=>"true"},:action=>"/dashboard/projects",:method=>"GET",:id=>"my-form"}
     .row
       .small-12.columns
         .custom-tagit
           %input#search-skills{:type=>"text",:placeholder=>"Skills",:name=>"skills"}
     .row
       .small-12.columns
-        %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword"}
+        %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword",:id=>"submit-keyword"}
     .row
       .small-12.columns.medium-6.columns.large-6.columns
         %h6.font-bold

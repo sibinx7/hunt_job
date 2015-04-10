@@ -1,8 +1,7 @@
 class SkillsController < ApplicationController
-  layout 'application', :except => :json_view
+  layout 'dashboard', :except => :json_view
 
   def index
-
   end
 
   def create

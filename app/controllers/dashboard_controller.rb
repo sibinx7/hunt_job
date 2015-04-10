@@ -15,6 +15,11 @@ class DashboardController < ApplicationController
 
   def projects
     @skills = ["PHP","Ruby","Wordpress","Python","Javascript","CSS","HTML"]
+    @params = params[:search_keyword]
+    respond_to do |format|
+      format.html { }
+      format.js {}
+    end
   end
 
   def project
