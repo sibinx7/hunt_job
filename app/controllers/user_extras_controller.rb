@@ -4,9 +4,13 @@ class UserExtrasController < ApplicationController
   def user_info
     @user = User.find(params[:id])
   end
+
+  def user_skill_info
+    @user = User.find(params[:id])
+    @userSkills = @user.skills
+  end
   def add_user_info
     @user = User.find(params[:id])
-    
   end
 
   def save_user_info

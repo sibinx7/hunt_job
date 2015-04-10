@@ -5,6 +5,21 @@ class SkillsController < ApplicationController
   end
 
   def create
+    puts "Here i reach"
+    puts params[:skills].inspect
+    @my_skills = params[:skills].split(",")
+
+    @user = User.find(current_user.id)
+    @my_skills.each  do |skills|
+      if not (Skill.where(name:skills).exists?)
+        @user.skills <<  Skill.new(:name => skills)
+      else
+        @user.skills <<  Skill.where(name:skills)
+      end
+    end
+    render :json => {
+               :my_skills => @user.skills
+    }
   end
 
   def store

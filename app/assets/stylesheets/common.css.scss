@@ -100,6 +100,11 @@ ul.custom-pagination{
     background:#e7e7e7;
   }
 }
+.custom-tagit.add-skills{
+  ul{
+    min-height: 37px;
+  }
+}
 .search-form{
   .custom-submit-btn,.range-slider.round .range-slider-handle{
     background:lighten(#de6258,5%);
@@ -141,5 +146,30 @@ ul.backend-errors{
     font-size:11px;
     margin-bottom:5px;
     display: inline-table;
+  }
+}
+.my-skills{
+  padding-bottom:10px;
+  border-bottom:2px solid #aaa;
+  margin-bottom:15px;
+}
+ul.my-skill-box{
+  margin:0;
+  display: table;
+  width:100%;
+  border-radius:6px;
+  border:1px solid lighten(#de6258,10%);
+  background:lighten(#de6258,35%);
+  padding:10px;
+  li{
+    list-style:none;
+    display: inline-table;
+    padding:4px 6px;
+    background:lighten(#de6258,5%);
+    border:1px solid lighten(#de6258,1%);
+    margin:5px;
+    border-radius:4px;
+    color:#fff;
+    text-shadow: 1px 1px 1px #333;
   }
 }

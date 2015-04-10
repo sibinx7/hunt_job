@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'skills/index'
 
-  get 'skills/create'
+  post 'skills/create'
 
   get 'skills/store'
 
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   patch 'user_extras/save_user_info'
   get 'user_extras/add_user_image'
   patch 'user_extras/save_user_image'
+  get 'user_extras/user_skill_info'
   resources :services
 
   mount Ckeditor::Engine => '/ckeditor'
