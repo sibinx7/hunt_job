@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
 
   def index
-    puts "I am on Dashobard"
+
   end
 
   def users
@@ -20,11 +20,17 @@ class DashboardController < ApplicationController
       format.html { }
       format.js {}
     end
+    @projects = Project.paginate(:page => params[:page],:per_page => 2)
   end
 
   def project
+    @project = Project.find(params[:project])
+    @project_owner = User.find(@project.creator)
   end
 
+  def user_profile
+
+  end
   def settings
   end
 

@@ -23,7 +23,7 @@
                     Action
 
               %tbody
-                - if @projects
+                - if not  @projects.empty?
                   - @projects.each_with_index do |project,index|
                     %tr
                       %td= project.title
@@ -46,5 +46,5 @@
                       Nothing found Please create/ add Projects....
         .row
           .small-12.columns
-            = will_paginate @projects, renderer: FoundationPagination::Rails
+            = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
 

@@ -1,4 +1,3 @@
-= @params.inspect
 .row
   .small-12.columns
     .result-table.margin-bottom-15
@@ -18,23 +17,20 @@
             %th
               End
         %tbody
-          %tr
-            %td{:width=>'200px'}
-              Lorem ipsum dolor sit amet.
-            %td{:class=>"hide-for-small-only"}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed luctus velit.
-              Donec eget ultrices nunc. Pellentesque vel sem eget quam pulvinar volutpat ut non lorem.
-              Proin molestie consectetur tellus id luctus. Quisque vel risus id lectus vulputate
-              hendrerit porta eget quam. Pellentesque imperdiet hendrerit turpis.
-              Suspendisse elementum sollicitudin posuere. Donec ante purus,
-              dapibus id congue et, rutrum at dolor. Duis sit amet libero nec lorem
-              sollicitudin mollis vitae facilisis lorem. Aliquam iaculis euismod leo,
-              ut tempor lorem iaculis faucibus
-            %td
-              = 20
-            %td
-              = @skills.sample
-            %td
-              140$
-            %td{:width=>"100px"}
-              = Date.today
+          - @projects.each do |project|
+            %tr
+              %td{:width=>'200px'}
+                = link_to project.title,:controller => 'dashboard',:action => 'project',:project=>project.id
+              %td{:class=>"hide-for-small-only"}
+                tghbe
+              %td
+                = 20
+              %td
+                = @skills.sample
+              %td
+                140$
+              %td{:width=>"100px"}
+                = Date.today
+.row
+  .small-12.columns
+    = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails

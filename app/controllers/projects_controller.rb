@@ -4,7 +4,7 @@ class ProjectsController < InheritedResources::Base
   layout "dashboard"
 
   def index
-    @projects = Project.paginate(:page => params[:page],:per_page => 20)
+    @projects = Project.where(:creator => current_user.id).paginate(:page => params[:page],:per_page => 1)
     @projectArray = Array.new
     @projects.each_with_index do |f,index|
       @projectArray[index] =  {

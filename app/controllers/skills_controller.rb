@@ -14,7 +14,10 @@ class SkillsController < ApplicationController
       if not (Skill.where(name:skills).exists?)
         @user.skills <<  Skill.new(:name => skills)
       else
-        @user.skills <<  Skill.where(name:skills)
+        puts @user.skills.where(name:skills).count
+        if @user.skills.where(name:skills).count == 0
+          @user.skills <<  Skill.where(name:skills)
+        end
       end
     end
     render :json => {

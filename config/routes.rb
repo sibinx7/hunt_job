@@ -48,7 +48,9 @@ Rails.application.routes.draw do
 
   get 'dashboard/projects'
 
-  get 'dashboard/project'
+  get 'dashboard/project/:project', to: 'dashboard#project'
+
+  get 'dashboard/user/:user', to: 'dashboard#user_profile'
 
   get 'dashboard/settings'
 

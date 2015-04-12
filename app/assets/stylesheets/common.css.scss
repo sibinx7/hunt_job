@@ -39,6 +39,17 @@
     border-bottom:2px solid #999;
   }
 }
+.dashboard-wrapper{
+  h1.p-title,h2.p-title,h3.p-title,h4.p-title,h5.p-title{
+    padding-bottom:2px;
+    border-bottom:2px solid #777;
+  }
+  .p-description{
+    display: block;
+    margin-top:10px;
+
+  }
+}
 /** Some common margins **/
 .padding-0{
   padding:0
@@ -171,5 +182,133 @@ ul.my-skill-box{
     border-radius:4px;
     color:#fff;
     text-shadow: 1px 1px 1px #333;
+  }
+}
+/* Custom pagination */
+ul.pagination.custom-pagination{
+  display: table;
+  margin-left:auto;
+  margin-right:auto;
+  li.current{
+    a{
+      background: #de6258;
+    }
+  }
+}
+/** Project in project page **/
+.project-info{
+  display: block;
+  margin:0;
+  padding:0;
+  li{
+    list-style:none;
+    display: inline-table;
+    color:#777;
+    a,b{
+      color:#555;
+      font-weight: bold;
+    }
+    a:hover,a:active,a:focus{
+      color:#111;
+    }
+  }
+}
+/** Profile page - biddings **/
+.p-bids{
+  .p-bids-inner{
+    .each-bid{
+      display: table;
+      width:100%;
+      background:#f1f1f1;
+      padding:10px;
+      box-shadow:0 1px 1px 0 #aaa;
+      .inner-each-bid{
+        display: block;
+        margin-left:100px;
+        .profile-image{
+          display: inline-block;
+          width:100px;
+          height:100px;
+          margin-left:-100px;
+          float: left;
+          background:#fafafa;
+          border-radius: 6px;
+          img{
+            width:100px;
+            height:100px;
+            padding:4px;
+            border-radius: 6px;
+            border:1px solid #eee;
+          }
+        }
+        .profile-info-wrapper{
+          display: block;
+          padding:5px;
+          margin-right:160px;
+          .profile-info{
+            display: inline-block;
+            padding:0 5px;
+            a{
+              font-weight: bold;
+              color:#555;
+              font-size:21px;
+            }
+            a:hover{
+              text-decoration: underline;
+            }
+          }
+          .profile-bid{
+            display: inline-block;
+            float: right;
+            width:160px;
+            margin-right:-160px;
+            .profile-money{
+              padding:15px;
+              font-size:25px;
+              display: table;
+              small{
+                color:#999;
+                clear: both;
+                display: block;
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+    .bid-header{
+      background: #de6258;
+      box-shadow:0 1px 0px 1px #de6258;
+      color:#fff;
+      .inner-each-bid {
+        display: block;
+        margin-left: 100px;
+        .profile-image.header{
+          display: inline-block;
+          width: auto;
+          margin-left: -100px;
+          float: left;
+          height: auto;
+          background: transparent;
+          padding:5px;
+        }
+        .profile-info-wrapper.header{
+          display: block;
+          padding: 5px;
+          margin-right: 160px;
+          .profile-info {
+            display: inline-block;
+          }
+          .profile-bid.header{
+            display: inline-block;
+            float: right;
+            width: 160px;
+            margin-right: -160px;
+          }
+        }
+      }
+    }
   }
 }
