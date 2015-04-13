@@ -2,8 +2,15 @@
   .quick-box
     %h6
       Status
-    %a.button.tiny.secondary.text-center.success.margin-0
-      open
+    - if @project.close == nil
+      %a.button.tiny.text-center.success.margin-0
+        open
+    - elsif @project.close == 2
+      %a.button.tiny.secondary.text-center.margin-0
+        close
+    - else
+      %a.button.tiny.alert.text-center.margin-0
+        open
   .quick-box
     %h6
       Bid
@@ -11,7 +18,7 @@
       %li
         Available Bids
         %span.label.alert.right
-          10
+          = @project.bids.size
 
   .quick-box
     %h6

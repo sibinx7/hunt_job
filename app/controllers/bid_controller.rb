@@ -3,7 +3,6 @@ class BidController < ApplicationController
   end
 
   def create
-    puts Bid.where(:user_id => params[:bid][:user_id],:project_id=> params[:bid][:project_id]).count.inspect
     if Bid.where(:user_id => params[:bid][:user_id],:project_id=> params[:bid][:project_id]).count == 0
       @bid = Bid.create(bid_params)
       params[:bid][:task].each_with_index do |f,index|

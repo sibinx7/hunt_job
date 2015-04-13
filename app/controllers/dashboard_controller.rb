@@ -26,7 +26,11 @@ class DashboardController < ApplicationController
   def project
     @project = Project.find(params[:project])
     @project_owner = User.find(@project.creator)
-
+    @project_bids  = @project.bids
+    @project_bid_users = Array.new  
+    @project_bids.each_with_index  do |f,index|
+      @project_bid_users[index] = User.find(f.user_id)
+    end
   end
 
   def user_profile
@@ -40,6 +44,12 @@ class DashboardController < ApplicationController
     @project = Project.find(params[:project])
     @project_owner = User.find(@project.creator)
     @bid = Bid.new
+  end
+
+  def edit_bid
+    @project = Project.find(params[:project])
+    @project_owner = User.find(@project.creator)
+    @bid = Bid.find(params[:bid])
   end
 
   def payments

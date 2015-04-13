@@ -64,6 +64,8 @@ Rails.application.routes.draw do
 
   get 'dashboard/bid/:project', to:'dashboard#bid'
 
+  get 'dashboard/project/:project/bid/:bid', to:'dashboard#edit_bid'
+
   get 'dashboard/payments'
 
   get 'dashboard/pending_project'
@@ -71,7 +73,7 @@ Rails.application.routes.draw do
   get 'dashboard/pending_projects'
 
   post 'bid/create'
-  patch 'bid/update'
+  patch 'bid/update/:id',to:'bid#update'
   delete 'bid/destroy'
   # Edit users info
 

@@ -20,7 +20,7 @@
                 %h5
                   = "Bid on #{@project.title}"
                 .bid-project
-                  = form_for  @bid,url: {:controller => 'bid',:action => 'create'} do |f|
+                  = form_for  @bid,url: {:controller => 'bid',:action => 'update',:id=>@bid.id} do |f|
                     .field
                       = f.label :details
                       = f.cktext_area :details
@@ -51,16 +51,17 @@
                     .field
                       = f.label "Milstones"
                       .milestones#milestones
-                        .row.each-milestone
-                          .small-8.medium-9.columns
-                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task",:id=>"")
-                          .small-4.medium-3.columns
-                            .row.collapse
-                              .small-2.columns
-                                %span.prefix
-                                  $
-                              .small-10.columns
-                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:id=>"")
+                        - @bid.milestones.each_with_index do |p|
+                          .row.each-milestone
+                            .small-8.medium-9.columns
+                              = text_field_tag("bid[task][]",p.milestone,:placeholder=>"Describe milestone task",:id=>"")
+                            .small-4.medium-3.columns
+                              .row.collapse
+                                .small-2.columns
+                                  %span.prefix
+                                    $
+                                .small-10.columns
+                                  = text_field_tag("bid[milestone][]",p.payment,:placeholder=>"Milestone payment",:id=>"")
                       .more-milestones.clearfix
                         %a.label.alert#add-milestones{:href=>"#milestones"}
                           %span.fa.fa-plus

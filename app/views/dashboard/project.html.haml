@@ -21,7 +21,8 @@
             .row
               .small-12.columns
                 %h5.p-title
-                  Freelancers Bids (10)
+                  Freelancers Bids
+                  ="(#{@project_bid_users.size})"
                 .p-bids#project-bids
                   .p-bids-inner
                     .each-bid.margin-bottom-15.bid-header
@@ -37,18 +38,25 @@
                               %span.fa.fa-chevron-down
                 .p-bids
                   .p-bids-inner#latest-bids
-                    -(1..10).each_with_index do |f,index|
+                    - @project_bids.each_with_index do |f,index|
                       .each-bid.margin-bottom-15
                         .inner-each-bid
                           .profile-image
-                            = image_tag 'default_profile.png'
+                            - if @project_bid_users[index].profile_image.url
+                              = image_tag @project_bid_users[index].profile_image.url
+                            - else
+                              = image_tag 'default_profile.png'
                           .profile-info-wrapper
                             .profile-info
-                              = link_to "Sibin Xavier",'#'
+                              %h3.profile-title
+                                = link_to "#{@project_bid_users[index].name}",'#'
+                              - if current_user.id == @project_bid_users[index].id
+                                %small
+                                  = link_to "Edit Bid",:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id
                             .profile-bid
                               .profile-money
-                                $30
+                                = "$#{f.bid}"
                                 %small
-                                  in 3 days
+                                  = "in #{f.duration} Days"
           .small-12.medium-4.large-3.columns
             = render 'quick_project_info'
