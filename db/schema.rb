@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410115429) do
+ActiveRecord::Schema.define(version: 20150412095753) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20150410115429) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "bids", force: true do |t|
+    t.text    "details"
+    t.integer "project_id"
+    t.integer "user_id"
+    t.integer "bid"
+    t.integer "duration"
+  end
+
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
@@ -61,6 +69,12 @@ ActiveRecord::Schema.define(version: 20150410115429) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "milestones", force: true do |t|
+    t.string  "milestone"
+    t.integer "bid_id"
+    t.integer "payment"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "title"
@@ -97,6 +111,11 @@ ActiveRecord::Schema.define(version: 20150410115429) do
     t.string "name"
   end
 
+  create_table "skills_users", force: true do |t|
+    t.integer "skill_id"
+    t.integer "user_id"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "username"
@@ -123,10 +142,5 @@ ActiveRecord::Schema.define(version: 20150410115429) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_skills", force: true do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
-  end
 
 end

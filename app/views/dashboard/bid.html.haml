@@ -1,2 +1,67 @@
-%h1 Dashboard#bid
-%p Find me in app/views/dashboard/bid.html.erb
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title
+          = @project.title
+        %ul.project-info
+          %li
+            Posted by
+            = link_to "#{@project_owner.name}",:controller => 'dashboard',:action => 'user_profile', :user => @project_owner.id
+          %li
+            On
+            %b= @project.created_at.strftime("%B %d, %Y")
+        .row
+          .small-12.medium-8.large-9.columns
+            .p-description.panel
+              = @project.description.html_safe
+            .row
+              .small-12.columns
+                %h5
+                  = "Bid on #{@project.title}"
+                .bid-project
+                  = form_for  @bid,url: {:controller => 'bid',:action => 'create'} do |f|
+                    .field
+                      = f.label :details
+                      = f.cktext_area :details
+                    .field.margin-top-15
+                      = f.label :bid
+                      .row.collapse
+                        .small-1.columns
+                          %span.prefix
+                            $
+                        .small-11.columns
+                          = f.text_field :bid
+                    .field
+                      = f.label "Milstones"
+                      .milestones#milestones
+                        .row.each-milestone
+                          .small-8.medium-9.columns
+                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task",:id=>"")
+                          .small-4.medium-3.columns
+                            .row.collapse
+                              .small-2.columns
+                                %span.prefix
+                                  $
+                              .small-10.columns
+                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:id=>"")
+                      .more-milestones.clearfix
+                        %a.label.alert#add-milestones{:href=>"#milestones"}
+                          %span.fa.fa-plus
+                          Add milestones
+                    .field
+                      = f.hidden_field :project_id,:value => @project.id
+                      = f.hidden_field :user_id, :value => current_user.id
+                    .actions
+                      = f.submit "Submit Proposal", :class => "button alert small custom-submit-btn right "
+          .small-12.medium-4.large-3.columns
+            = render 'quick_project_info'
+-content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      $('#add-milestones').on('click',function(){
+          var newMilestones = $('.each-milestone').first().clone();
+          newMilestones.find('input').val("")
+          $('.milestones').append(newMilestones);
+      })
+    })

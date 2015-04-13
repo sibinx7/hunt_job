@@ -26,6 +26,7 @@ class DashboardController < ApplicationController
   def project
     @project = Project.find(params[:project])
     @project_owner = User.find(@project.creator)
+
   end
 
   def user_profile
@@ -34,10 +35,11 @@ class DashboardController < ApplicationController
   def settings
   end
 
-  def bids
-  end
 
   def bid
+    @project = Project.find(params[:project])
+    @project_owner = User.find(@project.creator)
+    @bid = Bid.new
   end
 
   def payments

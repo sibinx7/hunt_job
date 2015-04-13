@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'bid/show'
+
+  get 'bid/create'
+
+  get 'bid/update'
+
+  get 'bid/delete'
+
   get 'skills/index'
 
   post 'skills/create'
@@ -54,9 +62,7 @@ Rails.application.routes.draw do
 
   get 'dashboard/settings'
 
-  get 'dashboard/bids'
-
-  get 'dashboard/bid'
+  get 'dashboard/bid/:project', to:'dashboard#bid'
 
   get 'dashboard/payments'
 
@@ -64,6 +70,9 @@ Rails.application.routes.draw do
 
   get 'dashboard/pending_projects'
 
+  post 'bid/create'
+  patch 'bid/update'
+  delete 'bid/destroy'
   # Edit users info
 
 

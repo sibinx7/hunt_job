@@ -1,0 +1,45 @@
+.quick-view
+  .quick-box
+    %h6
+      Status
+    %a.button.tiny.secondary.text-center.success.margin-0
+      open
+  .quick-box
+    %h6
+      Bid
+    %ul
+      %li
+        Available Bids
+        %span.label.alert.right
+          10
+
+  .quick-box
+    %h6
+      Skills required
+    %ul.my-skill-box
+      - @project.skills.each_with_index do |f,index|
+        %li
+          = f.name
+  .quick-box
+    %h6
+      Budget
+    %ul
+      %li
+        %a
+          Minimum Budget
+          %span.label.alert.right
+            = "$ #{@project.min_budget}"
+      %li
+        %a
+          Maximum Budget
+          %span.label.alert.right
+            = "$ #{@project.max_budget}"
+  .quick-box
+    %h6
+      Close date
+    %ul
+      %li
+        %a{:href=>'#'}
+          Expired on
+          %b
+            = @project.close_date.strftime("%B %d, %Y")
