@@ -74,7 +74,7 @@ Rails.application.routes.draw do
 
   post 'bid/create'
   patch 'bid/update/:id',to:'bid#update'
-  delete 'bid/destroy'
+  delete 'bid/project/:project/bid/:bid/destroy/', to:'bid#destroy'
   # Edit users info
 
 

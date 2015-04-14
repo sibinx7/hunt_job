@@ -50,9 +50,18 @@
                             .profile-info
                               %h3.profile-title
                                 = link_to "#{@project_bid_users[index].name}",'#'
-                              - if current_user.id == @project_bid_users[index].id
+                              - if current_user.id.to_i == @project_bid_users[index].id.to_i && current_user.id != @project.creator.to_i
                                 %small
-                                  = link_to "Edit Bid",:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id
+                                  = link_to "Edit Bid",{:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id},:class => "button tiny round"
+                                  = link_to "Delete", {:controller => 'bid',:action => 'destroy',:bid=>f.id,:project => @project.id},:class => "button tiny alert round"
+                              - elsif current_user.id.to_i == @project.creator.to_i && current_user.id.to_i == @project_bid_users[index].id.to_i
+                                %small
+                                  = link_to "View Bid",{:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id},:class => "button success tiny round"
+                                  = link_to "Edit Bid",{:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id},:class => "button tiny round"
+                                  = link_to "Delete", {:controller => 'bid',:action => 'destroy',:bid=>f.id,:project => @project.id},:class => "button tiny alert round"
+                              - elsif current_user.id.to_i == @project.creator.to_i && current_user.id.to_i != @project_bid_users[index].id.to_i
+                                %small
+                                  = link_to "View Bid",{:controller => 'dashboard',:action => 'edit_bid',:project=>@project.id , :bid => f.id},:class => "button tiny round"
                             .profile-bid
                               .profile-money
                                 = "$#{f.bid}"
