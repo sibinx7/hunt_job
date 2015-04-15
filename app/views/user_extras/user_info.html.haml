@@ -36,19 +36,31 @@
               .quick-view
                 %h6
                   Bank Detail
-                %table.user-info-table
-                  %tr
-                    %td
-                      Bank Name
-                    %td
-                  %tr
-                    %td
-                      Account No
-                    %td
-                  %tr
-                    %td
-                      Branch
-                    %td
-                      d
+                  .right
+                    = link_to "Add Account",{:controller => 'bank_accounts',:action => 'new'},:class => "label alert"
+                - if @bank_details
+                  - @bank_details.each_with_index do |b|
+                    %table.user-info-table.separate
+                      %tr
+                        %td
+                          Bank Name
+                        %td
+                          = b.name
+                      %tr
+                        %td
+                          Account No
+                        %td
+                          = b.account_no
+                      %tr
+                        %td
+                          Branch
+                        %td
+                          = b.place
+                -else
+                  %table.user-info-table
+                    %tr
+                      %td{:colspan => 2}
+                        .panel
+                          Bank account is not available, Please add
           .small-12.medium-4.large-3.columns{"data-equalizer-watch"=>""}
             = render 'dashboard/quick_view'

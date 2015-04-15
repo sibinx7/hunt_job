@@ -1,5 +1,5 @@
 .search-form
-  %form{:data=>{:remote=>"true"},:action=>"/dashboard/projects",:method=>"GET",:id=>"my-form"}
+  %form{:action=>"/dashboard/projects",:method=>"GET"}
     .row
       .small-12.columns
         .custom-tagit
@@ -8,29 +8,46 @@
       .small-12.columns
         %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword",:id=>"submit-keyword"}
     .row
-      .small-12.columns.medium-6.columns.large-6.columns
-        %h6.font-bold
-          Select Minimum Price
-        .row{:data=>{:equalizer=>""}}
-          .small-10.medium-11.columns{"data-equalizer-watch"=>""}
-            .range-slider.round{:data=>{:slider=>"",:options=>"display_selector:#minimumRange;start:0;end:100"}}
-              %span.range-slider-handle{:role=>"",:tabindex=>"0"}
-              %span.range-slider-active-segment
-              %input{:type=>"hidden",:name=>"min_range"}
-          .small-2.medium-1.columns{"data-equalizer-watch"=>""}
-            %span#minimumRange
-      .small-12.columns.medium-6.columns.large-6.columns
-        %h6.font-bold
-          Select Minimum Price
-        .row
-          .small-10.medium-11.columns
-            .range-slider.round{:data=>{:slider=>"",:options=>"display_selector:#maximumRange;"},:aria=>{:valuemin=>"0",:valuemax=>"100"}}
-              %span.range-slider-handle{:role=>"",:tabindex=>"0"}
-              %span.range-slider-active-segment
-              %input{:type=>"hidden",:name=>"max_range"}
-          .small-2.medium-1.columns
-            %span#maximumRange
+      .small-12.medium-12.large-12.columns
+        .range-slider-box.margin-bottom-15
+          %h5
+            Select minimum and Maximum Budget
+            (
+            %span#min-range-value
+            = "-"
+            %span#max-range-value
+            )
+          %input#min-range{:type=>"hidden",:name=>"min-range"}
+          %input#max-range{:type=>"hidden",:name=>"max-range"}
+          #slider-range
     .row
       .small-12.medium-10.columns
       .small-12.medium-2.columns
         %input.button.alert.tiny.right.custom-submit-btn{:type=>"submit",:value=>"Search"}
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+        var min_value = parseInt("#{@min_budget}")
+        var max_value = parseInt("#{@max_budget}")
+        var lower_value = (min_value+(max_value/10))
+        var upper_value = (min_value+(max_value/2))
+        MinMaxBudgetSlider(min_value,max_value,lower_value,upper_value);
+    })
+    MinMaxBudgetSlider = function(min_budget,max_budget,lower_value,upper_value){
+      $( "#slider-range" ).slider({
+        range: true,
+        min: typeof min_budget!="undefined"?min_budget:0,
+        max: typeof max_budget!="undefined"?max_budget:1000,
+        values: [ lower_value, upper_value ],
+        slide: function( event, ui ) {
+          $( "#min-range" ).val(ui.values[0]);
+          $( "#max-range" ).val(ui.values[1]);
+          $( "#min-range-value" ).html(ui.values[0]+'$');
+          $( "#max-range-value" ).html(ui.values[1]+'$');
+        }
+      });
+      $( "#min-range" ).val($( "#slider-range" ).slider( "values", 0 ));
+      $( "#max-range" ).val($( "#slider-range" ).slider( "values", 1 ));
+      $( "#min-range-value" ).html($( "#slider-range" ).slider( "values", 0 )+'$');
+      $( "#max-range-value" ).html($( "#slider-range" ).slider( "values", 1 )+'$');
+    }

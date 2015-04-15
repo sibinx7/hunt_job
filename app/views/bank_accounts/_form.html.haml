@@ -1,0 +1,32 @@
+= form_for @bank_account do |f|
+  - if @bank_account.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@bank_account.errors.count, "error")} prohibited this Bank Account from being saved:"
+      %ul.backend-errors.margin-bottom-15
+        - @bank_account.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name,"Bank Name"
+    = f.text_field :name
+  .field.margin-bottom-15
+    = f.label :address,"Bank Address"
+    = f.cktext_area :address
+  .field
+    = f.label :place, "Bank Location"
+    = f.text_field :place
+  .field
+    = f.label :ifsc_code, "Bank IFSC code"
+    = f.text_field :ifsc_code
+  .field
+    = f.label :account_no, "Your Bank Account Number"
+    = f.text_field :account_no
+  .field
+    = f.label :card_no, "Your ATM Number"
+    = f.text_field :card_no
+  .field
+    = f.label :card_csc,"Card Secret Number , <small>3 letter number on the card</small>".html_safe
+    = f.text_field :card_csc
+  .field
+    = f.hidden_field :user_id,:value=>current_user.id
+  .actions
+    = f.submit 'Save',:class=>"button alert right tiny"

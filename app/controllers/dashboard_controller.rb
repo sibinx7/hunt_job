@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
 
 
   def index
+    @notification = Notification.where(:user_id => current_user.id)
 
   end
 
@@ -16,10 +17,8 @@ class DashboardController < ApplicationController
   def projects
     @skills = ["PHP","Ruby","Wordpress","Python","Javascript","CSS","HTML"]
     @params = params[:search_keyword]
-    respond_to do |format|
-      format.html { }
-      format.js {}
-    end
+    @min_budget = Project.minimum(:min_budget)
+    @max_budget = Project.maximum(:max_budget)
     @projects = Project.paginate(:page => params[:page],:per_page => 2)
   end
 
@@ -30,6 +29,9 @@ class DashboardController < ApplicationController
     @project_bid_users = Array.new  
     @project_bids.each_with_index  do |f,index|
       @project_bid_users[index] = User.find(f.user_id)
+      if current_user.id == f.id
+        @i_bid = true
+      end
     end
   end
 

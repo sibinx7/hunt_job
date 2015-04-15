@@ -1,0 +1,15 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.columns
+            %h3 Editing bank_account
+
+            = render 'form'
+
+            = link_to 'Show', @bank_account
+            \|
+            = link_to 'Back', user_extras_user_info_path
+            \|
+            = link_to 'Delete', {:controller => 'bank_accounts',:action => 'destroy',:id=> @bank_account.id},:method => 'delete'

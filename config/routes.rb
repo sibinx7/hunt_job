@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :bank_accounts
+
   get 'bid/show'
 
   get 'bid/create'

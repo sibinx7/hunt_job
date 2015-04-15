@@ -38,6 +38,15 @@ class ProjectsController < InheritedResources::Base
          project.skills <<  Skill.where(name:skills)
         end
       end
+      @notification = Notification.new
+      @notification.title= "You have been created a Project"
+      @notification.content = "<p>A new Project <b>#{project.title}</b> created. For more information check this Project page"
+      @notification.user_id = current_user.id
+      @notification.not_type = "project"
+      @notification.project_id = project.id
+      @notification.related_task = project.id
+      @notification.link = "#{projects_path}/#{project.id}"
+      @notification.save
       redirect_to projects_path
 
     else

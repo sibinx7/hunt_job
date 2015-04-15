@@ -67,6 +67,9 @@
 .margin-bottom-15{
   margin-bottom:15px;
 }
+.margin-right-10{
+  margin-right:10px;
+}
 .font-bold{
   font-weight: bold;
 }
@@ -127,6 +130,10 @@ ul.custom-pagination{
   .range-slider.round .range-slider-handle:active,
   .range-slider.round .range-slider-handle:focus{
     background:darken(#de6258,10%);
+  }
+  .ui-widget-header{
+    background:#de6258;
+    border-color:#de6258;
   }
 }
 
@@ -323,4 +330,10 @@ ul.pagination.custom-pagination{
       }
     }
   }
+}
+table.separate{
+  width:100%;
+  background:#f4f4f4!important;
+  border-bottom:2px solid #bbb!important;
+  margin-bottom:10px;
 }

@@ -26,11 +26,9 @@
                         Income
                     - if  not user_signed_in?
                       %li.sign-in
-                        %a{:href=>"/users/sign_in"}
-                          Sign In
+                        = link_to "Sign In",new_user_session_path
                     - else
                       %li.sign-in
-                        %a{:href=>"/users/sign_out"}
-                          Sign Out
+                        = link_to "Sign Out",destroy_user_session_path,:method => :delete
   /end header
 = render 'dashboard/secondary_menu'

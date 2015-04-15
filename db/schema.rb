@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412095753) do
+ActiveRecord::Schema.define(version: 20150415144728) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 20150412095753) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "bank_accounts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "address"
+    t.string   "place"
+    t.string   "account_no"
+    t.string   "ifsc_code"
+    t.string   "card_no"
+    t.string   "card_csc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "bids", force: true do |t|
     t.text    "details"
     t.integer "project_id"
@@ -74,6 +87,18 @@ ActiveRecord::Schema.define(version: 20150412095753) do
     t.string  "milestone"
     t.integer "bid_id"
     t.integer "payment"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "related_task"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|

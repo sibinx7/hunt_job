@@ -45,14 +45,5 @@
           }
       })
     })
-    $(document).ready(function(){
-      $('#submit-keyword').on('keyup',function(){
-        $('form[data-remote=true]').submit()
-        $(document).on("submit", "form[data-remote=true]", function(e){
-          e.preventDefault();
-          $.getScript($('form').attr(action))
-        });
-      })
-    })
 
 

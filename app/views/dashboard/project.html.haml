@@ -17,7 +17,8 @@
               = @project.description.html_safe
             .row
               .small-12.columns
-                = link_to "Bid on this Project",{:controller => 'dashboard',:action => 'bid',:project=>@project.id},:class => 'button medium alert radius right'
+                - unless @i_bid == true
+                  = link_to "Bid on this Project",{:controller => 'dashboard',:action => 'bid',:project=>@project.id},:class => 'button medium alert radius right'
             .row
               .small-12.columns
                 %h5.p-title
