@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
 
   def index
-    @notification = Notification.where(:user_id => current_user.id)
+    @notification = Notification.where(:user_id => current_user.id).order('created_at DESC')
 
   end
 
@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
     @params = params[:search_keyword]
     @min_budget = Project.minimum(:min_budget)
     @max_budget = Project.maximum(:max_budget)
-    @projects = Project.paginate(:page => params[:page],:per_page => 2)
+    @projects = Project.paginate(:page => params[:page],:per_page => 4).order('created_at DESC')
   end
 
   def project
@@ -29,7 +29,7 @@ class DashboardController < ApplicationController
     @project_bid_users = Array.new  
     @project_bids.each_with_index  do |f,index|
       @project_bid_users[index] = User.find(f.user_id)
-      if current_user.id == f.id
+      if f.user_id == current_user.id
         @i_bid = true
       end
     end

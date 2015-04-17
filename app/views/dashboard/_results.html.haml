@@ -22,15 +22,19 @@
               %td{:width=>'200px'}
                 = link_to project.title,:controller => 'dashboard',:action => 'project',:project=>project.id
               %td{:class=>"hide-for-small-only"}
-                tghbe
+                = project.description.first(100).html_safe
               %td
-                = 20
+                = project.bids.count
               %td
-                = @skills.sample
+                - project.skills.each_with_index do |bid,index|
+                  -if index == 0
+                    = bid.name
+                  -else
+                    = ",#{bid.name}"
               %td
-                140$
+                = "$#{project.min_budget}-$#{project.max_budget}"
               %td{:width=>"100px"}
-                = Date.today
+                = project.close_date
 .row
   .small-12.columns
     = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails

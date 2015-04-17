@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415144728) do
+ActiveRecord::Schema.define(version: 20150417005845) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -65,6 +65,10 @@ ActiveRecord::Schema.define(version: 20150415144728) do
     t.integer "user_id"
     t.integer "bid"
     t.integer "duration"
+    t.boolean "status"
+    t.integer "percentage"
+    t.boolean "granted"
+    t.boolean "accepted"
   end
 
   create_table "ckeditor_assets", force: true do |t|
@@ -87,12 +91,16 @@ ActiveRecord::Schema.define(version: 20150415144728) do
     t.string  "milestone"
     t.integer "bid_id"
     t.integer "payment"
+    t.boolean "status"
+    t.integer "percentage"
+    t.boolean "request_payment"
+    t.boolean "grant_payment"
   end
 
   create_table "notifications", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.string   "type"
+    t.string   "not_type"
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "related_task"
