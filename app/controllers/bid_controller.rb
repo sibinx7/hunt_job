@@ -72,6 +72,27 @@ class BidController < ApplicationController
     @bid.destroy
     redirect_to :controller => 'dashboard',:action => 'project',:project => params[:project_id]
   end
+
+  # Extra method for accept/reject, grant bids
+  def grant
+    @project = Project.find(params[:project_id])
+    @bid = Bid.find(params[:bid_id])
+    # Project creator and current user are same
+    if @project.creator.to_i == current_user.id.to_i
+      @bid.granted = 1
+      if @bid.save
+        render json: {"status"=> "success"}
+      else
+        render json: {"status"=>"failure"}
+      end
+    end
+  end
+
+  # We can find granted bids
+  def granted
+
+  end
+
   private
     def bid_params
       params.require(:bid).permit(:details,:project_id,:user_id,:bid,:duration)

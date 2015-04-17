@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   get 'bid/delete'
 
+  post 'bid/grant'
+
+  get 'bid/granted'
+
   get 'skills/index'
 
   post 'skills/create'

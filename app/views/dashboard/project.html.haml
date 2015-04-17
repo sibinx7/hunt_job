@@ -17,7 +17,7 @@
               = @project.description.html_safe
             .row
               .small-12.columns
-                - unless @i_bid == true
+                - unless @i_bid == true || @project.creator.to_i == current_user.id.to_i
                   = link_to "Bid on this Project",{:controller => 'dashboard',:action => 'bid',:project=>@project.id},:class => 'button medium alert radius right'
             .row
               .small-12.columns
@@ -63,6 +63,9 @@
                               - elsif current_user.id.to_i == @project.creator.to_i && current_user.id.to_i != @project_bid_users[index].id.to_i
                                 %small
                                   = link_to "View Bid",{:controller => 'bid',:action => 'show',:project=>@project.id , :bid => f.id},:class => "button tiny round"
+                              / if bid is accpeted he can goto page
+                              - if @project_bid_users[index].id.to_i == current_user.id.to_i && f.granted
+                                = link_to "Project awarded",{:controller => 'bid',:action => 'show',:project=>@project.id , :bid => f.id},:class => "button info tiny round"
                             .profile-bid
                               .profile-money
                                 = "$#{f.bid}"

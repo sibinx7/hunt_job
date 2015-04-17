@@ -56,13 +56,41 @@
                 .row
                   .small-12.columns
                     - if @project.creator.to_i == current_user.id.to_i && @bids.granted == nil
-                      = link_to "Accept Bid","#",:class => "button small radius right ",:id=> "grant-bid"
-                    - elsif @bids.user_id == current_user.id && @bids.granted == 1
-                      = link_to "Accept","#",:class => "button small radius right ",:id=> "grant-bid"
-                      = link_to "Reject","#",:class => "button alert small radius right ",:id=> "grant-bid"
+                      %a.button.small.radius.right#grant-bid
+                        Accept Bid
+                    - elsif @project.creator.to_i == current_user.id.to_i && @bids.granted &&  @bids.accepted
+                      .panel
+                        = "You have accept this Bid, Check on #{link_to 'Granted Bid page',:controller => 'bid',:action => 'granted',:project=> @project.id, :bid => @bids.id }".html_safe
+                    - elsif @project.creator.to_i == current_user.id.to_i && @bids.granted &&  @bids.accepted == nil
+                      .panel
+                        You have accpeted Bid, Waiting for Developer reaction
+                    - elsif @bids.user_id == current_user.id && @bids.granted
+                      %a.button.tiny.alert.radius.right#reject-project
+                        Reject
+                      %a.button.tiny.radius.right.margin-right-10#accept-project
+                        Accept
                     -else
                       .panel
                         You should wait until Project owner accept your bid
-
           .small-12.medium-4.large-3.columns
             = render 'dashboard/quick_project_info'
+
+- content_for :extra_js do
+  - if @project.creator.to_i == current_user.id.to_i
+    :javascript
+      $(document).ready(function(){
+        var grantRequest = '#{bid_grant_url}';
+          $("#grant-bid").on('click',function(){
+            $.post(grantRequest,{
+            project_id : "#{@project.id}",
+            bid_id : "#{@bids.id}",
+            project_creator : "#{@project.creator}",
+            bid_user : "#{@bids.user_id}"
+          }).done(function(data){
+            if(data.status == "success"){
+              $("#grant-bid").html("Bid accepted").addClass('disabled');
+              window.location.reload();
+            }
+          })
+        })
+      })
