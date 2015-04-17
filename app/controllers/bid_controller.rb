@@ -4,6 +4,7 @@ class BidController < ApplicationController
     @project = Project.find(params[:project])
     @bids = @project.bids.find(params[:bid])
     @project_owner = User.find(@project.creator)
+    @bid_user = User.find(@bids.user_id)
   end
 
   def create

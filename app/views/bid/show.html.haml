@@ -16,10 +16,53 @@
             .p-description.panel
               = @project.description.html_safe
             %h5.p-title
-              Bid proposal
+              = "Bid Proposal by <b>#{@bid_user.name}</b>".html_safe
             .panel
               = @bids.details.html_safe
-              = @bids.duration
-              = @bids.bid
+            %hr
+            .row
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Project Duration
+                  .content
+                    %h2
+                      = @bids.duration
+                      %small
+                        %i days
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Bid Price
+                  .content
+                    %h2
+                      %small
+                        $
+                      = @bids.bid
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Milestones
+                  .content
+                    %h2
+                      = @bids.milestones.count
+                      %small
+                        %i
+                          milestones
+            .row
+              .small-12.columns
+                %h5.p-title
+                  Actions
+                .row
+                  .small-12.columns
+                    - if @project.creator.to_i == current_user.id.to_i && @bids.granted == nil
+                      = link_to "Accept Bid","#",:class => "button small radius right ",:id=> "grant-bid"
+                    - elsif @bids.user_id == current_user.id && @bids.granted == 1
+                      = link_to "Accept","#",:class => "button small radius right ",:id=> "grant-bid"
+                      = link_to "Reject","#",:class => "button alert small radius right ",:id=> "grant-bid"
+                    -else
+                      .panel
+                        You should wait until Project owner accept your bid
+
           .small-12.medium-4.large-3.columns
             = render 'dashboard/quick_project_info'
