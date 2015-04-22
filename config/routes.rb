@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
   post 'bid/grant'
 
+  post 'bid/user_reaction'
+
+  get 'bid/project/:project/bid/:bid/dashboard', to:'bid#bid_dashboard'
+
   get 'bid/granted'
 
   get 'skills/index'

@@ -76,11 +76,21 @@ class BidController < ApplicationController
   # Extra method for accept/reject, grant bids
   def grant
     @project = Project.find(params[:project_id])
+    @project_owner = User.find(@project.creator)
     @bid = Bid.find(params[:bid_id])
     # Project creator and current user are same
     if @project.creator.to_i == current_user.id.to_i
       @bid.granted = 1
       if @bid.save
+        @notification = Notification.new
+        @notification.title = "You have been awarded a new Project"
+        @notification.content = "#{@project_owner.name} awarded #{@project.title}, You can Accept/Reject this project. Please see
+        Project page to know more about your bid"
+        @notification.not_type = "bid"
+        @notification.user_id = @bid.user_id
+        @notification.related_task = @bid.id
+        @notification.link = "#{url_for :controller => 'bid',:action => 'show',:project=> @project.id,:bid => @bid.id}"
+        @notification.save
         render json: {"status"=> "success"}
       else
         render json: {"status"=>"failure"}
@@ -91,6 +101,67 @@ class BidController < ApplicationController
   # We can find granted bids
   def granted
 
+  end
+
+  def user_reaction
+    @project = Project.find(params[:project_id])
+    @bid = Bid.find(params[:bid_id])
+    @bid_user = User.find(params[:bid_user])
+    if @bid.user_id.to_i == current_user.id.to_i
+      if params[:user_action]
+        if params[:user_action].to_s == "reject"
+          @bid.accepted = 0
+        elsif params[:user_action].to_s == "accept"
+          @bid.accepted = 1
+        end
+        if @bid.save
+          @notification = Notification.new
+          if @bid.accepted
+            @notification.title = "Your Project has been accepted"
+            @notification.content = "#{@bid_user.name} accepted #{@project.title}, You can watch your Project process. Please see
+            Project page to know more about your bid"
+          else
+            @notification.title = "You Project has been rejected"
+            @notification.content = "#{@bid_user.name} rejected  #{@project.title}. Please see
+            Project page to know more about your bid"
+          end
+          @notification.not_type = "bid"
+          @notification.user_id = @project.creator
+          @notification.related_task = @bid.id
+          @notification.link = "#{url_for :controller => 'bid',:action => 'show',:project=> @project.id,:bid => @bid.id}"
+          @notification.save
+
+          # Pass info to bidder
+          @notification = Notification.new
+          if @bid.accepted
+            @notification.title = "Your have been accept new Project"
+            @notification.content = "You accepted #{@project.title}, You can watch your Project process. Please see
+            Project page to know more about your bid"
+          else
+            @notification.title = "You have been reject new Project"
+            @notification.content = "You rejected  #{@project.title}. Please see
+            Project page to know more about your bid"
+          end
+          @notification.not_type = "bid"
+          @notification.user_id = @bid.user_id
+          @notification.related_task = @bid.id
+          @notification.link = "#{url_for :controller => 'bid',:action => 'show',:project=> @project.id,:bid => @bid.id}"
+          @notification.save
+        end
+      end
+    end
+    if @bid.accepted
+      render json: {"status"=>"accepted"}
+    else
+      render json: {"status"=>"rejected"}
+    end
+  end
+
+  def bid_dashboard
+    @project = Project.find(params[:project])
+    @bids = Bid.find(params[:bid])
+    @project_owner = User.find(@project.creator)
+    @bid_user = User.find(@bids.user_id)
   end
 
   private

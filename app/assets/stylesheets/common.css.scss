@@ -359,3 +359,55 @@ table.separate{
     }
   }
 }
+/** user to set element at vertical center **/
+.vertical-center{
+  display:table;
+  top:0;
+  bottom:0;
+  position: absolute;
+  margin-top:auto;
+  margin-bottom:auto;
+  width:90%;
+}
+/** Common SVG circle progress bar **/
+.circle-progress{
+}
+.svg circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+  stroke: #666;
+  stroke-width: 1em;
+}
+.svg .circle-bar {
+  stroke:lighten(#DE6258,10%);
+}
+.circle-progress {
+  display: block;
+  height: 200px;
+  width: 200px;
+  margin: 2em auto;
+  border-radius: 100%;
+  position: relative;
+  text-align: center;
+}
+.circle-progress:after {
+  position: absolute;
+  display: block;
+  height: 160px;
+  width: 160px;
+  left: 50%;
+  top: 50%;
+  content: attr(data-pct)"%";
+  margin-top: -80px;
+  margin-left: -80px;
+  border-radius: 100%;
+  line-height: 160px;
+  font-size: 2em;
+}
+.range-slider-handle{
+  background: lighten(#de6258,10%);
+  transition:all 0.1s linear 0.05s;
+}
+.range-slider-handle:hover{
+  background: #de6258;
+}

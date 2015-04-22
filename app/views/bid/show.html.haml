@@ -63,18 +63,35 @@
                         = "You have accept this Bid, Check on #{link_to 'Granted Bid page',:controller => 'bid',:action => 'granted',:project=> @project.id, :bid => @bids.id }".html_safe
                     - elsif @project.creator.to_i == current_user.id.to_i && @bids.granted &&  @bids.accepted == nil
                       .panel
-                        You have accpeted Bid, Waiting for Developer reaction
-                    - elsif @bids.user_id == current_user.id && @bids.granted
+                        You have been  accepted  Bid, Waiting for Developer reaction
+                    - elsif @bids.user_id.to_i  == current_user.id.to_i  && @bids.granted &&@bids.accepted == nil
                       %a.button.tiny.alert.radius.right#reject-project
                         Reject
                       %a.button.tiny.radius.right.margin-right-10#accept-project
                         Accept
+                    - elsif @bids.user_id.to_i == current_user.id.to_i && @bids.accepted
+                      .panel
+                        = "You have accept this project, You can access"
+                        = link_to "Project Dasboard",:controller => 'bid',:action => 'bid_dashboard',:project => @project.id, :bid => @bids.id
+                    - elsif @bids.user_id.to_i == current_user.id.to_i && !@bids.accepted
+                      .panel
+                        You have rejected this Project
                     -else
                       .panel
                         You should wait until Project owner accept your bid
           .small-12.medium-4.large-3.columns
             = render 'dashboard/quick_project_info'
-
+- content_for :extra_css do
+  :css
+    .reject-alert{
+      position: fixed;
+      top:10px;
+      right:0;
+      left:0px;
+      margin-right: auto;
+      margin-left:auto;
+      width:60%;
+    }
 - content_for :extra_js do
   - if @project.creator.to_i == current_user.id.to_i
     :javascript
@@ -91,6 +108,48 @@
               $("#grant-bid").html("Bid accepted").addClass('disabled');
               window.location.reload();
             }
+          })
+        })
+      })
+  - if @bids.user_id.to_i == current_user.id.to_i
+    :javascript
+      $(document).ready(function(){
+        var user_reaction = '#{bid_user_reaction_url}'
+        $('#reject-project').on('click',function(){
+          $.post(user_reaction,{
+              project_id : '#{@project.id}',
+              bid_id : '#{@bids.id}',
+              project_owner : '#{@project.creator}',
+              bid_user : '#{@bids.user_id}',
+              user_action : 'reject'
+          }).done(function(data){
+            var alert = '<div data-alert class="reject-alert alert-box alert radius">'+
+                        'You have rejected this project.'+
+                        '<a href="#" class="close">&times;</a>'+
+                        '</div>';
+            $('body').append(alert);
+            setTimeout(function(){
+              $('body .reject-alert').remove()
+            },2000)
+
+          })
+        })
+          $('#accept-project').on('click',function(){
+          $.post(user_reaction,{
+              project_id : '#{@project.id}',
+              bid_id : '#{@bids.id}',
+              project_owner : '#{@project.creator}',
+              bid_user : '#{@bids.user_id}',
+              user_action : 'accept'
+          }).done(function(data){
+            var alert = '<div data-alert class="reject-alert alert-box success radius">'+
+                        'You have accepted this project.'+
+                        '<a href="#" class="close">&times;</a>'+
+                        '</div>';
+            $('body').append(alert);
+            setTimeout(function(){
+              $('body .reject-alert').remove()
+            },2000)
           })
         })
       })

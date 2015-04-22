@@ -1,0 +1,91 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title
+          = @project.title
+        %ul.project-info
+          %li
+            Posted by
+            = link_to "#{@project_owner.name}",:controller => 'dashboard',:action => 'user_profile', :user => @project_owner.id
+          %li
+            On
+            %b= @project.created_at.strftime("%B %d, %Y")
+        .row
+          .small-12.medium-8.large-9.columns
+            .p-description.panel
+              = @project.description.html_safe
+            %h5.p-title
+              = "Bid Proposal by <b>#{@bid_user.name}</b>".html_safe
+            .panel
+              = @bids.details.html_safe
+            %hr
+            .row
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Project Duration
+                  .content
+                    %h2
+                      = @bids.duration
+                      %small
+                        %i days
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Bid Price
+                  .content
+                    %h2
+                      %small
+                        $
+                      = @bids.bid
+              .small-12.medium-4.columns
+                .panel.bid-feature
+                  .title
+                    Milestones
+                  .content
+                    %h2
+                      = @bids.milestones.count
+                      %small
+                        %i
+                          milestones
+            .row
+              .small-12.columns
+                %h5.p-title
+                  Dashboard
+                .action-pack
+                  .panel
+                    %h6.p-title
+                      Bid
+                    .row{"data-equalizer"=>""}
+                      .small-12.medium-6.columns{"data-equalizer-watch"=>""}
+                        .circle-progress{"data-pct" => "100"}
+                          %svg.svg{:height => "200", :version => "1.1", :viewPort => "0 0 100 100", :width => "200", :xmlns => "http://www.w3.org/2000/svg"}
+                            %circle{:cx => "100", :cy => "100", :fill => "transparent", :r => "90", "stroke-dasharray" => "565.48", "stroke-dashoffset" => "0"}
+                            %path.path-bar{:d => "M100,10 A90,90 0 0,1 100,190 A90,90 0 0,1 100,10  Z", :fill => "none", :style => "stroke: rgb(236, 121, 58); stroke-width: 16px;stroke-dasharray: 565px, 565px; stroke-linecap: butt;", :transform => ""}
+                      .small-12.medium-6.columns{"data-equalizer-watch"=>""}
+                        .vertical-center
+                          .bid-progress.range-slider{"data-options" => "display_selector: #sliderOutput3;", "data-slider" => ""}
+                            %span.range-slider-handle{:role => "slider", :tabindex => "0"}
+                            %span.range-slider-active-segment
+                            = hidden_field_tag :bid_progress
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      $('.bid-progress').on('change.fndtn.slider', function(e){
+        var val = $(this).attr('data-slider')
+        var $path = $('.svg .path-bar')
+        if (isNaN(val)) {
+          val = 0;
+        }
+        else{
+          var r = 90;
+          var c = Math.PI*(r*2);
+          if (val < 0) { val = 0;}
+          if (val > 100) { val = 100;}
+          var pct = ((100-val)/100)*c;
+          $path.css({ 'stroke-dashoffset': pct});
+          $('.circle-progress').attr('data-pct',val);
+        }
+      });
+    })
