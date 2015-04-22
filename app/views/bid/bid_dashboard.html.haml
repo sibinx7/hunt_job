@@ -69,6 +69,36 @@
                             %span.range-slider-handle{:role => "slider", :tabindex => "0"}
                             %span.range-slider-active-segment
                             = hidden_field_tag :bid_progress
+                    .row
+                      .small-12.columns
+                        %table.right
+                          %thead
+                            %tr
+                              %th
+                                Remaining Days
+                              %th
+                                Budget
+                              %th
+                                Milestones
+                          %tbody
+                            %tr
+                              %td
+                                = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+                              %td
+                                = "$#{@bids.bid}"
+                              %td
+                                = @bids.milestones.count
+                  .row
+                    .small-12.columns
+                      %h5.p-title
+                        Milestones
+                      %ul.accordion{"data-accordion"=>""}
+                        - @bids.milestones.each_with_index do |m|
+                          %li.accordion-navigation
+                            = link_to "#{m.milestone}<span class='fa fa-plus right'></span>".html_safe,"#milestone#{m.id}"
+                            .content{:id=>"milestone#{m.id}"}
+                              = m.payment
+
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){

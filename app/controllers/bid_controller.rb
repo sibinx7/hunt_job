@@ -113,6 +113,7 @@ class BidController < ApplicationController
           @bid.accepted = 0
         elsif params[:user_action].to_s == "accept"
           @bid.accepted = 1
+          @bid.accepted_date = Time.now
         end
         if @bid.save
           @notification = Notification.new
