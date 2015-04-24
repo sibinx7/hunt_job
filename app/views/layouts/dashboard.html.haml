@@ -21,13 +21,13 @@
     = javascript_include_tag "custom.modernizer.js"
     = yield :extra_css
     = csrf_meta_tag
-
+    = javascript_include_tag "application"
   %body
     .home-wrapper
       = render 'layouts/user.header'
       = yield
       = render 'layouts/home.footer'
-    = javascript_include_tag "application"
+
     = yield :extra_js
   :plain
 

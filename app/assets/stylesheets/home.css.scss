@@ -71,7 +71,7 @@ body{
         }
         .top-bar-section{
           ul{
-            height: 80px!important;
+            height: auto;
             background:transparent;
             li{
               display: inline-table;
@@ -113,6 +113,9 @@ body{
             }
           }
         }
+      }
+      .my-top-bar.expanded{
+        height: auto;
       }
     }
     .custom-top-header.user-header{

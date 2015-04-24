@@ -2,13 +2,11 @@
   .row
     .small-12.columns
       .dashboard-inner.custom-container
-        .row
-          .small-12.columns
-          %h3 Add new Project
-          .search-form
-            = render 'form'
-            = link_to 'Back', projects_path
-          = current_user.id
+        %h3 Add new Project
+        .search-form
+          = render 'form'
+          = link_to 'Back', projects_path
+        = current_user.id
 - content_for :extra_css do
   - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
 - content_for :extra_js do

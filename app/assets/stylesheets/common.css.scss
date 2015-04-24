@@ -406,8 +406,16 @@ table.separate{
 }
 .range-slider-handle{
   background: lighten(#de6258,10%);
-  transition:all 0.1s linear 0.05s;
 }
 .range-slider-handle:hover{
   background: #de6258;
+}
+/** Bid table height adjustment in small devices **/
+@media all and (max-width: 640px){
+  .bid-table{
+    margin-top:40px;
+    position: relative;
+    float: none;
+    width:100%;
+  }
 }
