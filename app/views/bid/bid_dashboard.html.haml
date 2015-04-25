@@ -107,12 +107,19 @@
                                   .small-12.medium-6.columns
                                     %a.button.alert.tiny.right
                                       Request Payment
-                                    %a.button.margin-right-10.success.tiny.right{:id=>"complete-percentage-#{m.id}","disabled"=> @bids.percentage.to_i ==100}
+                                    %a.button.margin-right-10.success.tiny.right.complete-milestone{:id=>"complete-percentage-#{m.id}","disabled"=> @bids.percentage.to_i ==100,"data-milestone-id"=>m.id}
                                       Completed
                                 -elsif current_user.id.to_i == @project_owner.id.to_i
-                                  .small-12.medium-6.columns
-                                  .small-12.medium-6.columns
-
+                                  .small-12.columns
+                                    .panel
+                                      %p
+                                        = "Milestone is <b>#{m.percentage}%</b> Completed, Once it completed you should pay <b>#{m.payment}$</b> for the Developer".html_safe
+                                      .clearfix
+                                      - if m.request_payment
+                                        .row
+                                          .small-12.columns
+                                            %a.button.right.tiny{:class=>("success" if  m.grant_payment),:disabled=> m.grant_payment.to_i == 1}
+                                              = m.grant_payment ? "Payment Completed":"Release Payment"
 
 
 - content_for :extra_css do
@@ -159,7 +166,7 @@
         var values = $(this).parent('p').parent().find('.jquery-sliders').slider('value')
         $(this).attr('value',values).val(values);
       })
-
+      // Save progress
       $(document).find('.save_bid_progress').on('click',function(){
         var milestoneId = $(this).attr('data-milestone-id');
         var milestoneProgress = $(this).siblings('input').val();
@@ -168,6 +175,7 @@
             url:"#{url_for :controller => 'milestone', :action =>'milestone_progress' }",
             type:"POST",
             data:{
+              m_type :"progress',
               m_id : milestoneId,
               m_progress : milestoneProgress,
               m_creator : milestoneCreator,
@@ -181,9 +189,29 @@
               },1800)
 
             }
-
         })
       })
+      // Save status as completed
+      $('body').on('click','.complete-milestone',function(){
+        var milestoneId = $(this).attr('data-milestone-id');
+        $.ajax({
+            url:"#{url_for :controller => 'milestone', :action =>'milestone_complete' }",
+            type:"POST",
+            data:{
+              m_type :"completed',
+              m_id : milestoneId,
+              bid_id : "#{@bids.id}"
+            },
+            success:function(data){
+              $('#response-message-'+milestoneId).removeClass('hide').html(data.message)
+              setTimeout(function(){
+                $('#response-message-'+milestoneId).fadeOut('slow')
+              },1800)
+
+            }
+        })
+      })
+      // Request Payment
     })
     function changeProgressCircle(value){
       var val = Math.round(value)

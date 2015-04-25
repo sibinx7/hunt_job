@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   post 'milestone/milestone_progress'
 
+  post 'milestone/milestone_complete'
+
+  post 'milestone/milestone_payment'
+
   get 'bid/granted'
 
   get 'skills/index'

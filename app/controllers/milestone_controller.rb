@@ -16,6 +16,18 @@ class MilestoneController < ApplicationController
       render json:{"status"=>"failed","message"=>"Permission denied"}
     end
   end
+
+  # When user complete/ close milestone
+  def milestone_complete
+    if current_user.id.to_i == params[:m_creator]
+      @milestone = Milestone.find()
+    end
+  end
+
+  # When user request or grant payment
+  def milestone_payment
+
+  end
   private
   def milestone_params
     param.require(:milestone).permit(:milestone,:bid_id,:payment)
