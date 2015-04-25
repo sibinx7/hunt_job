@@ -165,6 +165,7 @@ class BidController < ApplicationController
     @bid_user = User.find(@bids.user_id)
   end
 
+
   private
     def bid_params
       params.require(:bid).permit(:details,:project_id,:user_id,:bid,:duration)

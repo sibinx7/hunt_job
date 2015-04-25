@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get 'bid/project/:project/bid/:bid/dashboard', to:'bid#bid_dashboard'
 
+  post 'milestone/milestone_progress'
+
   get 'bid/granted'
 
   get 'skills/index'

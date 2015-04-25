@@ -85,7 +85,7 @@
                     .small-12.columns
                       %h5.p-title
                         Milestones
-                      %ul.accordion{"data-accordion"=>""}
+                      %ul.accordion.margin-0{"data-accordion"=>""}
                         - @bids.milestones.each_with_index do |m|
                           %li.accordion-navigation
                             = link_to "#{m.milestone}<span class='fa fa-plus right'></span>".html_safe,"#milestone#{m.id}"
@@ -94,16 +94,19 @@
                                 .small-12.medium-6.columns
                                   .row
                                     .small-12.columns
-                                      .jquery-sliders{:id=>"milestone-progress-slider-#{m.id}"}
-                                      %p
+                                      .jquery-sliders{:id=>"milestone-progress-slider-#{m.id}","data-milestone-id"=>"#{m.id}","data-value"=>"#{m.percentage}"}
+                                      %p.margin-top-15
                                         %label
                                           Milestone Progress
-                                        %input.milestone-progress{:id=>"milestone-progress-#{m.id}",:type=>"text","readonly"=>""}
-
+                                          = m.percentage
+                                        %input.milestone-progress{:id=>"milestone-progress-#{m.id}",:type=>"text","readonly"=>"","data-milestone-id"=>"#{m.id}",:value=>"#{m.percentage}","data-value"=>"#{m.percentage}"}
+                                        %span.left.hide{:id=>"response-message-#{m.id}"}
+                                        %a.save_bid_progress.button.tiny.right{"data-milestone-id"=>"#{m.id}"}
+                                          Save Progress
                                 .small-12.medium-6.columns
                                   %a.button.alert.tiny.right
                                     Request Payment
-                                  %a.button.success.tiny.right
+                                  %a.button.margin-right-10.success.tiny.right{:id=>"complete-percentage-#{m.id}","disabled"=> @bids.percentage.to_i ==100}
                                     Completed
 
 
@@ -114,29 +117,67 @@
     }
 - content_for :extra_js do
   :javascript
+    $(window).load(function(){
+      changeProgressCircle("#{@bids.percentage}")
+      $('.jquery-sliders').each(function(index,value){
+        $(this).slider('value',$(this).attr('data-value'))
+        $(this).siblings('p').children('input').attr('value',$(this).attr('data-value')).val($(this).attr('data-value'))
+      })
+
+    })
     $(document).ready(function(){
+      var actualProgress = 0;
       $('.jquery-sliders').slider({
-        value:0,
         min: 0,
         max: 100,
         step: 1,
         slide:function(event,ui){
           $(this).siblings('p').children('.milestone-progress').attr('value',ui.value).val(ui.value)
+          var elementId = $(this).attr('data-milestone-id')
+          $('#complete-percentage-'+elementId).html(ui.value+" Completed")
+          if(ui.value=="100"){
+            $('#complete-percentage-'+elementId).removeAttr('disabled');
+          }else{
+            $('#complete-percentage-'+elementId).attr('disabled','disabled');
+          }
           var sum = 0;
           var numberOfMilestones= 0;
           $(document).find('.milestone-progress').each(function(index,value){
-            console.log(sum)
-            console.log($(this).val())
             sum = Number(sum) + Number($(this).val());
             numberOfMilestones +=1;
           })
-          var actualProgress = sum/(numberOfMilestones);
+           actualProgress = sum/(numberOfMilestones);
           changeProgressCircle(actualProgress)
         }
       })
       $('.milestone-progress').each(function(index,value){
         var values = $(this).parent('p').parent().find('.jquery-sliders').slider('value')
         $(this).attr('value',values).val(values);
+      })
+
+      $(document).find('.save_bid_progress').on('click',function(){
+        var milestoneId = $(this).attr('data-milestone-id');
+        var milestoneProgress = $(this).siblings('input').val();
+        var milestoneCreator = "#{current_user.id}";
+        $.ajax({
+            url:"#{url_for :controller => 'milestone', :action =>'milestone_progress' }",
+            type:"POST",
+            data:{
+              m_id : milestoneId,
+              m_progress : milestoneProgress,
+              m_creator : milestoneCreator,
+              bid_progress : Math.round(actualProgress),
+              bid_id : "#{@bids.id}"
+            },
+            success:function(data){
+              $('#response-message-'+milestoneId).removeClass('hide').html(data.message)
+              setTimeout(function(){
+                $('#response-message-'+milestoneId).fadeOut('slow')
+              },1800)
+
+            }
+
+        })
       })
     })
     function changeProgressCircle(value){

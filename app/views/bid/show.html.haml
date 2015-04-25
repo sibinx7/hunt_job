@@ -60,7 +60,7 @@
                         Accept Bid
                     - elsif @project.creator.to_i == current_user.id.to_i && @bids.granted &&  @bids.accepted
                       .panel
-                        = "You have accept this Bid, Check on #{link_to 'Granted Bid page',:controller => 'bid',:action => 'granted',:project=> @project.id, :bid => @bids.id }".html_safe
+                        = "You have accept this Bid, Check on #{link_to 'Granted Bid page',:controller => 'bid',:action => 'bid_dashboard',:project=> @project.id, :bid => @bids.id }".html_safe
                     - elsif @project.creator.to_i == current_user.id.to_i && @bids.granted &&  @bids.accepted == nil
                       .panel
                         You have been  accepted  Bid, Waiting for Developer reaction
