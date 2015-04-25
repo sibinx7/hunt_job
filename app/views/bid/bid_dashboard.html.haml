@@ -91,23 +91,28 @@
                             = link_to "#{m.milestone}<span class='fa fa-plus right'></span>".html_safe,"#milestone#{m.id}"
                             .content{:id=>"milestone#{m.id}"}
                               .row
-                                .small-12.medium-6.columns
-                                  .row
-                                    .small-12.columns
-                                      .jquery-sliders{:id=>"milestone-progress-slider-#{m.id}","data-milestone-id"=>"#{m.id}","data-value"=>"#{m.percentage}"}
-                                      %p.margin-top-15
-                                        %label
-                                          Milestone Progress
-                                          = m.percentage
-                                        %input.milestone-progress{:id=>"milestone-progress-#{m.id}",:type=>"text","readonly"=>"","data-milestone-id"=>"#{m.id}",:value=>"#{m.percentage}","data-value"=>"#{m.percentage}"}
-                                        %span.left.hide{:id=>"response-message-#{m.id}"}
-                                        %a.save_bid_progress.button.tiny.right{"data-milestone-id"=>"#{m.id}"}
-                                          Save Progress
-                                .small-12.medium-6.columns
-                                  %a.button.alert.tiny.right
-                                    Request Payment
-                                  %a.button.margin-right-10.success.tiny.right{:id=>"complete-percentage-#{m.id}","disabled"=> @bids.percentage.to_i ==100}
-                                    Completed
+                                -if current_user.id.to_i == @bids.user_id.to_i
+                                  .small-12.medium-6.columns
+                                    .row
+                                      .small-12.columns
+                                        .jquery-sliders{:id=>"milestone-progress-slider-#{m.id}","data-milestone-id"=>"#{m.id}","data-value"=>"#{m.percentage}"}
+                                        %p.margin-top-15
+                                          %label
+                                            Milestone Progress
+                                            = m.percentage
+                                          %input.milestone-progress{:id=>"milestone-progress-#{m.id}",:type=>"text","readonly"=>"","data-milestone-id"=>"#{m.id}",:value=>"#{m.percentage}","data-value"=>"#{m.percentage}"}
+                                          %span.left.hide{:id=>"response-message-#{m.id}"}
+                                          %a.save_bid_progress.button.tiny.right{"data-milestone-id"=>"#{m.id}"}
+                                            Save Progress
+                                  .small-12.medium-6.columns
+                                    %a.button.alert.tiny.right
+                                      Request Payment
+                                    %a.button.margin-right-10.success.tiny.right{:id=>"complete-percentage-#{m.id}","disabled"=> @bids.percentage.to_i ==100}
+                                      Completed
+                                -elsif current_user.id.to_i == @project_owner.id.to_i
+                                  .small-12.medium-6.columns
+                                  .small-12.medium-6.columns
+
 
 
 - content_for :extra_css do
