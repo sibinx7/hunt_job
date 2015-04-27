@@ -128,6 +128,7 @@ class BidController < ApplicationController
           end
           @notification.not_type = "bid"
           @notification.user_id = @project.creator
+          @notification.project_id = @project.id
           @notification.related_task = @bid.id
           @notification.link = "#{url_for :controller => 'bid',:action => 'show',:project=> @project.id,:bid => @bid.id}"
           @notification.save
@@ -145,6 +146,7 @@ class BidController < ApplicationController
           end
           @notification.not_type = "bid"
           @notification.user_id = @bid.user_id
+          @notification.project_id = @project.id
           @notification.related_task = @bid.id
           @notification.link = "#{url_for :controller => 'bid',:action => 'show',:project=> @project.id,:bid => @bid.id}"
           @notification.save

@@ -84,6 +84,8 @@ Rails.application.routes.draw do
 
   get 'dashboard/payments'
 
+  get 'dashboard/project/:project/bid/:bid/payment', to:'dashboard#payment_details'
+
   get 'dashboard/pending_project'
 
   get 'dashboard/pending_projects'

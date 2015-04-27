@@ -3,11 +3,18 @@
     Quick Summary
   .quick-money-project
     .quick-money-view
-      $1000
+      - if @user.user_project_detail != nil
+        = "#{@user.user_project_detail.user_income?}$"
+      -else
+        0$
     .quick-view-footer
       from
       %b
-        12
+        - if @user.user_project_detail != nil
+          = "#{@user.user_project_detail.project_completed+@user.user_project_detail.project_ongoing+@user.user_project_detail.project_lost}"
+        - else
+          0
+
       Projects
   .quick-box.with-margin-top
     %h6
@@ -17,27 +24,26 @@
         %a
           Completed Projects
           %span.label.alert.right
-            10
+            - if @user.user_project_detail != nil
+              = @user.user_project_detail.project_completed
+            - else
+              0
       %li
         %a
           Ongoing Projects
           %span.label.warning.right
-            20
-      %li
-        %a
-          Pending Project
-          %span.label.info.right
-            20
-      %li
-        %a
-          Canceled Project
-          %span.label.alert.right
-            10
+            - if @user.user_project_detail != nil
+              = @user.user_project_detail.project_ongoing
+            -else
+              0
       %li
         %a
           Lost Project
           %span.label.alert.right
-            20
+            - if @user.user_project_detail != nil
+              = @user.user_project_detail.project_lost
+            -else
+              0
   .quick-box
     %h6
       Edit Info

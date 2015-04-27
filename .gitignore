@@ -18,4 +18,8 @@
 # Ignore .git and .idea
 .idea
 .git
+/.idea
+/.git
+.idea/workspace.xml
+/.idea/workspace.xml
 

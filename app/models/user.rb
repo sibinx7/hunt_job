@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :skills
   has_many :bids
   has_many :bank_accounts
+  has_many :payments
+  has_one :user_project_detail
   has_attached_file :profile_image
   validates_attachment_content_type :profile_image, :content_type => /\Aimage\/.*\Z/
 end

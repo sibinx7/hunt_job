@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
 
   def index
     @notification = Notification.where(:user_id => current_user.id).order('created_at DESC')
-
+    @user = User.find(current_user.id)
   end
 
   def users
@@ -55,6 +55,11 @@ class DashboardController < ApplicationController
   end
 
   def payments
+
+  end
+
+  def payment_details
+
   end
 
   def pending_project

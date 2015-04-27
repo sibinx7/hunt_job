@@ -27,7 +27,7 @@
       = render 'layouts/user.header'
       = yield
       = render 'layouts/home.footer'
-
-    = yield :extra_js
+    = yield :extra_html
+  = yield :extra_js
   :plain
 

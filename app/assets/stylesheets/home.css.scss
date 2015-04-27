@@ -8,9 +8,14 @@ $primaryHeaderMenuActive : #d53a2e;
 $primaryBtnColor : #f55e25;
 $secondaryBtnColor : #2e2e2e;
 $topBarBackground :#111;
-
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
 // Keyframes
-
+html,body{
+  margin:0;
+  padding:0;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
 @-webkit-keyframes  come_from_bottom{
   0% {bottom:20%;opacity:0}
   100% {bottom:70%;opacity: 1}
@@ -28,11 +33,7 @@ $topBarBackground :#111;
   from {right:-500px;opacity: 0}
   to {right:150px;opacity: 1}
 }
-html,body{
-  margin:0;
-  padding:0;
-  height: 100%;
-}
+
 body{
   .home-wrapper{
     .sticky{
@@ -524,7 +525,8 @@ body{
     margin-left:0;
     padding-left:0;
     li{
-      list-style: none;padding:10px 0 0;
+      list-style: none;
+      padding:5px 0 0;
       font-size:15px;
       color:#999;
       a{
