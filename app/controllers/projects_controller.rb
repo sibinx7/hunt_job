@@ -85,7 +85,32 @@ class ProjectsController < InheritedResources::Base
     end
 
   end
+  # When project creator mark as complete or lost
+  def project_status
+    if current_user.id.to_i == params[:project_owner].to_i
 
+      @project_owner = User.find(params[:project_owner])
+      @bid_user = User.find(params[:bid_user])
+      @project = Project.find(params[:project_id])
+      # status 1 means completed and 2 means lost, we close project for both case
+      if params[:type] == "project_complete"
+        # When user marked as completed
+        @project.status = 1
+        @project.close =1
+        if @project.save
+          render :json =>  {"status"=>"success","message"=>"Project Marked as Completed","project_status"=>"completed"}
+        end
+      elsif params[:type] == "project_lost"
+        # When user marked as lost
+        @project.status = 2
+        @project.close = 1
+        if @project.save
+          render :json => {"status"=>"success","message"=>"Project Marked as Lost","project_status"=>"lost"}
+        end
+      end
+    end
+
+  end
   def destroy
     @project = Project.find(params[:id])
     @project.skills.clear
@@ -93,7 +118,6 @@ class ProjectsController < InheritedResources::Base
     redirect_to projects_path
   end
   private
-
     def project_params
       params.require(:project).permit(:title, :description, :creator, :min_budget, :max_budget, :close_date,:assigned_to,:status,:close)
     end

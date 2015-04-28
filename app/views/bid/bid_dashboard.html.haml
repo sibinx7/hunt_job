@@ -81,6 +81,30 @@
                                 = "$#{@bids.bid}"
                               %td
                                 = @bids.milestones.count
+                    - if @bids.percentage == 100 && current_user.id.to_i == @bids.user_id.to_i
+                      .row
+                        .small-12.columns
+                          %p
+                            Congratulation, You have completed your Project. Please Mark as Click on Completed to notify your
+                            Client
+                          .clearfix
+                            - if @bids.percentage == 100 &&  @project.status != 1
+                              %a.button.tiny.right{:class=> ("bid-complete-request" if not @bids.status),"data-bid-id"=>@bids.id,"data-project-id"=>@project.id,"data-bid-owner"=>@bids.user_id,:disabled=> ("disabled" if @bids.status == true)}
+                                Project Completed
+                            - elsif @bids.percentage == 100 && @project.status == 1
+                              %b Project Completed
+                            - elsif @bids.percentage == 100 && @project.status == 2
+                              %b Project lost
+                    -elsif @bids.percentage == 100 && current_user.id.to_i == @project.creator.to_i && @bids.status
+                      .row
+                        .small-12.columns
+                          %p
+                            Developer marked that Bid is completed, You can assign it as <b>Completed</b> or <b>Lost</b>
+                          .clearfix
+                            - if @bids.status && @project.close != 1
+                              %a.project-status.project-complete.button.tiny.success.right{"data-project-id"=>@project.id,"data-bid-id"=>@bids.id,"data-project-owner"=>@project.creator,"data-bid-user"=>@bids.user_id,"data-project-status"=>"project_complete"} Mark as Completed
+                              %a.project-status.project-lost.button.tiny.alert.right.margin-right-10{"data-project-id"=>@project.id,"data-bid-id"=>@bids.id,"data-project-owner"=>@project.creator,"data-bid-user"=>@bids.user_id,"data-project-status"=>"project_lost"} Mark as Lost
+
                   .row
                     .small-12.columns
                       %h5.p-title
@@ -117,12 +141,14 @@
                                               You have been completed This milestone
                                   .small-12.medium-6.columns
                                     - if m.status
-                                      %a.request-payment.button.alert.tiny.right{"data-milestone-id"=>"#{m.id}","data-milestone-creator"=>@bids.user_id,:disabled=> (m.grant_payment or m.request_payment)}
-                                        - if m.request_payment and  not m.grant_payment
+                                      - if m.request_payment and  not m.grant_payment
+                                        %a.request-payment.button.alert.tiny.right{"data-milestone-id"=>"#{m.id}","data-milestone-creator"=>@bids.user_id,:disabled=> ("disabled" if (m.grant_payment || m.request_payment))}
                                           Requested Payment
-                                        - elsif m.request_payment and   m.grant_payment
+                                      - elsif m.request_payment and   m.grant_payment
+                                        %a.payment-recieved.button.success.tiny.right{"data-milestone-id"=>"#{m.id}","data-milestone-creator"=>@bids.user_id,:disabled=> "disabled"}
                                           Payment received
-                                        - else
+                                      - else
+                                        %a.request-payment.button.alert.tiny.right{"data-milestone-id"=>"#{m.id}","data-milestone-creator"=>@bids.user_id,:disabled=> (m.grant_payment || m.request_payment)}
                                           Request Payment
                                     - unless m.status
                                       %a.button.margin-right-10.success.tiny.right.complete-milestone{:id=>"complete-percentage-#{m.id}","disabled"=> m.percentage.to_i !=100,"data-milestone-id"=>m.id,"data-milestone-creator"=>"#{@bids.user_id}"}
@@ -263,6 +289,7 @@
       })
       // Release payment
       $(document).on('click','body .release-payment',function(){
+        var element = $(this)
         var projectId = "#{@project.id}";
         var milestoneId = $(this).attr("data-milestone-id");
         var milestoneCreator = $(this).attr("data-milestone-creator");
@@ -278,10 +305,67 @@
             bid_id : "#{@bids.id}"
           },
           success:function(data){
+            if(data.status=="success"){
+              element.hide();
+              $('#paymentReleased').foundation('reveal','open')
+            }
+          }
+        })
+      })
+
+      // Bid complete request
+      $(document).on('click','body .bid-complete-request',function(){
+        var element = $(this);
+        var bidId = $(this).attr('data-bid-id');
+        var projectId = $(this).attr('data-project-id');
+        var bidOwner = $(this).attr('data-bid-owner');
+        $.ajax({
+          url: "#{url_for :controller => 'bid',:action => 'bid_completed'}",
+          type :"POST",
+          data :{
+            project_id : projectId,
+            bid_id : bidId,
+            bid_owner : bidOwner
+          },
+          success:function(data){
+            if(data.status=="success"){
+              $('#completedBid').foundation('reveal','open');
+              element.attr('disabled','disabled')
+            }
+          }
+        })
+      })
+
+      // Mark project as completed
+      $(document).on('click','body .project-status',function(){
+        var element = $(this);
+        var projectId = $(this).attr('data-project-id');
+        var bidId = $(this).attr('data-bid-id');
+        var projectOwner = $(this).attr('data-project-owner');
+        var bidUser = $(this).attr('data-bid-user');
+        var projectStatus = $(this).attr('data-project-status")
+        $.ajax({
+          url : "#{url_for :controller => 'projects'}",
+          type:"POST",
+          data:{
+            project_id = projectId
+            project_owner = projectOwner
+            bid_user =  bidUser
+            bid_id = bidId
+            type = projectStatus
+          },
+          success:function(data){
+             if(data.status=="success" && data.project_status=="completed"){
+                $('#completeProject').foundation('reveal','open')
+             }else if(data.status =="success" && data.project_status == "lost"){
+                $('#lostProject').foundation('reveal','open')
+             }
 
           }
         })
       })
+
+      // Makr project as lost
     })
 
     function changeProgressCircle(value){
@@ -305,4 +389,26 @@
     %h2#modalTitle Congratulation!!!
     %p.lead You have been completed one if your milestone
     %p Great news, You have been completed milestone, Now you can request for Payment
+    %a.close-reveal-modal{"aria-label" => "Close"} ×
+  #paymentReleased.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+    %h2#modalTitle Congratulation!!!
+    %p.lead You have been released payment
+    %p
+      Great news, You have been release Payment, If you release all Milestone, You can update Project status.
+      You can change your Project as 'Completed' or 'Lost'
+    %a.close-reveal-modal{"aria-label" => "Close"} ×
+  #completedBid.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+    %h2#modalTitle Congratulation!!!
+    %p.lead You have been completed your Bid
+    %p Great news, You have been completed bid. Wait for Client response
+    %a.close-reveal-modal{"aria-label" => "Close"} ×
+  #completeProject.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+    %h2#modalTitle Congratulation!!!
+    %p.lead You have been marked as Project completed
+    %p Great news, You have been marked as Project as completed. You can give more work or rating to developer
+    %a.close-reveal-modal{"aria-label" => "Close"} ×
+  #lostProject.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+    %h2#modalTitle Oops!!!
+    %p.lead You have been marked as Project lost
+    %p Great news, You have been marked as Project as lost. You can give more work or rating to developer
     %a.close-reveal-modal{"aria-label" => "Close"} ×

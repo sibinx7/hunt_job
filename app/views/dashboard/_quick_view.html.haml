@@ -4,7 +4,7 @@
   .quick-money-project
     .quick-money-view
       - if @user.user_project_detail != nil
-        = "#{@user.user_project_detail.user_income?}$"
+        = "#{@user.user_project_detail.user_income}$"
       -else
         0$
     .quick-view-footer

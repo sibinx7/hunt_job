@@ -167,7 +167,29 @@ class BidController < ApplicationController
     @bid_user = User.find(@bids.user_id)
   end
 
-
+  # Bid creator can mark bid as complete
+  def bid_completed
+    if current_user.id.to_i == params[:bid_owner].to_i
+      @bids = Bid.find(params[:bid_id])
+      @bids.status = 1
+      if @bids.save
+        # When Bid save, Update project owner that bid is completed
+        @project = Project.find(params[:project_id])
+        @user = User.find(params[:bid_owner])
+        @notification         = Notification.new
+        @notification.title   = "#{@user.name} marked #{@project.title} as Completed"
+        @notification.content = "<b>#{@project.title}</b> marked as Completed, Please Update your Project as Completed, If it not ok contact
+        Developer. If you feel it as Lost one, You can ,mark it as <b> Lost Project</b>"
+        @notification.user_id = @project.creator
+        @notification.not_type = "bid"
+        @notification.project_id = @project.id
+        @notification.related_task = @bids.id
+        @notification.link = "#{url_for :controller => 'bid',:action => 'bid_dashboard',:project=>@project.id,:bid=>@bids.id}"
+        @notification.save
+        render :json => {"status"=>"success","message"=>"Your feedback has been send"}
+      end
+    end
+  end
   private
     def bid_params
       params.require(:bid).permit(:details,:project_id,:user_id,:bid,:duration)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426123433) do
+ActiveRecord::Schema.define(version: 20150427092200) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -113,9 +113,9 @@ ActiveRecord::Schema.define(version: 20150426123433) do
   create_table "payments", force: true do |t|
     t.integer  "sender"
     t.integer  "receiver"
-    t.integer  "project"
-    t.integer  "bid"
-    t.integer  "milestone"
+    t.integer  "project_id"
+    t.integer  "bid_id"
+    t.integer  "milestone_id"
     t.integer  "payment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -161,12 +161,12 @@ ActiveRecord::Schema.define(version: 20150426123433) do
     t.integer "user_id"
   end
 
-  create_table "user_project_status", force: true do |t|
+  create_table "user_project_details", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_completed"
     t.integer  "project_ongoing"
     t.integer  "project_lost"
-    t.integer  "user_income"
+    t.integer  "user_income",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(version: 20150426123433) do
     t.string   "profile_image_content_type"
     t.integer  "profile_image_file_size"
     t.datetime "profile_image_updated_at"
+    t.text     "user_info"
+    t.integer  "user_rating"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

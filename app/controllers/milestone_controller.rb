@@ -90,7 +90,9 @@ class MilestoneController < ApplicationController
           @userProjectDetail.user_income       = (@userProjectDetail.user_income.to_i + @payment.payment)
           @userProjectDetail.save
         else
-          @userProjectDetail = UserProjectDetail.where(:user_id => params[:m_creator])
+          puts "I am updating exsting record of #{params[:m_creator]}"
+          @userProjectDetail = UserProjectDetail.find_by(:user_id => params[:m_creator])
+          puts @userProjectDetail.inspect
           @userProjectDetail.project_completed = Project.where(:assigned_to => params[:m_creator],:status => 1).count
           @userProjectDetail.project_ongoing   = Project.where(:assigned_to => params[:m_creator],:status => 0).count
           @userProjectDetail.project_lost      = Project.where(:assigned_to => params[:m_creator],:status => 2).count

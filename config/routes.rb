@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :bank_accounts
 
+  # Bid controller routes
   get 'bid/project/:project/show/:bid', to:'bid#show'
 
   get 'bid/create'
@@ -10,11 +11,23 @@ Rails.application.routes.draw do
 
   get 'bid/delete'
 
+  get 'bid/granted'
+
+  get 'bid/project/:project/bid/:bid/dashboard', to:'bid#bid_dashboard'
+
   post 'bid/grant'
 
   post 'bid/user_reaction'
 
-  get 'bid/project/:project/bid/:bid/dashboard', to:'bid#bid_dashboard'
+  post 'bid/create'
+
+  post 'bid/bid_completed'
+
+  patch 'bid/update/:id',to:'bid#update'
+
+  delete 'bid/project/:project/bid/:bid/destroy/', to:'bid#destroy'
+
+  # Stop Bid controller route
 
   post 'milestone/milestone_progress'
 
@@ -22,7 +35,8 @@ Rails.application.routes.draw do
 
   post 'milestone/milestone_payment'
 
-  get 'bid/granted'
+
+
 
   get 'skills/index'
 
@@ -90,9 +104,7 @@ Rails.application.routes.draw do
 
   get 'dashboard/pending_projects'
 
-  post 'bid/create'
-  patch 'bid/update/:id',to:'bid#update'
-  delete 'bid/project/:project/bid/:bid/destroy/', to:'bid#destroy'
+
   # Edit users info
 
 
