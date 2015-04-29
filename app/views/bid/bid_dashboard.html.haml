@@ -88,23 +88,29 @@
                             Congratulation, You have completed your Project. Please Mark as Click on Completed to notify your
                             Client
                           .clearfix
-                            - if @bids.percentage == 100 &&  @project.status != 1
+                            - if @bids.percentage == 100 &&  @project.status.to_i != 1 && @project.close == false
                               %a.button.tiny.right{:class=> ("bid-complete-request" if not @bids.status),"data-bid-id"=>@bids.id,"data-project-id"=>@project.id,"data-bid-owner"=>@bids.user_id,:disabled=> ("disabled" if @bids.status == true)}
                                 Project Completed
-                            - elsif @bids.percentage == 100 && @project.status == 1
-                              %b Project Completed
-                            - elsif @bids.percentage == 100 && @project.status == 2
-                              %b Project lost
+                            - elsif @bids.percentage == 100 && @project.status.to_i == 1 && @project.close
+                              %b Project Completed, Client Marked as Completed
+                            - elsif @bids.percentage == 100 && @project.status.to_i == 2 && @project.close
+                              %b Project Completed, Client Marked as lost
                     -elsif @bids.percentage == 100 && current_user.id.to_i == @project.creator.to_i && @bids.status
                       .row
                         .small-12.columns
                           %p
                             Developer marked that Bid is completed, You can assign it as <b>Completed</b> or <b>Lost</b>
                           .clearfix
-                            - if @bids.status && @project.close != 1
+
+                            - if @bids.status && @project.close != true
                               %a.project-status.project-complete.button.tiny.success.right{"data-project-id"=>@project.id,"data-bid-id"=>@bids.id,"data-project-owner"=>@project.creator,"data-bid-user"=>@bids.user_id,"data-project-status"=>"project_complete"} Mark as Completed
                               %a.project-status.project-lost.button.tiny.alert.right.margin-right-10{"data-project-id"=>@project.id,"data-bid-id"=>@bids.id,"data-project-owner"=>@project.creator,"data-bid-user"=>@bids.user_id,"data-project-status"=>"project_lost"} Mark as Lost
-
+                            - elsif @bids.status && @project.status.to_i == 1 && @project.close == true
+                              .panel.panel-success
+                                Project Marked as Completed
+                            - elsif @bids.status && @project.close && @project.status.to_i == 2
+                              .panel.panel-alert
+                                Project Marked as Lost
                   .row
                     .small-12.columns
                       %h5.p-title
@@ -343,16 +349,16 @@
         var bidId = $(this).attr('data-bid-id');
         var projectOwner = $(this).attr('data-project-owner');
         var bidUser = $(this).attr('data-bid-user');
-        var projectStatus = $(this).attr('data-project-status")
+        var projectStatus = $(this).attr('data-project-status')
         $.ajax({
-          url : "#{url_for :controller => 'projects'}",
+          url : "#{url_for :controller => 'projects',:action => 'project_status'}",
           type:"POST",
           data:{
-            project_id = projectId
-            project_owner = projectOwner
-            bid_user =  bidUser
-            bid_id = bidId
-            type = projectStatus
+            project_id : projectId,
+            project_owner : projectOwner,
+            bid_user :  bidUser,
+            bid_id : bidId,
+            type : projectStatus
           },
           success:function(data){
              if(data.status=="success" && data.project_status=="completed"){
@@ -364,8 +370,10 @@
           }
         })
       })
-
-      // Makr project as lost
+      // Reload website when we click on project complete / lost modal
+      $('.project-status-close').click(function(){
+          location.reload()
+      })
     })
 
     function changeProgressCircle(value){
@@ -406,9 +414,9 @@
     %h2#modalTitle Congratulation!!!
     %p.lead You have been marked as Project completed
     %p Great news, You have been marked as Project as completed. You can give more work or rating to developer
-    %a.close-reveal-modal{"aria-label" => "Close"} ×
+    %a.close-reveal-modal.project-status-close{"aria-label" => "Close"} ×
   #lostProject.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
     %h2#modalTitle Oops!!!
     %p.lead You have been marked as Project lost
     %p Great news, You have been marked as Project as lost. You can give more work or rating to developer
-    %a.close-reveal-modal{"aria-label" => "Close"} ×
+    %a.close-reveal-modal.project-status-close{"aria-label" => "Close"} ×

@@ -3,10 +3,10 @@
     .row
       .small-12.columns
         .custom-tagit
-          %input#search-skills{:type=>"text",:placeholder=>"Skills",:name=>"skills"}
+          %input#search-skills{:type=>"text",:placeholder=>"Skills",:name=>"skills",:value=>@skills_text}
     .row
       .small-12.columns
-        %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword",:id=>"submit-keyword"}
+        %input{:type=>"text",:placeholder=>"Search",:name=>"search_keyword",:id=>"submit-keyword",:value=>@search_keyword}
     .row
       .small-12.medium-12.large-12.columns
         .range-slider-box.margin-bottom-15
@@ -17,20 +17,21 @@
             = "-"
             %span#max-range-value
             )
-          %input#min-range{:type=>"hidden",:name=>"min-range"}
-          %input#max-range{:type=>"hidden",:name=>"max-range"}
+          %input#min-range{:type=>"hidden",:name=>"min_range",:value=>@min_range}
+          %input#max-range{:type=>"hidden",:name=>"max_range",:value=>@max_range}
           #slider-range
     .row
-      .small-12.medium-10.columns
-      .small-12.medium-2.columns
-        %input.button.alert.tiny.right.custom-submit-btn{:type=>"submit",:value=>"Search"}
+      .small-12.medium-9.columns
+      .small-12.medium-3.columns
+        %input.button.alert.tiny.right.custom-submit-btn{:type=>"submit",:value=>"Search",:name=>""}
+        = link_to "Reset",dashboard_projects_url,:class => "button tiny right margin-right-10"
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){
         var min_value = parseInt("#{@min_budget}")
         var max_value = parseInt("#{@max_budget}")
-        var lower_value = (min_value+(max_value/10))
-        var upper_value = (min_value+(max_value/2))
+        var lower_value = parseInt("#{@min_range.blank?? @min_budget:@min_range}")
+        var upper_value = parseInt("#{@max_range.blank? ? @max_budget:@max_range}")
         MinMaxBudgetSlider(min_value,max_value,lower_value,upper_value);
     })
     MinMaxBudgetSlider = function(min_budget,max_budget,lower_value,upper_value){

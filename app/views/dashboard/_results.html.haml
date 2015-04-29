@@ -17,24 +17,30 @@
             %th
               End
         %tbody
-          - @projects.each do |project|
+
+          -if not  @projects.blank?
+            - @projects.each do |project|
+              %tr
+                %td{:width=>'200px'}
+                  = link_to project.title,:controller => 'dashboard',:action => 'project',:project=>project.id
+                %td{:class=>"hide-for-small-only"}
+                  = project.description.first(100).html_safe
+                %td
+                  = project.bids.count
+                %td
+                  - project.skills.each_with_index do |bid,index|
+                    -if index == 0
+                      = bid.name
+                    -else
+                      = ",#{bid.name}"
+                %td
+                  = "$#{project.min_budget}-$#{project.max_budget}"
+                %td{:width=>"100px"}
+                  = project.close_date
+          - else
             %tr
-              %td{:width=>'200px'}
-                = link_to project.title,:controller => 'dashboard',:action => 'project',:project=>project.id
-              %td{:class=>"hide-for-small-only"}
-                = project.description.first(100).html_safe
-              %td
-                = project.bids.count
-              %td
-                - project.skills.each_with_index do |bid,index|
-                  -if index == 0
-                    = bid.name
-                  -else
-                    = ",#{bid.name}"
-              %td
-                = "$#{project.min_budget}-$#{project.max_budget}"
-              %td{:width=>"100px"}
-                = project.close_date
+              %td{:colspan=>7}
+                Projects are not available
 .row
   .small-12.columns
     = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails

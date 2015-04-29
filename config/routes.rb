@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :projects
 
+  post 'projects/project_status'
+
   devise_for :users
              # :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
 
   def index
-    @notification = Notification.where(:user_id => current_user.id).order('created_at DESC')
+    @notification = Notification.where(:user_id => current_user.id).order('created_at DESC').limit(10)
     @user = User.find(current_user.id)
   end
 
@@ -15,11 +15,35 @@ class DashboardController < ApplicationController
   end
 
   def projects
-    @skills = ["PHP","Ruby","Wordpress","Python","Javascript","CSS","HTML"]
-    @params = params[:search_keyword]
+    @skills = params[:skills]
+    @search_keyword = params[:search_keyword]
+    @min_range = params[:min_range]
+    @max_range = params[:max_range]
     @min_budget = Project.minimum(:min_budget)
     @max_budget = Project.maximum(:max_budget)
-    @projects = Project.paginate(:page => params[:page],:per_page => 4).order('created_at DESC')
+    if @skills =="" && @search_keyword == "" && @min_budget == "" && @max_budget == ""
+      @projects = Project.paginate(:page => params[:page],:per_page => 4).where(:close=>nil, :status => nil).order('created_at DESC')
+    else
+      @projects = Project.paginate(:page => params[:page],:per_page => 4).where(:close=>nil, :status => nil)
+      if @skills != nil
+        @skills_text = @skills
+        @skills = @skills.split(',')
+        puts @skills.inspect
+        @projects = @projects.includes(:skills).where('skills.name IN (?)',@skills).references(:skills)
+      end
+      if @search_keyword != nil
+        @projects = @projects.where("title LIKE ?","%#{@search_keyword}%")
+        puts @project.inspect
+      end
+      if @min_range != nil
+        @projects = @projects.where("min_budget >= ?",@min_range)
+        puts @project.inspect
+      end
+      if @max_range != nil
+        @projects = @projects.where("max_budget <= ?",@max_range)
+      end
+      @projects = @projects.order('created_at DESC')
+    end
   end
 
   def project

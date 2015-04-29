@@ -88,29 +88,44 @@ class ProjectsController < InheritedResources::Base
   # When project creator mark as complete or lost
   def project_status
     if current_user.id.to_i == params[:project_owner].to_i
-
       @project_owner = User.find(params[:project_owner])
       @bid_user = User.find(params[:bid_user])
       @project = Project.find(params[:project_id])
+      @project.close = 1
+      project_status_flag = ""
       # status 1 means completed and 2 means lost, we close project for both case
       if params[:type] == "project_complete"
         # When user marked as completed
         @project.status = 1
-        @project.close =1
-        if @project.save
-          render :json =>  {"status"=>"success","message"=>"Project Marked as Completed","project_status"=>"completed"}
-        end
+        project_status_flag = "Completed"
       elsif params[:type] == "project_lost"
         # When user marked as lost
         @project.status = 2
-        @project.close = 1
-        if @project.save
+        project_status_flag = "Lost"
+      end
+      if @project.save
+        puts "Saved success"
+        # Notify bid user
+        @notification = Notification.new
+        @notification.title = "#{@project_owner.name} Mark Project as #{project_status_flag}"
+        @notification.content = "#{@project_owner.name} Marked your latest completed Project as #{project_status_flag}, You can check it
+        Project Dashboard"
+        @notification.not_type = "project"
+        @notification.project_id = @project.id
+        @notification.related_task = params[:bid_id]
+        @notification.user_id = @bid_user.id
+        @notification.link = "#{url_for :controller => 'bid',:action => 'bid_dashboard',:project=>@project.id ,:bid=> params[:bid_id]}"
+        @notification.save
+        if project_status_flag == "Lost"
           render :json => {"status"=>"success","message"=>"Project Marked as Lost","project_status"=>"lost"}
+        elsif project_status_flag  == "Completed"
+          render :json =>  {"status"=>"success","message"=>"Project Marked as Completed","project_status"=>"completed"}
         end
+
       end
     end
-
   end
+
   def destroy
     @project = Project.find(params[:id])
     @project.skills.clear

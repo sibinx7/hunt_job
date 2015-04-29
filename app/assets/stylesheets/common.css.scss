@@ -423,3 +423,14 @@ table.separate{
     width:100%;
   }
 }
+/** Common panel with different color **/
+.panel.panel-alert{
+  background-color:#f04124;
+  border-color:#cf2a0e;
+  color:#fff;
+}
+.panel.panel-success{
+  background-color:#43AC6A;
+  border-color:#368a55;
+  color:#fff;
+}
