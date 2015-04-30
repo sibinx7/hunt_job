@@ -98,11 +98,6 @@ class BidController < ApplicationController
     end
   end
 
-  # We can find granted bids
-  def granted
-
-  end
-
   def user_reaction
     @project = Project.find(params[:project_id])
     @bid = Bid.find(params[:bid_id])
@@ -118,6 +113,8 @@ class BidController < ApplicationController
         if @bid.save
           @notification = Notification.new
           if @bid.accepted
+            @project.assigned_to = @bid_user.id
+            @project.status = 0
             @notification.title = "Your Project has been accepted"
             @notification.content = "#{@bid_user.name} accepted #{@project.title}, You can watch your Project process. Please see
             Project page to know more about your bid"

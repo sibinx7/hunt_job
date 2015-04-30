@@ -434,3 +434,13 @@ table.separate{
   border-color:#368a55;
   color:#fff;
 }
+/** Date picker **/
+.date_select{
+  select{
+    width:auto;
+    display: inline-block;
+    float: left;
+    padding:0 40px;
+    margin-right:10px;
+  }
+}

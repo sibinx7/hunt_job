@@ -28,9 +28,10 @@
   .field
     = f.label :max_budget
     = f.number_field :max_budget,:placeholder=>"Budget in Dollar"
-  .field
+  .field.date_select
     = f.label :close_date
-    = f.date_select :close_date
+    %fieldset
+      = f.date_select :close_date
   .field
     = f.hidden_field :creator,:value=>current_user.id
   -#.field

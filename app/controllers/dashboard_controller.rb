@@ -21,23 +21,24 @@ class DashboardController < ApplicationController
     @max_range = params[:max_range]
     @min_budget = Project.minimum(:min_budget)
     @max_budget = Project.maximum(:max_budget)
-    if @skills =="" && @search_keyword == "" && @min_budget == "" && @max_budget == ""
-      @projects = Project.paginate(:page => params[:page],:per_page => 4).where(:close=>nil, :status => nil).order('created_at DESC')
+    puts @skills.inspect
+    puts @search_keyword.inspect
+    puts @max_range.inspect
+    puts @min_range.inspect
+    if @skills == nil && @search_keyword == nil && @min_budget == nil && @max_budget == nil
+      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil).order('created_at DESC')
     else
-      @projects = Project.paginate(:page => params[:page],:per_page => 4).where(:close=>nil, :status => nil)
-      if @skills != nil
+      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil)
+      if @skills != nil && @skills != ""
         @skills_text = @skills
         @skills = @skills.split(',')
-        puts @skills.inspect
         @projects = @projects.includes(:skills).where('skills.name IN (?)',@skills).references(:skills)
       end
-      if @search_keyword != nil
+      if @search_keyword != nil && @search_keyword != ""
         @projects = @projects.where("title LIKE ?","%#{@search_keyword}%")
-        puts @project.inspect
       end
       if @min_range != nil
         @projects = @projects.where("min_budget >= ?",@min_range)
-        puts @project.inspect
       end
       if @max_range != nil
         @projects = @projects.where("max_budget <= ?",@max_range)
@@ -91,6 +92,7 @@ class DashboardController < ApplicationController
   end
 
   def pending_projects
+    @project = Project.where(:status => 0,:assigned_to => current_user.id.to_i).paginate(:per_page=>10,:page=>params[:page])
 
   end
 
