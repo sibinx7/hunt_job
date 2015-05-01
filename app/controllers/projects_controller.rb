@@ -98,10 +98,18 @@ class ProjectsController < InheritedResources::Base
         # When user marked as completed
         @project.status = 1
         project_status_flag = "Completed"
+        @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
+        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing - 1
+        @userProjectDetail.project_completed = @userProjectDetail.project_completed + 1
+        @userProjectDetail.save
       elsif params[:type] == "project_lost"
         # When user marked as lost
         @project.status = 2
         project_status_flag = "Lost"
+        @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
+        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing - 1
+        @userProjectDetail.project_lost = @userProjectDetail.project_lost + 1
+        @userProjectDetail.save
       end
       if @project.save
         puts "Saved success"

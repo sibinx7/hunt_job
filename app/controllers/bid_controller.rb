@@ -115,6 +115,9 @@ class BidController < ApplicationController
           if @bid.accepted
             @project.assigned_to = @bid_user.id
             @project.status = 0
+            @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
+            @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing + 1;
+            @userProjectDetail.save
             @notification.title = "Your Project has been accepted"
             @notification.content = "#{@bid_user.name} accepted #{@project.title}, You can watch your Project process. Please see
             Project page to know more about your bid"
