@@ -19,6 +19,12 @@ class BidController < ApplicationController
           @milestone.save
         end
       end
+      # When user create Bid, User Project details page will update
+      if UserProjectDetail.where(:user_id => params[:bid][:user_id]).count == 0
+        @userProjectDetails = UserProjectDetail.new
+        @userProjectDetails.user_id = params[:bid][:user_id]
+        @userProjectDetails.save
+      end
       # Update notification table of project creator and bidder
       @project = Project.find(params[:bid][:project_id])
       @creator_not = Notification.new
@@ -113,8 +119,11 @@ class BidController < ApplicationController
         if @bid.save
           @notification = Notification.new
           if @bid.accepted
+            # Save On Project table , update assigned to status
             @project.assigned_to = @bid_user.id
             @project.status = 0
+            @project.save
+            # Update UserProject table
             @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
             @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing + 1;
             @userProjectDetail.save

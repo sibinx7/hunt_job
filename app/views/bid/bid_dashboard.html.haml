@@ -158,12 +158,12 @@
                                           Request Payment
                                     - unless m.status
                                       %a.button.margin-right-10.success.tiny.right.complete-milestone{:id=>"complete-percentage-#{m.id}","disabled"=> m.percentage.to_i !=100,"data-milestone-id"=>m.id,"data-milestone-creator"=>"#{@bids.user_id}"}
-                                        ="#{m.percentage} Completed"
+                                        ="#{m.percentage != nil ? m.percentage : 0} Completed"
                                 -elsif current_user.id.to_i == @project_owner.id.to_i
                                   .small-12.columns
                                     .panel
                                       %p
-                                        = "Milestone is <b>#{m.percentage}%</b> Completed, Once it completed you should pay <b>#{m.payment}$</b> for the Developer".html_safe
+                                        = "Milestone is <b>#{m.percentage != nil ? m.percentage : 0}%</b> Completed, Once it completed you should pay <b>#{m.payment}$</b> for the Developer".html_safe
                                       .clearfix
                                       - if m.request_payment
                                         .row

@@ -34,7 +34,7 @@
         var upper_value = parseInt("#{@max_range.blank? ? @max_budget:@max_range}")
         MinMaxBudgetSlider(min_value,max_value,lower_value,upper_value);
     })
-    MinMaxBudgetSlider = function(min_budget,max_budget,lower_value,upper_value){
+     function MinMaxBudgetSlider(min_budget,max_budget,lower_value,upper_value){
       $( "#slider-range" ).slider({
         range: true,
         min: typeof min_budget!="undefined"?min_budget:0,

@@ -2,4 +2,32 @@
   .row
     .small-12.columns
       .dashboard-inner.custom-container
-        = @project.inspect
+        .result-table.margin-bottom-15
+          %table
+            %thead
+              %tr
+                %th
+                  Project Name
+                %th
+                  Close Date
+                %th
+                  Duration
+                %th
+                  Bid on
+            %tbody
+              - unless @project.blank? && @project.count == 0
+                - @project.each_with_index do |p|
+                  %tr
+                    %td
+                      = link_to  p.title, {:controller => 'bid',:action => 'bid_dashboard',:project=>p.id,:bid=>p.bids[0].id}
+                    %td
+                      = p.close_date
+                    %td
+                      = p.bids[0].duration
+                    %td
+                      = p.bids[0].accepted_date
+              - else
+                %tr
+                  %td{"colspan" => 4}
+                    Sorry... Nothing found
+

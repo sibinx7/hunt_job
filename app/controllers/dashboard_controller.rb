@@ -92,7 +92,7 @@ class DashboardController < ApplicationController
   end
 
   def pending_projects
-    @project = Project.where(:status => 0,:assigned_to => current_user.id.to_i).paginate(:per_page=>10,:page=>params[:page])
+    @project = Project.where('status' => 0,'assigned_to' => current_user.id).paginate(:per_page=>10,:page=>params[:page])
 
   end
 
