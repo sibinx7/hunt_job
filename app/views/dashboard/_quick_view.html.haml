@@ -11,7 +11,7 @@
       from
       %b
         - if @user.user_project_detail != nil
-          = "#{@user.user_project_detail.project_completed+@user.user_project_detail.project_ongoing+@user.user_project_detail.project_lost}"
+          = "#{@user.user_project_detail.project_completed.to_i+@user.user_project_detail.project_ongoing.to_i+@user.user_project_detail.project_lost.to_i}"
         - else
           0
 
@@ -25,7 +25,7 @@
           Completed Projects
           %span.label.alert.right
             - if @user.user_project_detail != nil
-              = @user.user_project_detail.project_completed
+              = @user.user_project_detail.project_completed.to_i
             - else
               0
       %li
@@ -33,7 +33,7 @@
           Ongoing Projects
           %span.label.warning.right
             - if @user.user_project_detail != nil
-              = @user.user_project_detail.project_ongoing
+              = @user.user_project_detail.project_ongoing.to_i
             -else
               0
       %li
@@ -41,7 +41,7 @@
           Lost Project
           %span.label.alert.right
             - if @user.user_project_detail != nil
-              = @user.user_project_detail.project_lost
+              = @user.user_project_detail.project_lost.to_i
             -else
               0
   .quick-box

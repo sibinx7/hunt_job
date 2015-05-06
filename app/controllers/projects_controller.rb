@@ -4,7 +4,7 @@ class ProjectsController < InheritedResources::Base
   layout "dashboard"
 
   def index
-    @projects = Project.where(:creator => current_user.id).paginate(:page => params[:page],:per_page => 1)
+    @projects = Project.where(:creator => current_user.id).order('created_at DESC').paginate(:page => params[:page],:per_page => 10)
     @projectArray = Array.new
     @projects.each_with_index do |f,index|
       @projectArray[index] =  {
@@ -99,16 +99,17 @@ class ProjectsController < InheritedResources::Base
         @project.status = 1
         project_status_flag = "Completed"
         @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
-        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing - 1
-        @userProjectDetail.project_completed = @userProjectDetail.project_completed + 1
+        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing.to_i - 1
+        @userProjectDetail.project_completed = @userProjectDetail.project_completed.to_i + 1
         @userProjectDetail.save
       elsif params[:type] == "project_lost"
         # When user marked as lost
         @project.status = 2
         project_status_flag = "Lost"
+
         @userProjectDetail = UserProjectDetail.find_by_user_id(@bid_user.id)
-        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing - 1
-        @userProjectDetail.project_lost = @userProjectDetail.project_lost + 1
+        @userProjectDetail.project_ongoing = @userProjectDetail.project_ongoing.to_i - 1
+        @userProjectDetail.project_lost = @userProjectDetail.project_lost.to_i + 1
         @userProjectDetail.save
       end
       if @project.save

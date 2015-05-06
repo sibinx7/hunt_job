@@ -106,6 +106,8 @@ Rails.application.routes.draw do
 
   get 'dashboard/pending_projects'
 
+  get 'dashboard/history'
+
 
   # Edit users info
 

@@ -14,9 +14,7 @@
                 = link_to '<span class="fa fa-spinner fa-spin"></span>&nbsp;Pending Projects'.html_safe, dashboard_pending_projects_path
 
               %li
-                %a{:href=>"#"}
-                  %span.fa.fa-tasks
-                  History
+                = link_to '<span class="fa fa-tasks"></span>&nbsp;History'.html_safe, dashboard_history_path
               %li
                 %a{:href=>"#"}
                   %span.fa.fa-area-chart

@@ -9,6 +9,14 @@
                 %th
                   Project Name
                 %th
+                  Progress
+                %th
+                  Milestone Achieved
+                %th
+                  Project Cost
+                %th
+                  Earned
+                %th
                   Close Date
                 %th
                   Duration
@@ -21,9 +29,17 @@
                     %td
                       = link_to  p.title, {:controller => 'bid',:action => 'bid_dashboard',:project=>p.id,:bid=>p.bids[0].id}
                     %td
+                      = "#{p.bids[0].percentage == nil ? 0 : p.bids[0].percentage}%"
+                    %td
+                      = Milestone.where(:bid_id => p.bids[0].id,:status => true).count
+                    %td
+                      = "#{p.bids[0].bid}$"
+                    %td
+                      = "#{Milestone.where(:bid_id => p.bids[0],:grant_payment => true).sum('payment')}$"
+                    %td
                       = p.close_date
                     %td
-                      = p.bids[0].duration
+                      = "#{p.bids[0].duration} Days"
                     %td
                       = p.bids[0].accepted_date
               - else

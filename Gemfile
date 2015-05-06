@@ -88,3 +88,4 @@ end
 
  gem 'country_select', github: 'stefanpenner/country_select'
  gem 'will_paginate-foundation'
+ gem 'kaminari'

@@ -97,6 +97,8 @@ class DashboardController < ApplicationController
   end
 
   def history
+    @notifications = Notification.where(:user_id => current_user.id.to_i).order('created_at DESC').paginate(:page => params[:page],:per_page => 15)
+    puts @notifications.inspect
   end
 
   def my_status
