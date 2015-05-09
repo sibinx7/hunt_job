@@ -20,10 +20,10 @@
                 %h5
                   = "Bid on #{@project.title}"
                 .bid-project
-                  = form_for  @bid,url: {:controller => 'bid',:action => 'update',:id=>@bid.id} do |f|
+                  = form_for  @bid,url: {:controller => 'bid',:action => 'update',:id=>@bid.id},:html=>{"data-parsley-validate"=>true} do |f|
                     .field
                       = f.label :details
-                      = f.cktext_area :details
+                      = f.cktext_area :details,:required=>true
                     .field.margin-top-15
                       .row
                         .small-3.columns
@@ -35,7 +35,7 @@
                               %span.prefix
                                 $
                             .small-11.columns
-                              = f.text_field :bid
+                              = f.text_field :bid,:required=>true
                     .field
                       .row
                         .small-3.columns
@@ -47,7 +47,7 @@
                               %span.prefix
                                 @
                             .small-11.columns
-                              = f.text_field :duration
+                              = f.text_field :duration,:required=>true
                     .field
                       = f.label "Milstones"
                       .milestones#milestones
@@ -61,7 +61,7 @@
                                   %span.prefix
                                     $
                                 .small-10.columns
-                                  = text_field_tag("bid[milestone][]",p.payment,:placeholder=>"Milestone payment",:id=>"")
+                                  = text_field_tag("bid[milestone][]",p.payment,:placeholder=>"Milestone payment",:id=>"",:required=>true)
                       .more-milestones.clearfix
                         %a.label.alert#add-milestones{:href=>"#milestones"}
                           %span.fa.fa-plus
@@ -78,7 +78,16 @@
     $(document).ready(function(){
       $('#add-milestones').on('click',function(){
           var newMilestones = $('.each-milestone').first().clone();
+          if(typeof newMilestones=="undefined"){
+            newMilestones='<div class="row each-milestone"><div class="small-8 medium-9 columns"><input id="bid_task_" name="bid[task][]" placeholder="Describe milestone task" type="text" value="" data-parsley-id="6946"><ul class="parsley-errors-list" id="parsley-id-6946"></ul>'+
+                          '</div><div class="small-4 medium-3 columns"><div class="row collapse"><div class="small-2 columns">'+
+                          '<span class="prefix">$</span></div><div class="small-10 columns">'+
+                          '<input class="milestone_payment" id="bid_milestone_" name="bid[milestone][]" placeholder="Milestone payment" type="text" value="" data-parsley-id="7720"><ul class="parsley-errors-list" id="parsley-id-7720"></ul>'+
+                          '</div></div></div></div>'
+          }
           newMilestones.find('input').val("")
           $('.milestones').append(newMilestones);
+          // Validate form with parsley
+          $('form').parsley()
       })
     })

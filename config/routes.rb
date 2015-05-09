@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   patch 'bid/update/:id',to:'bid#update'
 
-  delete 'bid/project/:project/bid/:bid/destroy/', to:'bid#destroy'
+  get 'bid/project/:project/bid/:bid/destroy_bid/', to:'bid#destroy_bid'
 
   # Stop Bid controller route
 
@@ -106,7 +106,9 @@ Rails.application.routes.draw do
 
   get 'dashboard/pending_projects'
 
-  get 'dashboard/history'
+  get 'dashboard/timeline'
+
+  get 'dashboard/projects_history'
 
 
   # Edit users info

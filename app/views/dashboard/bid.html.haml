@@ -20,10 +20,10 @@
                 %h5
                   = "Bid on #{@project.title}"
                 .bid-project
-                  = form_for  @bid,url: {:controller => 'bid',:action => 'create'} do |f|
+                  = form_for  @bid,url: {:controller => 'bid',:action => 'create'},:html=>{"data-parsley-validate"=>true} do |f|
                     .field
                       = f.label :details
-                      = f.cktext_area :details
+                      = f.cktext_area :details ,:required=>true
                     .field.margin-top-15
                       .row
                         .small-3.columns
@@ -35,7 +35,7 @@
                               %span.prefix
                                 $
                             .small-11.columns
-                              = f.text_field :bid
+                              = f.text_field :bid,:required=>true
                     .field
                       .row
                         .small-3.columns
@@ -47,20 +47,20 @@
                               %span.prefix
                                 @
                             .small-11.columns
-                              = f.text_field :duration
+                              = f.text_field :duration,:required=>true
                     .field
                       = f.label "Milstones"
                       .milestones#milestones
                         .row.each-milestone
                           .small-8.medium-9.columns
-                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task",:id=>"")
+                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task")
                           .small-4.medium-3.columns
                             .row.collapse
                               .small-2.columns
                                 %span.prefix
                                   $
                               .small-10.columns
-                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:id=>"")
+                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:class=>"milestone_payment")
                       .more-milestones.clearfix
                         %a.label.alert#add-milestones{:href=>"#milestones"}
                           %span.fa.fa-plus
@@ -79,5 +79,17 @@
           var newMilestones = $('.each-milestone').first().clone();
           newMilestones.find('input').val("")
           $('.milestones').append(newMilestones);
+      })
+      // Parsley validation
+      $('form').parsley()
+      // Milestone payment should not exceed Total budgets
+      var totalPayment = $('#bid_bid').val();
+      $(document).on('keyup','.milestone_payment',function(){
+          // calculete current milestone payment
+          var calculateMilestones = 0
+          $('body .milestone_payment').each(function(index,value){
+            calculateMilestones = calculateMilestones + parseInt($(this).val());
+          })
+
       })
     })

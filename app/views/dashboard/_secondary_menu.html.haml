@@ -12,9 +12,10 @@
                 = link_to '<span class="fa fa-folder-open"></span>&nbsp;Browse Project'.html_safe,dashboard_projects_path
               %li
                 = link_to '<span class="fa fa-spinner fa-spin"></span>&nbsp;Pending Projects'.html_safe, dashboard_pending_projects_path
-
               %li
-                = link_to '<span class="fa fa-tasks"></span>&nbsp;History'.html_safe, dashboard_history_path
+                = link_to '<span class="fa fa-tasks"></span>&nbsp;Project History'.html_safe, dashboard_projects_history_path
+              %li
+                = link_to '<span class="fa fa-refresh"></span>&nbsp;Timeline'.html_safe, dashboard_timeline_path
               %li
                 %a{:href=>"#"}
                   %span.fa.fa-area-chart

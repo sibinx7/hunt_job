@@ -1,0 +1,36 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title Project History
+        .result-table.margin-bottom-15
+          %table
+            %thead
+              %tr
+                %th
+                  Project Id
+                %th
+                  Title
+                %th
+                  Status
+                %th
+                  Time Taken
+                %th
+                  Earned Money
+                %th
+                  Lost Money
+            %tbody
+              - if !@projects.empty?
+                - (1..10).each_with_index do |project|
+                  %tr
+                    %td 1
+                    %td Lolepsum
+                    %td Completed
+                    %td 20 Days
+                    %td 100$
+                    %td 10%
+              - else
+                %tr
+                  %td{:colspan=>6}
+                    Project history is empty
+

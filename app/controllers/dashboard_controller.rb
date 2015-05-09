@@ -83,22 +83,19 @@ class DashboardController < ApplicationController
 
   end
 
-  def payment_details
-
-  end
-
-  def pending_project
-
-  end
 
   def pending_projects
     @project = Project.where('status' => 0,'assigned_to' => current_user.id).paginate(:per_page=>10,:page=>params[:page])
 
   end
 
-  def history
+  def timeline
     @notifications = Notification.where(:user_id => current_user.id.to_i).order('created_at DESC').paginate(:page => params[:page],:per_page => 15)
     puts @notifications.inspect
+  end
+
+  def projects_history
+    @projects = Project.where(:assigned_to => current_user.id.to_i, :close => true).paginate(:per_page=>10,:page=>params[:page])
   end
 
   def my_status

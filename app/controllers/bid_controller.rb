@@ -72,11 +72,11 @@ class BidController < ApplicationController
     redirect_to :controller => 'dashboard',:action => 'project',:project => params[:bid][:project_id]
   end
 
-  def destroy
+  def destroy_bid
     @bid = Bid.find(params[:bid])
     @bid.milestones.delete
     @bid.destroy
-    redirect_to :controller => 'dashboard',:action => 'project',:project => params[:project_id]
+    redirect_to :controller => 'dashboard',:action => 'project',:project => params[:project]
   end
 
   # Extra method for accept/reject, grant bids
