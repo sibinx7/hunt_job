@@ -28,7 +28,7 @@
                       .row
                         .small-3.columns
                           %label.left.inline
-                            =f.label :bid,"Expected Budget (Dollar)"
+                            =f.label :bid,"Expected Budget (Dollar)",:required=>true,"data-parsley-gegroup"=>".milestone_payment","data-parsley-gegroup-message"=>"This value should equal to the total milestone payment"
                         .small-9.columns
                           .row.collapse
                             .small-1.columns
@@ -54,14 +54,14 @@
                         - @bid.milestones.each_with_index do |p|
                           .row.each-milestone
                             .small-8.medium-9.columns
-                              = text_field_tag("bid[task][]",p.milestone,:placeholder=>"Describe milestone task",:id=>"")
+                              = text_field_tag("bid[task][]",p.milestone,:placeholder=>"Describe milestone task",:class=>"milestone_task",:required=>true)
                             .small-4.medium-3.columns
                               .row.collapse
                                 .small-2.columns
                                   %span.prefix
                                     $
                                 .small-10.columns
-                                  = text_field_tag("bid[milestone][]",p.payment,:placeholder=>"Milestone payment",:id=>"",:required=>true)
+                                  = text_field_tag("bid[milestone][]",p.payment,:placeholder=>"Milestone payment",:class=>"milestone_payment",:required=>true,"data-parsley-le"=>"#bid_bid","data-parsley-le-message"=>"This value should be less than or equal to total bid payment")
                             .remove-milestones
                               %span.remove-milestone.fa.fa-trash
                       .more-milestones.clearfix

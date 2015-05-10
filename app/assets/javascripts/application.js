@@ -34,6 +34,7 @@
 //= require foundation/foundation.tab
 //= require foundation/foundation.tooltip
 
-//= require parsley.js
+//= require parsley
+//= require comparison
 $(function(){$(document).foundation()});
 
