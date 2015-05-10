@@ -23,7 +23,7 @@
                   = form_for  @bid,url: {:controller => 'bid',:action => 'create'},:html=>{"data-parsley-validate"=>true} do |f|
                     .field
                       = f.label :details
-                      = f.cktext_area :details ,:required=>true
+                      = f.cktext_area :details,:required=>true
                     .field.margin-top-15
                       .row
                         .small-3.columns
@@ -53,14 +53,16 @@
                       .milestones#milestones
                         .row.each-milestone
                           .small-8.medium-9.columns
-                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task")
+                            = text_field_tag("bid[task][]","",:placeholder=>"Describe milestone task",:required=>true,:class=>"milestone_task" )
                           .small-4.medium-3.columns
                             .row.collapse
                               .small-2.columns
                                 %span.prefix
                                   $
                               .small-10.columns
-                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:class=>"milestone_payment")
+                                = text_field_tag("bid[milestone][]","",:placeholder=>"Milestone payment",:class=>"milestone_payment",:required=>true)
+                          .remove-milestones
+                            %span.remove-milestone.fa.fa-trash
                       .more-milestones.clearfix
                         %a.label.alert#add-milestones{:href=>"#milestones"}
                           %span.fa.fa-plus
@@ -75,13 +77,7 @@
 -content_for :extra_js do
   :javascript
     $(document).ready(function(){
-      $('#add-milestones').on('click',function(){
-          var newMilestones = $('.each-milestone').first().clone();
-          newMilestones.find('input').val("")
-          $('.milestones').append(newMilestones);
-      })
-      // Parsley validation
-      $('form').parsley()
+
       // Milestone payment should not exceed Total budgets
       var totalPayment = $('#bid_bid').val();
       $(document).on('keyup','.milestone_payment',function(){
@@ -90,6 +86,25 @@
           $('body .milestone_payment').each(function(index,value){
             calculateMilestones = calculateMilestones + parseInt($(this).val());
           })
-
+      })
+      // Add new milstones
+      $('#add-milestones').on('click',function(){
+          var newMilestones = $('.each-milestone').first().clone();
+          newMilestones.find('.parsley-errors-list').remove()
+          newMilestones.find('input').val("")
+          $('.milestones').append(newMilestones);
+      })
+      // Parsley validation
+      $('form').parsley()
+      // When user click on remove icon remove its milestone fields
+      $('body').on('click','.remove-milestone',function(){
+        if($('.each-milestone').length > 1){
+          $(this).closest('.each-milestone').fadeOut('slow',function(){
+            $(this).remove()
+          })
+        }else{
+          $(this).closest('.each-milestone').find('.milestone_task').val("")
+          $(this).closest('.each-milestone').find('.milestone_payment').val("")
+        }
       })
     })

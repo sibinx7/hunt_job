@@ -58,14 +58,18 @@ class BidController < ApplicationController
 
   def update
     @bid = Bid.find(params[:id])
+    @milestones = Milestone.where(:bid_id => params[:id])
+    @milestones.each do |milestone|
+      @bid.milestones.destroy(milestone)
+    end
     @bid.update(bid_params)
-    @bid.milestones.delete
+
     params[:bid][:task].each_with_index do |f,index|
       if Milestone.where(:milestone =>f,:bid_id=>@bid.id ,:payment => params[:bid][:milestone][index]).count == 0 && !f.blank?
         @milestone = Milestone.new
         @milestone.milestone = f
-        @milestone.bid_id = @bid.id
         @milestone.payment = params[:bid][:milestone][index]
+        @milestone.bid_id = @bid.id
         @milestone.save
       end
     end
@@ -74,7 +78,10 @@ class BidController < ApplicationController
 
   def destroy_bid
     @bid = Bid.find(params[:bid])
-    @bid.milestones.delete
+    @milestones = Milestone.where(bid_id:params[:bid])
+    @milestones.each do |milestone|
+      @bid.milestones.destroy(milestone)
+    end
     @bid.destroy
     redirect_to :controller => 'dashboard',:action => 'project',:project => params[:project]
   end
