@@ -27,6 +27,12 @@ Rails.application.routes.draw do
 
   get 'bid/project/:project/bid/:bid/destroy_bid/', to:'bid#destroy_bid'
 
+  get 'bid/project/:project/bid/:bid/lost_request', to:'bid#project_lost_request'
+
+  patch  'bid/project_lost_request_post'
+
+  get 'bid/:project/bid/:bid/lost_project_report/', to:'bid#lost_project_report'
+
   # Stop Bid controller route
 
   post 'milestone/milestone_progress'

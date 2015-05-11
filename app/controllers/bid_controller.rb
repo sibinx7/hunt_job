@@ -206,8 +206,63 @@ class BidController < ApplicationController
       end
     end
   end
+  # When Project owner mark Project as Lost either he didn't like or time expired
+  def project_lost_request
+    @project = Project.find(params[:project])
+    @bid = Bid.find(params[:bid])
+    @project_owner = User.find(@project.creator.to_i)
+    @bid_user = User.find(@bid.user_id)
+  end
+
+  def project_lost_request_post
+    bid_id = params[:bid][:bid_id]
+    @project = Project.find(params[:bid][:project_id])
+    @project_owner = User.find(@project.creator)
+    @bid = Bid.find(bid_id)
+    @bid.client_feedback = params[:bid][:client_feedback]
+    @bid.status = 0
+    @bid.save
+    puts "----------Bid status changed-------skip error"
+    # Milestone update at 0
+    @milestones = Milestone.where(:bid_id => @bid.id,:status => nil)
+    @milestones.each do |milestone|
+      milestone.status = 0
+      milestone.save
+    end
+    puts "-------------Milestone status changed-----------skip error"
+    # Once we save mark project as lost one
+    @project.status = 2
+    @project.close = 1
+    @project.save
+    puts "-------------------Project saved ------- skip error"
+    # Update Project User table that Project lost
+    @user_project_details = UserProjectDetail.find_by_user_id(@bid.user_id)
+    @user_project_details.project_ongoing = @user_project_details.project_ongoing.to_i  - 1
+    @user_project_details.project_lost = @user_project_details.project_lost.to_i  + 1
+    # Find sum of payment where milestone is not completed
+    @lostmilestones = Milestone.where(:bid_id => @bid.id,:status => 0).sum(:payment)
+    @user_project_details.user_lost_money = @user_project_details.user_lost_money.to_i + @lostmilestones.to_i
+    @user_project_details.save
+    puts "-----------------User project details updated ------------skip"
+    # Update notification
+    @notification = Notification.new
+    @notification.title = "#{@project_owner.name} mark #{@project.title} as a Lost Project"
+    @notification.content = "#{@project_owner.name} made #{@project.title} as Lost Project. Itmay either due to Project expire or due to some
+    other reasons, you can contact using Email ID. We have been move Unfinished milestone payment as Lost money. This will be shown in your dashboard"
+    @notification.not_type = "bid"
+    @notification.user_id = @bid.user_id
+    @notification.project_id = @project.id
+    @notification.related_task = @bid.id
+    @notification.link = "#{url_for :controller => 'bid',:action => 'lost_project_report',:project=>@project.id,:bid=>@bid.id}"
+    @notification.save
+    redirect_to :controller => 'bid',:action => 'bid_dashboard',:project=>@project.id,:bid=>@bid.id
+  end
+
+  def lost_project_report
+
+  end
   private
     def bid_params
-      params.require(:bid).permit(:details,:project_id,:user_id,:bid,:duration)
+      params.require(:bid).permit(:details,:project_id,:user_id,:bid,:duration,:client_feedback)
     end
 end

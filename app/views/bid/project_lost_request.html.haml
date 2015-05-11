@@ -1,0 +1,61 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title
+          Project Lost Form
+        .row
+          .small-12.columns
+            .panel
+              .row
+                .small-12.medium-3.large-2.columns
+                  %b
+                    Project :
+                .small-12.medium-9.large-10.columns
+                  = @project.title
+              %hr
+              .row
+                .small-12.medium-3.large-2.columns
+                  %b Description :
+                .small-12.medium-9.large-10.columns
+                  = @project.description.html_safe
+              .row
+                .small-12.medium-3.large-2.columns
+                  %b Bid ID
+                .small-12.medium-9.large-10.columns
+                  @bid.id
+              %hr
+              .row
+                .small-12.medium-3.large-2.columns
+                  %b Project Creator
+                .small-12.medium-9.large-10.columns
+                  = @project_owner.name
+              %hr
+              .row
+                .small-12.medium-3.large-2.columns
+                  %b Bid Owner
+                .small-12.medium-9.large-10.columns
+                  = @bid_user.name
+              %hr
+                .row
+                  .small-12.columns
+                    = form_for @bid,:url => {:controller => 'bid',:action => 'project_lost_request_post'},:html => {"data-parsley-validate"=>true} do |f|
+                      .field
+                        %b Client Feedback
+                        = f.cktext_area :client_feedback,{"data-parsley-required"=>true}
+                      .field.margin-top-15
+                        = f.hidden_field :bid_id, :value=> @bid.id
+                        = f.hidden_field :user_id,:value=>@bid.user_id
+                        = f.hidden_field :project_id,:value=>@project.id
+                        = f.hidden_field :project_owner , :value => @project.creator
+                        = f.submit "Add client Feedback",:class=>"button tiny alert right"
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      for (var i in CKEDITOR.instances) {
+        CKEDITOR.instances[i].on('change', function() {
+          var ckeditor_content = CKEDITOR.instances['bid_client_feedback'].getData()
+          $('#bid_client_feedback').val(ckeditor_content)
+        });
+      }
+    })

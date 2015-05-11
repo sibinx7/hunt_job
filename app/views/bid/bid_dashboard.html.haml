@@ -57,7 +57,35 @@
                   .panel
                     %h6.p-title
                       Project Overall status
+                    - if @project.status.to_i == 2
+                      %p.mark-lost
+                        Project Marked as Lost
+                    - if current_user.id.to_i == @project_owner.id.to_i
+                      .row
+                        .small-12.columns
+                          - unless @project.status.to_i == 2
+                            - if(((@bids.accepted_date).to_date - Time.now.to_date).to_i > 0)
+                              %p.mark-lost
+                                You have
+                                = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+                                for your Project, You can mark as Lost if you don't satisfied
+                              .clearfix
+                              = link_to "Mark as lost Project",{:controller => 'bid',:action => 'project_lost_request',:project=> @project.id,:bid=>@bids.id},{:class=>"button tiny right"}
+                            - else
+                              %p.mark-lost
+                                Project Expired by
+                                %b
+                                  = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+                                  ago
+                                You can marked it as
+                                = link_to "<b>Lost Project</b>".html_safe,{:controller => 'bid',:action => 'project_lost_request',:project=> @project.id,:bid=>@bids.id}
+                          - else
+                            %p.mark-lost
+                              %b Project Marked as Lost
+
+                  - unless @project.status.to_i == 2
                     .row{"data-equalizer"=>""}
+
                       .small-12.medium-6.columns{"data-equalizer-watch"=>""}
                         .circle-progress{"data-pct" => "100"}
                           %svg.svg{:height => "200", :version => "1.1", :viewPort => "0 0 100 100", :width => "200", :xmlns => "http://www.w3.org/2000/svg"}
@@ -76,7 +104,12 @@
                           %tbody
                             %tr
                               %td
-                                = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+                                - if(((@bids.accepted_date+(@bids.duration.to_i).days).to_date - Time.now.to_date).to_i > 0)
+                                  = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+                                - else
+                                  Expired by
+                                  = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
+
                               %td
                                 = "$#{@bids.bid}"
                               %td
@@ -111,6 +144,7 @@
                             - elsif @bids.status && @project.close && @project.status.to_i == 2
                               .panel.panel-alert
                                 Project Marked as Lost
+                - unless @project.status.to_i == 2
                   .row
                     .small-12.columns
                       %h5.p-title
