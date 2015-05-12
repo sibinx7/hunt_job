@@ -7,3 +7,81 @@
         %p
           This Project has been marked as Lost, We have list some reasons. If you don't like this you can contact client by Email or
           other ways
+        .panel
+          %h4.p-title
+            = @project.title
+          .description
+            = @project.description.html_safe
+        .row
+          .small-12.columns.medium-6
+            .panel
+              %h5.p-title Client
+              .clearfix
+              %table.table-wrapper
+                %tr
+                  %td
+                    Name
+                  %td
+                    = @project_owner.name
+                %tr
+                  %td
+                    Budget
+                  %td
+                    = "#{@project.min_budget}-#{@project.max_budget}$"
+                %tr
+                  %td
+                    Close Date
+                  %td
+                    = @project.close_date
+          .small-12.medium-6.columns
+            .panel
+              %h5.p-title Developer/ Designer
+              .clearfix
+              %table.table-wrapper
+                %tr
+                  %td
+                    Name
+                  %td
+                    = @bid_owner.name
+                %tr
+                  %td
+                    Bid
+                  %td
+                    = @bid.bid
+                    $
+                %tr
+                  %td
+                    Duration
+                  %td
+                    = @bid.duration
+                    Days
+                %tr
+                  %td
+                    Milestones
+                  %td
+                    = @bid.milestones.count
+                %tr
+                  %td
+                    Gain
+                  %td
+                    = @bid.milestones.where(:status=> 1).sum(:payment)
+                    $
+                %tr
+                  %td
+                    Lost
+                  %td
+                    = @bid.milestones.where(:status=> 0).sum(:payment)
+                    $
+        .row
+          .small-12.columns
+            .panel
+              %p
+                Project Status
+                %b
+                  - if @project.status.to_i == 1
+                    Comepleted
+                  - elsif @project.status.to_i == 2
+                    Losted
+                  - else
+                    Ongoing
+                = link_to 'Back to Dashboard',dashboard_index_url,:class => 'right'

@@ -259,7 +259,10 @@ class BidController < ApplicationController
   end
 
   def lost_project_report
-
+    @project = Project.find(params[:project])
+    @project_owner = User.find(@project.creator)
+    @bid = Bid.find(params[:bid])
+    @bid_owner = User.find(@bid.user_id)
   end
   private
     def bid_params

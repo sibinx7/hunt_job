@@ -496,5 +496,19 @@ in default parsley containers **/
       }
     }
   }
-
+}
+/** Custom alert box **/
+.custom-alert{
+  .alert-box{
+    display: inline-block;
+    font-size: 0.6875rem;
+    padding: 0.625rem 1.25rem 0.6875rem;
+    border-width: 0;
+    font-weight: normal;
+    line-height: normal;
+  }
+}
+/** Custom fixed modal **/
+.custom-modal{
+  position: fixed;
 }

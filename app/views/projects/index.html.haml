@@ -12,14 +12,14 @@
             %table
               %thead
                 %tr
-                  %th Title
-                  %th Description
+                  %th{:width=>120} Title
+                  %th{:width=>300} Description
                   %th Creator
                   %th Skills
                   %th Min budget
                   %th Max budget
-                  %th Duration
-                  %th{:colspan=>3}
+                  %th{:width=>80} Duration
+                  %th{:colspan=>3,:width=>200}
                     Action
 
               %tbody
@@ -27,7 +27,7 @@
                   - @projects.each_with_index do |project,index|
                     %tr
                       %td= project.title
-                      %td= project.description.first(100).html_safe
+                      %td{:width=>400}= project.description.first(100).html_safe
                       %td= @projectArray[index]['creator']
                       %td{:width=>140}
                         %ul.ul-skills
