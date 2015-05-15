@@ -512,3 +512,32 @@ in default parsley containers **/
 .custom-modal{
   position: fixed;
 }
+/** Action on show project table **/
+.my-project-action{
+  display: table;
+  margin:0px;
+  padding:0px;
+  li{
+    display: inline-table;
+    list-style:none;
+    a{
+      font-size:8px;
+      padding:2px 4px;
+      color:#fff;
+      font-weight: bold;
+    }
+    a.edit{
+
+      background: #1854a7;
+      border:1px solid #134489;
+    }
+    a.delete{
+      background: #e52222;
+      border:1px solid #c92020;
+    }
+  }
+}
+.create-new-project{
+  position: relative;
+  margin-top:15px;
+}

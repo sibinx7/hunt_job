@@ -4,7 +4,15 @@ class ProjectsController < InheritedResources::Base
   layout "dashboard"
 
   def index
-    @projects = Project.where(:creator => current_user.id).order('created_at DESC').paginate(:page => params[:page],:per_page => 10)
+    @projects = Project.where(:creator => current_user.id).order('created_at DESC')
+    if params[:sort] =="completed"
+      @projects = @projects.where(:status=>1)
+    elsif params[:sort] =="ongoing"
+      @projects = @projects.where(:status=>0)
+    elsif params[:sort]=="lost"
+      @projects = @projects.where(:status=>1)
+    end
+    @projects = @projects.paginate(:page => params[:page],:per_page => 10)
     @projectArray = Array.new
     @projects.each_with_index do |f,index|
       @projectArray[index] =  {

@@ -6,7 +6,17 @@
           .small-12.columns
             %h1
               Listing projects
-              = link_to 'New Project', new_project_path,:class => 'button alert tiny round right'
+              = link_to 'New Project', new_project_path,:class => 'button alert tiny  right create-new-project'
+              = link_to 'Sort &raquo;'.html_safe,'#',:data=>{:dropdown=>"sort-menu-list"},:class => 'button tiny right create-new-project margin-right-10'
+              %ul#sort-menu-list.f-dropdown
+                %li
+                  = link_to "All Projects",:controller => 'projects',:action => 'index'
+                %li
+                  = link_to "Completed Project",:controller => 'projects',:action => 'index',:sort=>"completed"
+                %li
+                  = link_to "Ongoing Project",:controller => 'projects',:action => 'index',:sort=>"ongoing"
+                %li
+                  = link_to "Lost Project",:controller => 'projects',:action => 'index',:sort=>"lost"
         .row
           .small-12.columns
             %table
@@ -14,21 +24,20 @@
                 %tr
                   %th{:width=>120} Title
                   %th{:width=>300} Description
-                  %th Creator
                   %th Skills
                   %th Min budget
                   %th Max budget
                   %th{:width=>80} Duration
-                  %th{:colspan=>3,:width=>200}
+                  %th{:colspan=>1,:width=>100}
                     Action
 
               %tbody
                 - if not  @projects.empty?
                   - @projects.each_with_index do |project,index|
                     %tr
-                      %td= project.title
+                      %td
+                        = link_to project.title, project
                       %td{:width=>400}= project.description.first(100).html_safe
-                      %td= @projectArray[index]['creator']
                       %td{:width=>140}
                         %ul.ul-skills
                           - @projectArray[index]['skills'].each_with_index do |s,index|
@@ -37,12 +46,15 @@
                       %td= project.min_budget
                       %td= project.max_budget
                       %td= project.close_date
-                      %td= link_to 'Show', project
-                      %td= link_to 'Edit', edit_project_path(project)
-                      %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                      %td
+                        %ul.my-project-action
+                          %li
+                            = link_to 'Edit', edit_project_path(project),:class => 'edit'
+                          %li
+                            = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' },:class => 'delete'
                 - else
                   %tr
-                    %td{:colspan => 11}
+                    %td{:colspan => 8}
                       Nothing found Please create/ add Projects....
         .row
           .small-12.columns
