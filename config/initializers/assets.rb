@@ -16,4 +16,5 @@ Rails.application.config.assets.precompile += %w( owl.transitions.css )
 
 Rails.application.config.assets.precompile += %w( jquery.tagit.css )
 Rails.application.config.assets.precompile += %w( tagit.ui-zendesk.css )
-Rails.application.config.assets.precompile += %w( user_extras )
+Rails.application.config.assets.precompile += %w( user_extras.scss )
+Rails.application.config.assets.precompile += %w( user_ratings.css )

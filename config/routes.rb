@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :user_ratings
+  get 'user_rating/rating_for_user/:user_id',to:'user_ratings#rating_for_user'
+
   resources :bank_accounts
 
   # Bid controller routes

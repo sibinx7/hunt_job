@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   has_one :user
   attr_reader :skill
   has_many :bids
+  has_one :user_rating
 
 
   def skill=(id)

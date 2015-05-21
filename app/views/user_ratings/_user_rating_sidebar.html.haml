@@ -1,0 +1,12 @@
+.small-12.medium-4.large-3.columns
+  .quick-view
+    %h6 Recent Ratings
+    .quick-box
+      - unless @all_ratings.empty?
+        - @all_ratings.each_with_index do |feedback,index|
+          .rate-view-wrapper.user-rating-view
+            .rate-feedback
+              = feedback.description.html_safe
+            .rate-info
+              = "- #{User.find(feedback.rated_by).name} on <b> #{Project.find(feedback.project_id).title}</b>".html_safe
+

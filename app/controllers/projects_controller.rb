@@ -5,12 +5,14 @@ class ProjectsController < InheritedResources::Base
 
   def index
     @projects = Project.where(:creator => current_user.id).order('created_at DESC')
-    if params[:sort] =="completed"
-      @projects = @projects.where(:status=>1)
-    elsif params[:sort] =="ongoing"
-      @projects = @projects.where(:status=>0)
-    elsif params[:sort]=="lost"
-      @projects = @projects.where(:status=>1)
+    if params[:sort]    == "completed"
+      @projects = @projects.where(:status => 1)
+    elsif params[:sort] == "ongoing"
+      @projects = @projects.where(:status => 0)
+    elsif params[:sort] == "lost"
+      @projects = @projects.where(:status => 2)
+    elsif params[:sort] == "nobid"
+      @projects = @projects.where(:status => nil)
     end
     @projects = @projects.paginate(:page => params[:page],:per_page => 10)
     @projectArray = Array.new

@@ -11,13 +11,6 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //= require jquery.js
-//= require jquery_ujs
-//= require jquery-ui.min
-//= require tag-it.min
-//= require turbolinks
-//= require jquery.materialripple
-//= require ckeditor/init
-
 
 //= require foundation/foundation
 //= require foundation/foundation.abide
@@ -27,12 +20,20 @@
 //= require foundation/foundation.dropdown
 //= require foundation/foundation.equalizer
 //= require foundation/foundation.interchange
-//= require foundation/foundation.magellan
-//= require foundation/foundation.offcanvas
 //= require foundation/foundation.reveal
 //= require foundation/foundation.slider
 //= require foundation/foundation.tab
 //= require foundation/foundation.tooltip
+
+//= require jquery_ujs
+//= require jquery-ui.min
+//= require tag-it.min
+//= require turbolinks
+//= require jquery.materialripple
+//= require ckeditor/init
+
+
+
 
 //= require parsley
 //= require comparison

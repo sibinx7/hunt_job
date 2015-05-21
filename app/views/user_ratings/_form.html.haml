@@ -1,0 +1,39 @@
+= form_for @user_rating,:html=>{"data-parsley-validate"=>true,:class=>"user-rating-form"} do |f|
+  - if @user_rating.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user_rating.errors.count, "error")} prohibited this user_rating from being saved:"
+      %ul
+        - @user_rating.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.hidden_field :user_id,value:@rate_for.id.to_i
+    = f.hidden_field :rated_by,value:@project.creator.to_i
+    = f.hidden_field :project_id,value:@project.id.to_i
+  .field.margin-bottom-15
+    %p
+      Rate your Developer, Extream Left means Poor rating and Extream Right means Good rating
+
+    %ul.user-rate-option.margin-bottom-15
+      - (1..5).each_with_index do |value,index|
+        %li.ratings
+          = f.radio_button :rating,value
+          %label
+            = value
+            %span.rating
+    .alert-box.alert
+      %p
+        Write your feedback based on your Project. You can add Feedback for each project you have done with same Developer.
+  .field.margin-bottom-15
+    %label
+      %b Your Feedback
+    .clearfix
+    = f.cktext_area :description,:required=>"required"
+
+
+  .actions
+    = f.submit 'Save',:class=>"button tiny right alert"
+:javascript
+  $(document).ready(function(){
+    $('form.user-rating-form').parsley()
+  })

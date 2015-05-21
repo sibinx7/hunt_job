@@ -1,0 +1,21 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.medium-8.large-9.columns
+            %p#notice= notice
+            %h5.p-title
+              Your Feedback
+            .panel
+              = @user_rating.description.html_safe
+              .clearfix
+                %b Rating:
+                - (1..@user_rating.rating).each_with_index do |rating,index|
+                  %span.fa.fa-star
+
+            = link_to 'Edit', edit_user_rating_path(@user_rating),:class => 'button alert right tiny'
+            = link_to 'Back', user_ratings_path,:class => 'button left tiny'
+          = render 'user_rating_sidebar'
+- content_for :extra_css do
+  = stylesheet_link_tag 'user_ratings'

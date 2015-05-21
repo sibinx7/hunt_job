@@ -46,7 +46,12 @@
               0
   .quick-box
     %h6
-      Edit Info
+      Presonal Info
     %ul
       %li
+        = link_to "View Profile", user_extras_user_info_path(:id => current_user.id)
+      %li
         = link_to "Edit Profile",user_extras_user_info_path(:id=>current_user.id)
+      - unless @user.user_ratings.empty?
+        %li
+          = link_to "Feedbacks",:controller => 'user_ratings',:action => 'rating_for_user',:user_id=>current_user.id

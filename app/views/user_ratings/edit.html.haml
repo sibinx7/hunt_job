@@ -1,0 +1,18 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        .row
+          .small-12.medium-8.large-9.columns
+            .user-rating
+              %h3.p-title
+                Add Feedback for
+                = @rate_for.name
+
+              = render 'form'
+              = link_to 'Back', user_ratings_path,:class => 'button tiny left success margin-right-10'
+              = link_to 'Show', @user_rating,:class => 'button tiny left'
+
+          = render 'user_rating_sidebar'
+- content_for :extra_css do
+  = stylesheet_link_tag 'user_ratings'

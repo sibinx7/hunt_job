@@ -1,0 +1,185 @@
+// Place all the styles related to the UserRatings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.user-rating{
+  display: block;
+  padding:10px 15px;
+  margin-bottom: 20px;
+}
+.quick-view{
+  display: block;
+  padding:10px;
+
+}
+.quick-view .user-rating-view{
+  background:#f4f4f4;
+  border:1px solid #e7e7e7;
+  border-radius: 8px;
+}
+.quick-view .user-rating-view{
+  margin-bottom: 10px;
+  padding:10px;
+  .rate-feedback{
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-style: italic;
+    span,p,h5,h6,b,a{
+      font-size: 12px;
+      margin:0;
+      color:#999;
+    }
+  }
+  .rate-info{
+    @extend .rate-feedback;
+    font-style: normal;
+  }
+}
+
+ul.user-rate-option{
+  margin:0 0 20px 0;
+  padding:10px;
+  background:#f7f7f7;
+  border:1px solid #eee;
+
+}
+ul.user-rate-option li.ratings{
+  display: inline-block;
+  list-style:none;
+  position: relative;
+}
+ul.user-rate-option li.ratings input[type="radio"]{
+  position: absolute;
+  opacity: 0;
+  top:10px;
+  left:21px;
+}
+ul.user-rate-option > li.ratings {
+  input[type="radio"] + label span{
+    width:15px;
+    height: 15px;
+    border-radius: 50%;
+    background: lighten(#de6258,10%);
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    border:2px solid darken(#de6258,10%);
+    -webkit-box-shadow: inset 0 0 1px darken(#de6258,2%);
+    -moz-box-shadow: inset 0 0 1px darken(#de6258,2%);
+    box-shadow: inset 0 0 1px darken(#de6258,2%);
+  }
+
+}
+ul.user-rate-option li.ratings {
+  input[type="radio"]:checked + label span{
+    background: lighten(#d53a2e,50%);
+  }
+
+}
+.rating-wrapper{
+  display: block;
+  .each-rating{
+    display: block;
+    background:#f7f7f7;
+    border:1px solid #eee;
+    margin-bottom: 25px;
+
+    .inner-rating{
+      display: block;
+      margin-left:200px;
+      .rating-profile-and-rating{
+        width: 200px;
+        display: block;
+        margin-left:-200px;
+        float: left;
+        height: 240px;
+        .profile-img{
+          width:150px;
+          height:150px;
+          display: block;
+          margin:20px auto;
+          img{
+            display: block;
+            border-radius: 50%;
+            height:100%;
+            width:100%;
+            padding:2px;
+            border:2px solid #eee;
+            box-shadow: 1px 1px 1px 0 #ccc,
+                        inset 0 0 2px 0 #eee;
+            background:#fff;
+          }
+        }
+        .rating{
+          display: block;
+          margin:5px 10px ;
+          text-align:center;
+          background:#fbfbfb;
+          padding:5px;
+          border:2px solid #fff;
+          box-shadow: 0 0 1px 0 #ddd;
+          span{
+            display: inline
+          }
+        }
+      }
+      .rating-description-info{
+        display: block;
+        min-height: 240px;
+        margin:15px;
+        position: relative;
+        .description{
+          display: block;
+          border-radius: 6px;
+          background: #f3f3f3;
+          border:1px solid #e3e3e3;
+          color:#999;
+          font-size: 13px;
+          font-style: italic;
+          position: relative;
+          min-height: 180px;
+          z-index: 2;
+          .inner-description{
+            display: table-cell;
+            vertical-align: middle;
+            height: 100%;
+            width:100%
+          }
+        }
+        .description:before{
+          content: '';
+          width:30px;
+          height: 30px;
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          background:#f3f3f3;
+          position: absolute;
+          z-index:1001;
+          top:80px;
+          left:-15px;
+        }
+        .pointer{
+          content:"";
+          width:30px;
+          height: 30px;
+          position: absolute;
+          border:1px solid #e3e3e3;
+          background:#f3f3f3;
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          top:80px;
+          left:-15px;
+          z-index:1
+
+        }
+      }
+    }
+  }
+  .each-rating:first-child{
+    margin-top:20px;
+  }
+}
+
+
+
