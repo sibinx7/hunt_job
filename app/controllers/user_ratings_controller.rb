@@ -44,7 +44,7 @@ class UserRatingsController < InheritedResources::Base
   end
 
   def rating_for_user
-    @user_rating = UserRating.find_by_user_id(params[:user_id])
+    @user_rating = UserRating.where(:user_id => params[:user_id])
   end
   private
 

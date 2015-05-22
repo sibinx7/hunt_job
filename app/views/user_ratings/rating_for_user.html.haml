@@ -8,21 +8,23 @@
               %h3.p-title
                 Latest feedbacks for your
               .rating-wrapper
-                -(1..10).each_with_index do |feedbacks,index|
+                - @user_rating.each do |feedbacks|
                   .each-rating
                     .inner-rating
                       .rating-profile-and-rating
                         .profile-img
-                          = image_tag @user_rating.user.profile_image.url
+                          = image_tag feedbacks.user.profile_image.url
                         .rating
-                          - (1..@user_rating.rating).each_with_index do |rate,index|
+                          - (1..feedbacks.rating).each_with_index do |rate,index|
                             %span.fa.fa-star
                       .rating-description-info
                         .description
                           .inner-description
-                            = @user_rating.description.html_safe
+                            = feedbacks.description.html_safe
                         .pointer
                         .more-info
+                          %a.has-tip.tip-top.right{href:"#","data-tooltip"=>true,title:"This Rating for Project '<b>#{feedbacks.project.title}</b>'".html_safe,"aria-haspopup"=>true}
+                            %span.fa.fa-ellipsis-v
 
 - content_for :extra_css do
   = stylesheet_link_tag 'user_ratings'

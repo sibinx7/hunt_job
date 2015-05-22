@@ -128,21 +128,27 @@ ul.user-rate-option li.ratings {
         margin:15px;
         position: relative;
         .description{
-          display: block;
+          display: table;
+          width:100%;
           border-radius: 6px;
           background: #f3f3f3;
           border:1px solid #e3e3e3;
-          color:#999;
-          font-size: 13px;
-          font-style: italic;
+          color:#666;
+          font-size: 12px;
           position: relative;
-          min-height: 180px;
+          height: 180px;
           z-index: 2;
           .inner-description{
             display: table-cell;
             vertical-align: middle;
             height: 100%;
-            width:100%
+            width:100%;
+            padding:0 25px;
+            font-size:13px;
+            line-height: normal;
+            p{
+              font-size: inherit;
+            }
           }
         }
         .description:before{
@@ -171,7 +177,26 @@ ul.user-rate-option li.ratings {
           top:80px;
           left:-15px;
           z-index:1
-
+        }
+        .more-info{
+          display: block;
+          width: 100%;
+          margin-top:10px;
+          a{
+            display: block;
+            width: 30px;
+            height: 30px;
+            background: #f4f4f4;
+            border-radius: 50%;
+            border: 1px solid #e3e3e3;
+            text-align: center;
+            padding-top:3px;
+            color:#777;
+            transition: all 0.05s linear 0.1s;
+            &:hover,:active,:focus{
+              background: #f1f1f1;
+            }
+          }
         }
       }
     }
