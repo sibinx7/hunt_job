@@ -3,7 +3,7 @@
     .small-12.columns
       .dashboard-inner.custom-container
         .row
-          .small-12.medium-8.large-9.columns
+          .small-12.medium-11.large-9.columns
             .dashboard-tab-wrapper
               %h3.p-title
                 Latest feedbacks for your
@@ -23,8 +23,12 @@
                             = feedbacks.description.html_safe
                         .pointer
                         .more-info
-                          %a.has-tip.tip-top.right{href:"#","data-tooltip"=>true,title:"This Rating for Project '<b>#{feedbacks.project.title}</b>'".html_safe,"aria-haspopup"=>true}
-                            %span.fa.fa-ellipsis-v
+                          .more-info-link
+                            %a.has-tip.tip-top{href:"#","data-tooltip"=>true,title:"This Rating for Project '<b>#{feedbacks.project.title}</b>'".html_safe,"aria-haspopup"=>true}
+                              %span.fa.fa-ellipsis-v
+        .row
+          .small-12.columns
+            = will_paginate @user_rating,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
 
 - content_for :extra_css do
   = stylesheet_link_tag 'user_ratings'

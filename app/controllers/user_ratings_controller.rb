@@ -44,7 +44,7 @@ class UserRatingsController < InheritedResources::Base
   end
 
   def rating_for_user
-    @user_rating = UserRating.where(:user_id => params[:user_id])
+    @user_rating = UserRating.where(:user_id => params[:user_id]).paginate(:page => params[:page],:per_page => 10)
   end
   private
 

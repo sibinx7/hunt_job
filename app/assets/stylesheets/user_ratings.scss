@@ -82,21 +82,32 @@ ul.user-rate-option li.ratings {
     background:#f7f7f7;
     border:1px solid #eee;
     margin-bottom: 25px;
-
     .inner-rating{
       display: block;
-      margin-left:200px;
+      margin-left:160px;
+      @media all and (max-width:640px) {
+        margin-left: 0;
+      }
       .rating-profile-and-rating{
-        width: 200px;
+        width: 160px;
         display: block;
-        margin-left:-200px;
+        margin-left:-160px;
         float: left;
-        height: 240px;
+        height: 190px;
+        @media all and (max-width: 640px){
+          width:100%;
+          margin-left: 0;
+          float: none;
+        }
         .profile-img{
-          width:150px;
-          height:150px;
+          width:100px;
+          height:100px;
           display: block;
           margin:20px auto;
+          @media all and (max-width: 640px) {
+            width: 120px;
+            height: 120px;
+          }
           img{
             display: block;
             border-radius: 50%;
@@ -117,6 +128,12 @@ ul.user-rate-option li.ratings {
           padding:5px;
           border:2px solid #fff;
           box-shadow: 0 0 1px 0 #ddd;
+          font-size: 13px;
+          @media all and (max-width:640px) {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+          }
           span{
             display: inline
           }
@@ -124,9 +141,13 @@ ul.user-rate-option li.ratings {
       }
       .rating-description-info{
         display: block;
-        min-height: 240px;
+        min-height: 190px;
         margin:15px;
         position: relative;
+        @media all and (max-width: 640px){
+          min-height: inherit;
+          height: auto;
+        }
         .description{
           display: table;
           width:100%;
@@ -136,8 +157,11 @@ ul.user-rate-option li.ratings {
           color:#666;
           font-size: 12px;
           position: relative;
-          height: 180px;
+          height: 160px;
           z-index: 2;
+          @media all and (max-width: 640px){
+            height: auto;
+          }
           .inner-description{
             display: table-cell;
             vertical-align: middle;
@@ -146,6 +170,11 @@ ul.user-rate-option li.ratings {
             padding:0 25px;
             font-size:13px;
             line-height: normal;
+            @media  all and (max-width: 640px){
+              padding:25px 10px 10px;
+              display: table;
+              width: 100%;
+            }
             p{
               font-size: inherit;
             }
@@ -161,8 +190,12 @@ ul.user-rate-option li.ratings {
           background:#f3f3f3;
           position: absolute;
           z-index:1001;
-          top:80px;
-          left:-15px;
+          top:70px;
+          left:-14px;
+          @media  all and (max-width: 640px){
+            left: 45%;
+            top:-15px;
+          }
         }
         .pointer{
           content:"";
@@ -174,27 +207,50 @@ ul.user-rate-option li.ratings {
           transform: rotate(45deg);
           -webkit-transform: rotate(45deg);
           -moz-transform: rotate(45deg);
-          top:80px;
+          top:70px;
           left:-15px;
-          z-index:1
+          z-index:1;
+          @media  all and (max-width: 640px){
+          left: 45%;
+          top:-16px;
+          }
         }
         .more-info{
           display: block;
           width: 100%;
           margin-top:10px;
-          a{
-            display: block;
-            width: 30px;
-            height: 30px;
-            background: #f4f4f4;
-            border-radius: 50%;
-            border: 1px solid #e3e3e3;
-            text-align: center;
-            padding-top:3px;
-            color:#777;
-            transition: all 0.05s linear 0.1s;
-            &:hover,:active,:focus{
-              background: #f1f1f1;
+          text-align:right;
+          position: relative;
+          @media all and (max-width: 640px){
+            display: table;
+          }
+          .more-info-link {
+            text-align: right;
+            display: table;
+            float: right;
+            position: relative;
+            @media all and (min-width: 641px) and (max-width: 1024px){
+              float: none;
+            }
+            a{
+              display: block;
+              position: relative;
+              width: 25px;
+              height: 25px;
+              background: #f4f4f4;
+              border-radius: 50%;
+              border: 1px solid #e3e3e3;
+              text-align: center;
+              padding-top:3px;
+              color:#777;
+              font-size: 12px;
+              transition: all 0.05s linear 0.1s;
+              &:hover,:active,:focus{
+                background: #f1f1f1;
+              }
+              @media all and (max-width: 640px){
+                display: table;
+              }
             }
           }
         }

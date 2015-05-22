@@ -30,4 +30,6 @@
                       = link_to 'Edit', edit_user_rating_path(user_rating),:class => "edit"
                     %li
                       = link_to 'Destroy', user_rating, :method => :delete, :data => { :confirm => 'Are you sure?' },:class => "delete"
-
+  .row
+    .small-12.columns
+      = will_paginate @user_ratings,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
