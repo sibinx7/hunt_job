@@ -24,6 +24,7 @@
 //= require foundation/foundation.slider
 //= require foundation/foundation.tab
 //= require foundation/foundation.tooltip
+//= require foundation/foundation.offcanvas
 
 //= require jquery_ujs
 //= require jquery-ui.min
@@ -37,5 +38,5 @@
 
 //= require parsley
 //= require comparison
-$(function(){$(document).foundation()});
 
+$(function(){ $(document).foundation(); });

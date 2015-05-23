@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/galetahub/ckeditor.git
-  revision: 16dc5d233e48b5d9a52c8d60923c6a86f366f8cd
+  revision: 46f5ac6db09331692b54d22454b8f4bdf4039bc4
   specs:
-    ckeditor (4.1.1)
+    ckeditor (4.1.2)
       cocaine
       orm_adapter (~> 0.5.0)
 
@@ -135,7 +135,7 @@ GEM
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    jbuilder (2.2.13)
+    jbuilder (2.2.16)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -233,7 +233,7 @@ GEM
       railties (>= 3.2, < 4.2)
     ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
-    sass (3.4.13)
+    sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)

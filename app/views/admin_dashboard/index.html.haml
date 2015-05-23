@@ -1,0 +1,74 @@
+.small-12.columns
+  .admin-dashboard
+    %ul.admin-quick-list
+      %li.small-12.medium-3.columns
+        %section.admin-quick-box.quick-blue
+          .admin-quick-main
+            .admin-quick-note
+              %p
+                %b 18
+                Project has been posted on
+                %b last 30 days.
+          .admin-quick-footer
+            %h5
+              120 Projects
+              %span.fa.fa-rocket.pull-right
+      %li.small-12.medium-3.columns
+        %section.admin-quick-box.quick-green
+          .admin-quick-main
+            .admin-quick-note
+              %p
+                %b 22
+                active users use this platform for freelance works
+          .admin-quick-footer
+            %h5
+              22 Users
+              %span.fa.fa-user.pull-right
+      %li.small-12.medium-3.columns
+        %section.admin-quick-box.quick-red
+          .admin-quick-main
+            .admin-quick-note
+              %p
+                So far
+                %b $300
+                transaction across platform
+          .admin-quick-footer
+            %h5
+              Transaction History
+              %span.fa.fa-money.pull-right
+      %li.small-12.medium-3.columns
+        %section.admin-quick-box.quick-violet
+          .admin-quick-main
+            .admin-quick-note
+              %p
+                Messages and Notifications from Users on
+                Project
+          .admin-quick-footer
+            %h5
+              Inbox/ Notifications
+              %span.fa.fa-inbox.pull-right
+    .clearfix
+    .admin-quick-detailed-box
+      .small-12.medium-3.columns
+        .admin-admin-details
+          %h5
+            %span.fa.fa-group
+            &nbsp;Admins
+            %a.pull-right
+              %span.fa.fa-arrow-circle-right
+          .clearfix
+          .admin-admin-detail-table
+            %table.table
+              %tbody
+                -(1..5).each do |index|
+                  %tr
+                    %td
+                      %a.profile
+                        %span.fa.fa-user
+                    %td{width:"300"}
+                      %a{href:"#"}
+                        Sibin Xavier
+      .small-12.medium-6.columns
+      .small-12.medium-3.columns
+
+

@@ -26,5 +26,6 @@
  *= require tagit.ui-zendesk
  *= require user_extras
  *= require dropzone
+ *= require admin_dashboard
  */
 

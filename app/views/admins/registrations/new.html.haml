@@ -1,0 +1,40 @@
+.user-signin
+  .row
+    .small-12.medium-6.medium-centered.large-6.large-centered.columns
+      .user-sign-in-inner
+        %h3 Admin Registration
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = f.error_notification
+          .form-inputs
+          = f.input :email, required: true, autofocus: true
+          = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+          = f.input :password_confirmation, required: true
+          = f.input :admin_type, :as=> :hidden, required:false
+          .form-inputs
+            .alert-box
+              %p
+              Enter your Security Key and Get Admin Privilage
+            .row.collapse
+              .small-7.large-8.columns
+                %input#secret-pass{:placeholder => "Enter your Secret Key", :type => "text"}/
+              .small-5.large-4.columns
+                %a#get-admin-pass.button.postfix Get Key
+          .form-actions
+            = f.button :submit, "Sign up",:class=>"button tiny right"
+          = render "admins/shared/links"
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      $('#get-admin-pass').click(function(){
+        var getSecretCode = $('#secret-pass').val();
+        var getSectetUrl = "#{url_for home_get_secret_key_url}";
+        $.post(getSectetUrl,{secret:getSecretCode},function(data){
+          $('#admin_admin_type').attr('value',data.super_admin_key)
+          $('#admin_admin_type').val(data.super_admin_key)
+        })
+        .fail(function(){
+         $('#admin_admin_type').attr('value',0)
+          $('#admin_admin_type').val(0)
+        })
+      })
+    })

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :user_ratings
   get 'user_rating/rating_for_user/:user_id',to:'user_ratings#rating_for_user'
 
@@ -77,8 +78,9 @@ Rails.application.routes.draw do
 
   devise_for :users
              # :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+
+  devise_for :admins, controllers: {sessions: 'admins/sessions',registrations:'admins/registrations',confirmations:'admins/confirmations'}
+
   get 'home/index'
 
   get 'home/about'
@@ -87,7 +89,8 @@ Rails.application.routes.draw do
 
   get 'home/contact'
 
-  get 'home/maintenance'
+  post 'home/get_secret_key'
+
 
   get 'dashboard/index'
 
@@ -119,7 +122,9 @@ Rails.application.routes.draw do
 
   get 'dashboard/projects_history'
 
+  # Admin Dashboard section
 
+  get 'admin_dashboard/index'
   # Edit users info
 
 

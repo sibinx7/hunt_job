@@ -1,3 +1,150 @@
 // Place all the styles related to the AdminDashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html,body{
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.off-canvas-wrap{
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.main-section .admin-dashboard-wrapper{
+  background: #e5e9ec;
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 50px 30px
+}
+.main-section .admin-dashboard-wrapper .admin-quick-list{
+  margin: 10px 0 30px;
+  position: relative;
+  padding: 0;
+  display: table;
+  li{
+    list-style: none;
+    display: block;
+    margin-bottom: 25px;
+  }
+}
+.main-section .admin-quick-box{
+  min-height: 160px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  .admin-quick-main{
+    height: 120px;
+    display: table;
+    .admin-quick-note{
+      display: table-cell;
+      vertical-align: middle;
+      padding:15px;
+      height:120px;
+      color: #fff;
+      text-shadow: 0 1px 0 #444;
+      P{
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+  }
+  .admin-quick-footer{
+    height: 40px;
+    padding:12px 10px;
+    h5{
+      text-transform: uppercase;
+      color: #fff;
+      margin:0;
+      font-size: 16px;
+      font-weight: 600;
+      text-shadow: 1px 0px 0 #555;
+      span{
+        margin-right: 5px;
+        position: relative;
+        vertical-align: middle;
+        top: 3px;
+      }
+    }
+  }
+}
+.main-section .admin-quick-box.quick-blue{
+  background: #0090d9;
+  border-color: darken(#0090d9,5%);
+  .admin-quick-footer{
+    @extend .admin-quick-footer;
+    background: darken(#0090d9,5%);
+  }
+}
+.main-section .admin-quick-box.quick-green{
+  background: #0aa699;
+  border-color: darken(#0aa699,5%);
+  .admin-quick-footer{
+    @extend .admin-quick-footer;
+    background: darken(#0aa699,5%);
+  }
+}
+.main-section .admin-quick-box.quick-red{
+  background: #dd2e2b;
+  border-color: darken(#dd2e2b,5%);
+  .admin-quick-footer{
+    @extend .admin-quick-footer;
+    background: darken(#dd2e2b,5%);
+  }
+}
+.main-section .admin-quick-box.quick-violet{
+  background: #755a92;
+  border-color: darken(#755a92,5%);
+  .admin-quick-footer{
+    @extend .admin-quick-footer;
+    background: darken(#755a92,5%);
+  }
+}
+/** Admin dashboard detailed details **/
+.admin-admin-details{
+  background: #fff;
+  border:1px solid #eee;
+  h5{
+    background: #f3f3f3;
+    margin:0;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    text-transform: uppercase;
+    color: #666;
+    a{
+      color:#999;
+      text-decoration: none;
+      &:hover{
+        color:#777;
+      }
+    }
+  }
+  table{
+    width:100%;
+    border: none;
+    td{
+      font-size: 15px;
+      padding: 10px 15px;
+      a.profile{
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        border-radius: 50%;
+        border:1px solid #fff;
+        box-shadow: 0 0 0 1px #eee;
+        display: block;
+        text-align: center;
+        span{
+          font-size: 24px;
+          color:#ddd;
+          margin-top:7px;
+          text-align: center;
+        }
+      }
+      a{
+        color: #666;
+      }
+    }
+  }
+}
