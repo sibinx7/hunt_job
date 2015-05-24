@@ -93,7 +93,6 @@
                     Budget
                   %td
                     By Do
-
       .small-12.medium-3.large-3.columns
         .admin-latest-user
           .admin-each-user
@@ -102,7 +101,25 @@
                 .image
                   %img{src:"https://pbs.twimg.com/profile_images/1771648774/Sacca_profile_400x400.jpg"}
               .navigation
+                .navigation-panel
+                  %a.pull-left
+                    %span.fa.fa-arrow-circle-left
+                  %a.pull-right
+                    %span.fa.fa-arrow-circle-right
             %section
+              %h4.user-name.text-center
+                Sibin Xavier
+              .clearfix
+              .user-info
+                %p
+                  @username
+                %p
+                  sibinx7@gmail.com
+                %p.country
+                  = ISO3166::Country['IN']
+    .clearfix
+
+
 
 
 
