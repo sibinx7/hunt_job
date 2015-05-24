@@ -49,16 +49,16 @@
               %span.fa.fa-inbox.pull-right
     .clearfix
     .admin-quick-detailed-box
-      .small-12.medium-3.columns
+      .small-12.medium-3.large-3.columns
         .admin-admin-details
-          %h5
+          %h5.admin-detail-head
             %span.fa.fa-group
             &nbsp;Admins
             %a.pull-right
               %span.fa.fa-arrow-circle-right
           .clearfix
           .admin-admin-detail-table
-            %table.table
+            %table.admin-table
               %tbody
                 -(1..5).each do |index|
                   %tr
@@ -68,7 +68,41 @@
                     %td{width:"300"}
                       %a{href:"#"}
                         Sibin Xavier
-      .small-12.medium-6.columns
-      .small-12.medium-3.columns
+      .small-12.medium-6.large-6.columns
+        .admin-project-detail-table
+          %h5.admin-detail-head
+            %span.fa.fa-file
+            &nbsp;Project
+            %a.pull-right
+              %span.fa.fa-arrow-circle-right
+          %table.admin-table
+            %tfoot
+              %tr
+                %th
+                  Title
+                %th
+                  Budget
+                %th
+                  Creator
+            %tbody
+              -(1..7).each do |project|
+                %tr
+                  %td
+                    %a{href:""} Title of the project
+                  %td
+                    Budget
+                  %td
+                    By Do
+
+      .small-12.medium-3.large-3.columns
+        .admin-latest-user
+          .admin-each-user
+            %header
+              .profile-image
+                .image
+                  %img{src:"https://pbs.twimg.com/profile_images/1771648774/Sacca_profile_400x400.jpg"}
+              .navigation
+            %section
+
 
 
