@@ -1,0 +1,36 @@
+.small-12.columns
+  .admin-dashboard
+    .admin-project-wrapper
+      %header.project-title
+        %h3 Projects
+      %section.body
+        - @projects.each do |project|
+          .admin-projects
+            .admin-projects-title
+              %h5
+                = project.title
+            .admin-projects-desc-budget
+              .small-12.medium-8.large-9.columns
+                .description
+                  = (truncate(strip_tags(project.description).html_safe,length:540,escape:false)).html_safe
+              .small-12.medium-4.large-3.columns
+                .budget
+                  %h6 Budget
+                  .clearfix
+                  .budget-money
+                    = "#{project.min_budget}$ - #{project.max_budget}$"
+            .admin-projects-skills
+              Skills:
+              .clearfix
+              %ul.skills
+                - project.skills.each do |skill|
+                  %li
+                    = skill.name
+            .admin-project-author-info
+              %p
+                = "Posted by #{project.user.name} on #{project.created_at.strftime("%A %d, %B %Y")}"
+
+      .clearfix
+      %footer
+        .pagination-wrapper
+          = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
