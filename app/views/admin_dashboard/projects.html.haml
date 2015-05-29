@@ -2,7 +2,20 @@
   .admin-dashboard
     .admin-project-wrapper
       %header.project-title
-        %h3 Projects
+        %h3
+          Projects
+          %dl.sub-nav.right.admin-project-subnav
+            %dt Filter:
+            %dd{:class => ("active" if (params[:sort]=="all" || params[:sort]==nil))}
+              = link_to "All",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"all"}
+            %dd{:class => ("active" if (params[:sort]=="completed"))}
+              = link_to "Completed",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"completed"}
+            %dd{:class => ("active" if (params[:sort]=="ongoing"))}
+              = link_to "Ongoing",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"ongoing"}
+            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="pending"))}
+              = link_to "Pending",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"pending"}
+            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="lost"))}
+              = link_to "Lost",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"lost"}
       %section.body
         - @projects.each do |project|
           .admin-projects
