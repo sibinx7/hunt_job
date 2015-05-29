@@ -323,3 +323,69 @@ footer .pagination-wrapper{
 .admin-project-subnav{
   margin-top: 0.3rem
 }
+.admin-user-database-users{
+  display: table;
+  width: 100%;
+}
+.admin-user-database-users .admin-user-database-each-user{
+  min-height: 320px;
+  margin:15px 0;
+  float: left!important;
+  position: relative;
+}
+.admin-user-database-each-user .user-info{
+  border: 1px solid #ddd;
+  position: relative;
+}
+.admin-user-database-each-user .user-image{
+  height: 240px;
+  overflow: hidden;
+  background: #eee;
+  img{
+    width: 100%;
+  }
+}
+.admin-user-database-each-user .user-name{
+  padding: 10px;
+  background: #1c94c4;
+  margin: 0;
+  color: #fff;
+}
+.admin-user-database-each-user .user-extra{
+  padding:10px 10px 0;
+  display: table;
+  width: 100%;
+  clear: both;
+  color: #555;
+  font-size: 13px;
+  font-weight: bold;
+  a{
+    color: #555;
+  }
+  .country{
+    text-transform: uppercase;
+  }
+}
+.admin-user-database-each-user .user-rating{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #f6a828;
+  display: table;
+  padding:1px 3px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 3px;
+}
+.admin-user-database-each-user .user-description{
+  font-size: 14px;
+  color: #777;
+  padding:10px 10px 10px;
+  text-align: justify;
+  p,span,b,a{
+    font-size: inherit;
+    color: inherit;
+  }
+  h1,h2,h3,h4,h5,h6{
+    color: inherit;
+  }
+}

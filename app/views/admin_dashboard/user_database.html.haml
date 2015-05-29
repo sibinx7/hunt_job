@@ -1,0 +1,41 @@
+.small-12.columns
+  .admin-dashboard
+    .admin-project-wrapper
+      %header.project-title
+        %h3
+          %span.fa.fa-users
+          User Database
+          %dl.sub-nav.right.admin-project-subnav
+            %dt Filter:
+            %dd{:class => ("active" if (params[:sort]=="all" || params[:sort]==nil))}
+              = link_to "All",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"all"}
+            %dd{:class => ("active" if (params[:sort]=="completed"))}
+              = link_to "Completed",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"completed"}
+            %dd{:class => ("active" if (params[:sort]=="ongoing"))}
+              = link_to "Ongoing",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"ongoing"}
+            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="pending"))}
+              = link_to "Pending",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"pending"}
+            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="lost"))}
+              = link_to "Lost",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"lost"}
+      %section.body
+        .admin-user-database-users
+          - @users_database.each_with_index do |user|
+            .small-6.medium-4.large-3.columns.admin-user-database-each-user
+              .user-info
+                .user-rating
+                  %span.fa.fa-star
+                .user-image
+                  - if user.profile_image_file_name?
+                    = image_tag user.profile_image.url
+                  -else
+                    %img{:src=>"#{image_path("default_profile.png")}"}
+                %h5.user-name.text-center
+                  = user.name
+                %section.user-extra
+                  =link_to "@"+user.username,'#',:class => 'left username'
+                  =link_to ISO3166::Country[user.country],"#",:class => 'right country'
+                %section.user-description
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend tempus quam,
+                  nec laoreet nisi maximus vel. Praesent dictum sapien rhoncus felis ultricies,
+                  in tempus massa dignissim. Pellentesque posuere sed mi ut tincidunt.
+                  Etiam nec nulla ac leo pretium semper

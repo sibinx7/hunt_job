@@ -21,6 +21,10 @@ class AdminDashboardController < ApplicationController
         @projects = @projects.where(:status => 0)
       end
     end
-    puts @projects.inspect
+  end
+
+  # User database
+  def user_database
+    @users_database = User.paginate(:page=>params[:page],:per_page=>2)
   end
 end

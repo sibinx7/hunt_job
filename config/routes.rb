@@ -126,6 +126,7 @@ Rails.application.routes.draw do
 
   get 'admin_dashboard/index'
   get 'admin_dashboard/projects'
+  get 'admin_dashboard/user_database'
   # Edit users info
 
 
