@@ -28,6 +28,9 @@ class ProjectsController < InheritedResources::Base
   def show
     @project = Project.find(params[:id])
     @projectCreator = User.find(@project.creator).name
+    unless @project.assigned_to == nil
+      @bid = Bid.where(:project_id => @project.id,:user_id => @project.assigned_to).first
+    end
   end
 
 

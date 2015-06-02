@@ -73,7 +73,7 @@
                               = link_to "Mark as lost Project",{:controller => 'bid',:action => 'project_lost_request',:project=> @project.id,:bid=>@bids.id},{:class=>"button tiny right"}
                             - else
                               %p.mark-lost
-                                Project Expired by
+                                Project Bid Expired by
                                 %b
                                   = distance_of_time_in_words(Time.now,(@bids.accepted_date+(@bids.duration.to_i).days))
                                   ago

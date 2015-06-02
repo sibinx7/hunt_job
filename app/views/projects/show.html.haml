@@ -20,6 +20,12 @@
               .small-12.medium-8.large-9.columns
                 .p-description.panel
                   = @project.description.html_safe
+                - unless @bid == nil
+                  .row
+                    .small-12.columns
+                      .panel
+                        Check your Project Dashboard for more information
+                        = link_to 'Dashboard',{:controller => 'bid',:action => 'bid_dashboard',:project=>@bid.project_id,:bid=>@bid.id}
                 .row
                   .small-12.columns.custom-alert
                     -if @project.status == nil

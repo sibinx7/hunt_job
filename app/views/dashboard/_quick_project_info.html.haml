@@ -2,14 +2,20 @@
   .quick-box
     %h6
       Status
-    - if @project.close == nil
+    - if @project.close == nil && @project.status == "0"
       %a.button.tiny.text-center.success.margin-0
-        open
-    - elsif @project.close == 2
+        Ongoing
+    - elsif @project.close == true && @project.status == "1"
       %a.button.tiny.secondary.text-center.margin-0
-        close
-    - else
+        closed
+    - elsif @project.close == true && @project.status == "2"
       %a.button.tiny.alert.text-center.margin-0
+        Losted
+    - elsif @project.close == nil && @project.status == nil
+      %a.button.tiny.success.text-center.margin-0
+        open
+    - else
+      %a.button.tiny.success.text-center.margin-0
         open
   .quick-box
     %h6
