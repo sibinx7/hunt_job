@@ -27,4 +27,8 @@ class AdminDashboardController < ApplicationController
   def user_database
     @users_database = User.paginate(:page=>params[:page],:per_page=>2)
   end
+
+  def notifications
+    @notifications = AdminNotification.paginate(:page=> params[:page],:per_page=>2)
+  end
 end

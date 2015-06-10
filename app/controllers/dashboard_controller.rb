@@ -101,4 +101,19 @@ class DashboardController < ApplicationController
   def my_status
 
   end
+
+  def request_admin
+    if current_user.id.to_i == params[:user].to_i
+      @admin_notification = AdminNotification.new
+      @admin_notification.user_id = current_user.id
+      @admin_notification.message = params[:message]
+      @admin_notification.category = "request"
+      @admin_notification.project = params[:project]
+      if @admin_notification.save
+        render json: {:message =>"Saved",:status => "success"}
+      else
+        render json: {:message =>"Message failed",:status => "fail"}
+      end
+    end
+  end
 end

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :payments
   has_one :user_project_detail
   has_many :user_ratings
+  has_many :admin_notifications
   has_attached_file :profile_image
   validates_attachment_content_type :profile_image, :content_type => /\Aimage\/.*\Z/
 end

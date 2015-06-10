@@ -21,7 +21,7 @@
                   %p
                     You didn't get Good Freelancer, You can contact us to get Good Freelancer
                   %p.text-right
-                    = link_to "Request For Help", "#",:class => 'button tiny  alert'
+                    = link_to "Request For Help", "#",:class => 'button tiny  alert',"data-reveal-id"=>"request-admin-help"
             .row
               .small-12.columns
                 - unless @i_bid == true || @project.creator.to_i == current_user.id.to_i
@@ -79,5 +79,47 @@
           .small-12.medium-4.large-3.columns
             = render 'quick_project_info'
 -content_for :extra_html do
+  #request-admin-help.reveal-modal.medium{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
+    %h4#modalTitle Request Help
+    .modalBody
+      = form_tag({controller:"dashboard",action:"request_admin"},id:"request-form") do
+        .row
+          .small-12.column.request-area
+            = label_tag("Message")
+            = text_area_tag("message","",rows:5,placeholder:"Example: Dear Admin, I have a Project and troble to get a developer")
+            = hidden_field_tag("project",@project.id)
+            = hidden_field_tag("user",@project.creator)
+        .row
+          .small-12.column
+            %button{id:"request-button",class:"button tiny right"} Submit
+    %a.close-reveal-modal{"aria-label" => "Close"} ×
 
 
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      $('#request-form').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+          url : $(this).attr('action'),
+          data:$(this).serialize(),
+          type: "POST",
+          error: function(){
+          },
+          success:function(data){
+          not = $('<div>',{
+                  class : 'alert-box'
+                })
+
+            if(data.status=="success"){
+              not.addClass('success').html("Request submitted successfully").appendTo('.request-area')
+            }else{
+              not.addClass('danger').html("Unexpected error occured, Request failed").appendTo('.request-area')
+            }
+             window.location.reload()
+          }
+
+        })
+        return false
+      })
+    })

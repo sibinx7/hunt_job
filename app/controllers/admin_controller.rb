@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class AdminController < ApplicationController
   before_action :authenticate_user?, only: [:update,:destroy]
   before_action :configure_permitted_parameters, if: :devise_controller?
 

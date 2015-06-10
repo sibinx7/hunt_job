@@ -122,11 +122,16 @@ Rails.application.routes.draw do
 
   get 'dashboard/projects_history'
 
+  post 'dashboard/request_admin/:project', to:'dashboard#request_admin'
+
   # Admin Dashboard section
 
   get 'admin_dashboard/index'
   get 'admin_dashboard/projects'
   get 'admin_dashboard/user_database'
+  get 'admin_dashboard/notifications'
+
+  get 'admin_notification/resolve_notification/:request/:project', to:'admin_notification#resolve_notification'
   # Edit users info
 
 
