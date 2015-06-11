@@ -350,6 +350,10 @@ footer .pagination-wrapper{
   background: #1c94c4;
   margin: 0;
   color: #fff;
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
 }
 .admin-user-database-each-user .user-extra{
   padding:10px 10px 0;

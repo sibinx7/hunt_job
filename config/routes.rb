@@ -132,6 +132,8 @@ Rails.application.routes.draw do
   get 'admin_dashboard/notifications'
 
   get 'admin_notification/resolve_notification/:request/:project', to:'admin_notification#resolve_notification'
+  post 'admin_notification/get_users'
+  post 'admin_notification/recommend_user'
   # Edit users info
 
 

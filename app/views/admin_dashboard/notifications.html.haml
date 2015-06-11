@@ -21,7 +21,7 @@
                         %small On
                         = notification.created_at.strftime("%A, %b %e, %Y")
                         .right.solution
-                          = link_to "Solve Issues",:controller => 'admin_notification',:action => 'resolve_notification',:request=>notification.id,:project=>notification.project
+                          = link_to "Solve Issues",:controller => 'admin_notification',:action => 'resolve_notification',:request=>notification.id,:project=>notification.project_id
                     %section
                       %p
                         = notification.message

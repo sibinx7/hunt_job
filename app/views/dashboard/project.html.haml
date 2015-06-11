@@ -15,13 +15,14 @@
           .small-12.medium-8.large-9.columns
             .p-description.panel
               = @project.description.html_safe
-            .row
-              .small-12.columns
-                .panel
-                  %p
-                    You didn't get Good Freelancer, You can contact us to get Good Freelancer
-                  %p.text-right
-                    = link_to "Request For Help", "#",:class => 'button tiny  alert',"data-reveal-id"=>"request-admin-help"
+            - if @project.creator.to_i == current_user.id
+              .row
+                .small-12.columns
+                  .panel
+                    %p
+                      You didn't get Good Freelancer, You can contact us to get Good Freelancer
+                    %p.text-right
+                      = link_to "Request For Help", "#",:class => 'button tiny  alert',"data-reveal-id"=>"request-admin-help"
             .row
               .small-12.columns
                 - unless @i_bid == true || @project.creator.to_i == current_user.id.to_i
