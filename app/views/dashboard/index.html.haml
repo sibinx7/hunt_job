@@ -18,7 +18,7 @@
                           = f.created_at.strftime('%B')
                       .each-notifications
                         %h6
-                          = f.title
+                          = f.title.html_safe
                         .content
                           = f.content.html_safe
                         = link_to "More info",f.link,:class => "right"

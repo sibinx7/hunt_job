@@ -26,7 +26,25 @@ class AdminNotificationController < ApplicationController
   end
 
   def recommend_users
-    
+    # Don't set anything automatically, just send a notification
+    @user_info = User.find(params[:user_id])
+    @project_info = Project.find(params[:project_id])
+
+    @user_notification = Notification.new
+    @user_notification.title = "Congratulations! We have recommend <b>#{@project_info.title}</b> for you."
+    @user_notification.not_type = "project"
+    @user_notification.user_id  = @user_info.id
+    @user_notification.project_id = @project_info.id
+    @user_notification.related_task = nil
+    @user_notification.content = "<p>Project creator ask our help find a good Freelancer for him. We have selected as Freelancer. Project name is <a href='#{url_for(:controller => 'dashboard',:action => 'project',:project=>@project_info.id)}'>#{@project_info.title}</a>, You can check more details on Project
+    Page.</p><p> This is only a recommendation based on your performance, You can either accept or drop Project</p>
+    <p> Thanks you <br/> Admin</p>"
+    @user_notification.link = "#{url_for(:controller => 'dashboard',:action => 'project',:project=> @project_info.id )}"
+    if @user_notification.save
+      render :json => {'status' => 'success','message'=>"Successfullt send Notifications"}
+    else
+      render :json => {'status' => 'failed','message'=>"Unknown error occured."}
+    end
   end
   private
   def admin_notification_params

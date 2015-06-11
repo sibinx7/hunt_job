@@ -133,7 +133,7 @@ Rails.application.routes.draw do
 
   get 'admin_notification/resolve_notification/:request/:project', to:'admin_notification#resolve_notification'
   post 'admin_notification/get_users'
-  post 'admin_notification/recommend_user'
+  post 'admin_notification/recommend_users'
   # Edit users info
 
 

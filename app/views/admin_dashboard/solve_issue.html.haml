@@ -52,10 +52,10 @@
                 %button.button.tiny.right
                   Find
             .recommend-users
-              .admin-user-database-users
-                - @user_array.each do |user|
+              .admin-user-database-users#users-id
+                - @user_array.each_with_index do |user,index|
                   .small-6.medium-4.large-3.columns.admin-user-database-each-user
-                    .user-info
+                    .user-info{:id => "user-#{user.id}"}
                       .user-rating
                         %span.fa.fa-star
                       .user-image
@@ -76,25 +76,37 @@
                         in tempus massa dignissim. Pellentesque posuere sed mi ut tincidunt.
                         Etiam nec nulla ac leo pretium semper
                       %footer.user-name.text-center
-                        = link_to "<span class='fa fa-thumbs-up'></span>&nbsp;Recommend This Project".html_safe ,'#'
+                        = link_to "<span class='fa fa-thumbs-up'></span>&nbsp;Recommend This Project".html_safe ,'#users-id',:class => 'recommend-user',"data-user-id"=> user.id,"data-project-id"=> @project.id
 
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){
       // Send an Ajax request to recommend an user
-      $.ajax({
-        url: "",
-        type : "POST",
-        data:{
-          user_id : 1
-          user_name : "XXX"
-        },
-        success:function(data){
+      $('.recommend-user').on('click',function(){
+        if(!$(this).hasClass('recommended')){
+          var currentElement = $(this)
+          var userId     = $(this).attr('data-user-id')
+          var projectId  = $(this).attr('data-project-id')
+          $.ajax({
+            url: "#{url_for(:controller => 'admin_notification',:action => 'recommend_users')}",
+            type : "POST",
+            data:{
+              user_id : userId,
+              project_id : projectId
+            },
+            beforeSend: function(xhr,options){
 
-        },
-        error:function(){
+            },
+            success:function(data){
+              if(data.status == "success"){
+                currentElement.html('Recommended')
+                currentElement.addClass('recommended').attr('disabled','disabled')
+              }
+            },
+            error:function(){
 
+            }
+          })
         }
-
       })
     })
