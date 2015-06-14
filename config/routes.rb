@@ -128,12 +128,14 @@ Rails.application.routes.draw do
 
   get 'admin_dashboard/index'
   get 'admin_dashboard/projects'
+  get 'admin_dashboard/project'
   get 'admin_dashboard/user_database'
   get 'admin_dashboard/notifications'
-
+  get 'admin_dashboard/settings'
   get 'admin_notification/resolve_notification/:request/:project', to:'admin_notification#resolve_notification'
   post 'admin_notification/get_users'
   post 'admin_notification/recommend_users'
+  post 'admin_settings/change_maintenance_mode'
   # Edit users info
 
 

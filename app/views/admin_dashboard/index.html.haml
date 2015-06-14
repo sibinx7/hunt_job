@@ -1,7 +1,7 @@
 .small-12.columns
   .admin-dashboard
     %ul.admin-quick-list
-      %li.small-12.medium-3.columns
+      %li.small-12.medium-3.large-3.columns
         %section.admin-quick-box.quick-blue
           .admin-quick-main
             .admin-quick-note
@@ -11,9 +11,10 @@
                 %b last 30 days.
           .admin-quick-footer
             %h5
-              120 Projects
+              = @total_project
+              Projects
               %span.fa.fa-rocket.pull-right
-      %li.small-12.medium-3.columns
+      %li.small-12.medium-3.large-3.columns
         %section.admin-quick-box.quick-green
           .admin-quick-main
             .admin-quick-note
@@ -22,9 +23,10 @@
                 active users use this platform for freelance works
           .admin-quick-footer
             %h5
-              22 Users
+              = @total_users
+              Users
               %span.fa.fa-user.pull-right
-      %li.small-12.medium-3.columns
+      %li.small-12.medium-3.large-3.columns
         %section.admin-quick-box.quick-red
           .admin-quick-main
             .admin-quick-note
@@ -36,7 +38,7 @@
             %h5
               Transaction History
               %span.fa.fa-money.pull-right
-      %li.small-12.medium-3.columns
+      %li.small-12.medium-3.large-3.columns
         %section.admin-quick-box.quick-violet
           .admin-quick-main
             .admin-quick-note
@@ -85,14 +87,14 @@
                 %th
                   Creator
             %tbody
-              -(1..7).each do |project|
+              -@last_five_project.each do |project|
                 %tr
                   %td
-                    %a{href:""} Title of the project
+                    = link_to project.title, '#'
                   %td
-                    Budget
+                    = "#{project.min_budget}$ ~ #{project.max_budget}$"
                   %td
-                    By Do
+                    = project.user.name
       .small-12.medium-3.large-3.columns
         .admin-latest-user
           .admin-each-user

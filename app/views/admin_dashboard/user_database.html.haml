@@ -8,15 +8,14 @@
           %dl.sub-nav.right.admin-project-subnav
             %dt Filter:
             %dd{:class => ("active" if (params[:sort]=="all" || params[:sort]==nil))}
-              = link_to "All",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"all"}
-            %dd{:class => ("active" if (params[:sort]=="completed"))}
-              = link_to "Completed",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"completed"}
-            %dd{:class => ("active" if (params[:sort]=="ongoing"))}
-              = link_to "Ongoing",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"ongoing"}
-            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="pending"))}
-              = link_to "Pending",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"pending"}
-            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="lost"))}
-              = link_to "Lost",{:controller => 'admin_dashboard',:action => 'projects',:sort=>"lost"}
+              = link_to "All",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"all"}
+            %dd{:class => ("active" if (params[:sort]=="high-rated"))}
+              = link_to "High Rated",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"high-rated"}
+            %dd{:class => ("active" if (params[:sort]=="popular"))}
+              = link_to "Popular",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"popular"}
+            %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="new"))}
+              = link_to "New",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"new"}
+
       %section.body
         .admin-user-database-users
           - @users_database.each_with_index do |user|
@@ -39,3 +38,7 @@
                   nec laoreet nisi maximus vel. Praesent dictum sapien rhoncus felis ultricies,
                   in tempus massa dignissim. Pellentesque posuere sed mi ut tincidunt.
                   Etiam nec nulla ac leo pretium semper
+      .clearfix
+      %footer
+        .pagination-wrapper
+          = will_paginate @users_database,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails

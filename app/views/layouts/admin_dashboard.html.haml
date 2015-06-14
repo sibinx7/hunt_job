@@ -35,9 +35,23 @@
             %li
               = link_to "User Database",admin_dashboard_user_database_url
             %li
-              = link_to "Settings","#"
+              = link_to "Settings",admin_dashboard_settings_url
         %section.main-section
           .admin-dashboard-wrapper
             = yield
     = yield :extra_js
+    :javascript
+      // Resize sidebar height
+      $(window).load(function(){
+        resizeSideBar()
+      })
+      $(window).resize(function(){
+        resizeSideBar()
+      })
+      resizeSideBar = function(){
+        var windowHeight = $(window).innerHeight();
+        $('.left-off-canvas-menu').css({
+          'min-height' : windowHeight
+         })
+      }
 

@@ -1,0 +1,45 @@
+.small-12.columns
+  .admin-dashboard
+    .admin-project-wrapper
+      %header.project-title
+        %h3
+          Site Settings
+      %section.body
+        .admin-settings
+          .small-12.medium-3.large-3
+            .admin-admin-details
+              %h5.admin-detail-head
+                Site Maintenance
+            .admin-admin-detail-table.admin-settings-table
+              .admin-admin-detail-settings
+                %p
+                  Currently website in
+                  %b.website-status
+                    active
+                  mode, Press below button to Enable/Disable website
+                %p.text-right
+                  %a#maintenance-mode.button.tiny{"data-maintenance"=>0}
+                    Maintenance Off
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      // When admin click on maintenance mode enable/disable button
+      $('#maintenance-mode').on('click',function(){
+        var maintenanceElement  = $(this)
+        var maintenanceMode     = maintenanceElement.attr('data-maintenance')
+        $.ajax({
+          url       : "#{url_for(:controller => 'admin_settings',:action => 'change_maintenance_mode')}",
+          type      : "POST",
+          data      : {
+            status  : maintenanceMode
+          },
+          success   : function(data){
+            if(data.status == "success"){
+              maintenanceElement.attr('data-maintenance',data.value)
+              maintenanceElement.html(data.message)
+            }
+          }
+        })
+      })
+
+    })

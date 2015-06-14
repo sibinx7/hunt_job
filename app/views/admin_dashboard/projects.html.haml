@@ -21,7 +21,7 @@
           .admin-projects
             .admin-projects-title
               %h5
-                = project.title
+                = link_to project.title ,:controller => 'admin_dashboard',:action => 'project',:project_id => project.id
             .admin-projects-desc-budget
               .small-12.medium-8.large-9.columns
                 .description

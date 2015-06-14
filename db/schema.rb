@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607060440) do
+ActiveRecord::Schema.define(version: 20150613143752) do
 
   create_table "admin_notifications", force: true do |t|
     t.integer  "user_id"
     t.text     "message"
-    t.integer  "project"
-    t.string   "type"
-    t.integer  "admin_id",   null: false
+    t.integer  "project_id"
+    t.string   "category"
+    t.integer  "admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150607060440) do
   create_table "admin_settings", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "option_name"
+    t.string   "option_value"
   end
 
   create_table "admins", force: true do |t|

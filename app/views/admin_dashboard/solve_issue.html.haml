@@ -35,9 +35,7 @@
               Find Freelancer based on Rating and Skills
             %hr
             .recommend-users-filter
-              .small-12.medium-3.large-4.columns
-                %input{type:'text'}
-              .small-12.medium-7.large-6.columns
+              .small-12.medium-12.large-12.columns
                 %dl.sub-nav
                   %dt Filter:
                   %dd{:class => ('active' if params[:sort]=="all" || params[:sort] == nil) }
@@ -48,9 +46,6 @@
                     = link_to "Popular",:controller => 'admin_notification',:action => 'resolve_notification',:request=>@request.id,:project=>@project.id,:sort=>"popular_users"
                   %dd.hide-for-small-only{:class => ('active' if params[:sort] == "new_users")}
                     = link_to "New Members",:controller => 'admin_notification',:action => 'resolve_notification',:request=>@request.id,:project=>@project.id,:sort=>"new_users"
-              .small-12.medium-2.large-2.columns
-                %button.button.tiny.right
-                  Find
             .recommend-users
               .admin-user-database-users#users-id
                 - @user_array.each_with_index do |user,index|

@@ -1,0 +1,59 @@
+.small-12.columns
+  .admin-dashboard
+    .admin-project-wrapper
+      %header.project-title
+        %h3
+          = @project.title
+      %section
+        .project-body
+          .small-12.column
+            .project-description
+              = @project.description.html_safe
+            .clearfix
+            .project-budget-creator
+              .small-12.medium-6.columns
+                .project-budget
+                  Budget
+                  = "#{@project.min_budget}$ ~ #{@project.max_budget}$"
+              .small-12.medium-6.columns
+                .project-creator
+                  Created By
+                  = @project.user.name
+            %hr
+            .project-skills-close
+              .small-12.medium-6.columns
+                %h4 Skills
+                .project-skills
+                  - @project.skills.each do |skill|
+                    %li
+                      = skill.name
+              .small-12.medium-6.columns
+                .project-close-date
+                  %h4 Close Date
+                  %br
+                  = @project.close_date
+            %hr
+            .projects-bids
+              %h4.text-center  Bids
+              - unless @project.bids.count <= 0
+                - @project.bids.each do |bid|
+                  .project-bid
+                    .desc
+                      = bid.details.html_safe
+                    .author
+                      Freelancer :
+                      %b
+                        = bid.user.name
+                    .bid-price
+                      Bid Price :
+                      %b
+                        = bid.bid
+                    .bid-duration
+                      Duration :
+                      %b
+                        = bid.duration
+                      Days
+
+              - else
+                %p.text-center
+                  No Bids
