@@ -6,17 +6,16 @@
           .small-12.columns
             %ul.secondary-menu
               %li
-                = link_to '<span class="fa fa-dashboard"></span>&nbsp;Dashboard'.html_safe,dashboard_index_path
+                = link_to '<span class="fa fa-dashboard"></span>&nbsp;Dashboard'.html_safe,dashboard_index_url
 
               %li
-                = link_to '<span class="fa fa-folder-open"></span>&nbsp;Browse Project'.html_safe,dashboard_projects_path
+                = link_to '<span class="fa fa-folder-open"></span>&nbsp;Browse Project'.html_safe,dashboard_projects_url
               %li
-                = link_to '<span class="fa fa-spinner fa-spin"></span>&nbsp;Pending Projects'.html_safe, dashboard_pending_projects_path
+                = link_to '<span class="fa fa-spinner fa-spin"></span>&nbsp;Pending Projects'.html_safe, dashboard_pending_projects_url
               %li
-                = link_to '<span class="fa fa-tasks"></span>&nbsp;Project History'.html_safe, dashboard_projects_history_path
+                = link_to '<span class="fa fa-tasks"></span>&nbsp;Project History'.html_safe, dashboard_projects_history_url
               %li
-                = link_to '<span class="fa fa-refresh"></span>&nbsp;Timeline'.html_safe, dashboard_timeline_path
+                = link_to '<span class="fa fa-refresh"></span>&nbsp;Timeline'.html_safe, dashboard_timeline_url
               %li
-                %a{:href=>"#"}
-                  %span.fa.fa-area-chart
-                  My Status
+                = link_to '<span class="fa fa-area-chart"></span>&nbsp; My Status'.html_safe, dashboard_my_status_url
+

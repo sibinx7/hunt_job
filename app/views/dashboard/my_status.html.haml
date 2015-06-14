@@ -1,0 +1,99 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title
+          Current Status
+        %section
+          .result-table
+            %table
+              %thead
+                %tr
+                  %th
+                    Earned Money
+                  %th
+                    Lost Money
+                  %th
+                    Transaction : Credit
+                  %th
+                    Transaction : Debit
+                  %th
+                    Net Balance
+              %tbody
+                %tr
+                  %td
+                    $
+                    = @user_project_status.user_income
+                  %td
+                    $
+                    = @user_project_status.user_lost_money
+                  %td
+                    $10
+                  %td
+                    $10
+                  %td
+                    $
+                    = (@user_project_status.user_income - @user_project_status.user_lost_money)
+                    %br
+                    - if @user_project_status.user_income < @user_project_status.user_lost_money
+                      %p.alert.alert-box.negative-balance
+                        You have -ve balance. You should add some money to continue your account
+          %hr
+          .user-transaction
+            .row
+              .small-12.medium-6.columns
+                .add-money
+                  %h3
+                    Add Money
+                    = link_to "Add Fund",{:controller => 'transaction',:action => 'add_money_new'},:class => 'button tiny right'
+                  .result-table
+                    %table
+                      %thead
+                        %tr
+                          %th
+                            ID
+                          %th
+                            Credit
+                          %th
+                            Date
+                      %tbody
+                        %tr
+                          %td
+                            16253126
+                          %td
+                            $23
+                          %th
+                            Date
+                    .clearfix
+                    .load-more
+                      %a.text-center
+                        More
+
+              .small-12.medium-6.columns
+                .withdraw-money
+                  %h3
+                    Withdraw Money
+                    %a.right.button.tiny
+                      Withdraw
+                  .result-table
+                    %table
+                      %thead
+                        %tr
+                          %th
+                            ID
+                          %th
+                            Credit
+                          %th
+                            Date
+                      %tbody
+                        %tr
+                          %td
+                            16253126
+                          %td
+                            $23
+                          %th
+                            Date
+                    .clearfix
+                    .load-more
+                      %a.text-center
+                        More

@@ -62,14 +62,14 @@
           .admin-admin-detail-table
             %table.admin-table
               %tbody
-                -(1..5).each do |index|
+                -@admin_users.each do |admin|
                   %tr
                     %td
                       %a.profile
                         %span.fa.fa-user
                     %td{width:"300"}
                       %a{href:"#"}
-                        Sibin Xavier
+                        = admin.email
       .small-12.medium-6.large-6.columns
         .admin-project-detail-table
           %h5.admin-detail-head
@@ -101,24 +101,19 @@
             %header
               .profile-image
                 .image
-                  %img{src:"https://pbs.twimg.com/profile_images/1771648774/Sacca_profile_400x400.jpg"}
-              .navigation
-                .navigation-panel
-                  %a.pull-left
-                    %span.fa.fa-arrow-circle-left
-                  %a.pull-right
-                    %span.fa.fa-arrow-circle-right
+                  = image_tag @last_five_users.profile_image.url
             %section
               %h4.user-name.text-center
-                Sibin Xavier
+                = @last_five_users.name
               .clearfix
               .user-info
                 %p
-                  @username
+                  @
+                  = @last_five_users.username
                 %p
-                  sibinx7@gmail.com
+                  = @last_five_users.email
                 %p.country
-                  = ISO3166::Country['IN']
+                  = ISO3166::Country[@last_five_users.country]
     .clearfix
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613143752) do
+ActiveRecord::Schema.define(version: 20150614125455) do
 
   create_table "admin_notifications", force: true do |t|
     t.integer  "user_id"
@@ -164,6 +164,16 @@ ActiveRecord::Schema.define(version: 20150613143752) do
   create_table "skills_users", force: true do |t|
     t.integer "skill_id"
     t.integer "user_id"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "user_bank_id"
+    t.string   "bank_name"
+    t.integer  "amount"
+    t.integer  "transaction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_project_details", force: true do |t|

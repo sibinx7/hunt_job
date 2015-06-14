@@ -120,6 +120,11 @@ Rails.application.routes.draw do
 
   get 'dashboard/timeline'
 
+  get 'dashboard/my_status'
+
+  get 'transaction/add_money_new'
+  post 'transaction/add_money'
+
   get 'dashboard/projects_history'
 
   post 'dashboard/request_admin/:project', to:'dashboard#request_admin'

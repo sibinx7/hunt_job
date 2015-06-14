@@ -99,7 +99,7 @@ class DashboardController < ApplicationController
   end
 
   def my_status
-
+    @user_project_status = UserProjectDetail.find_by_user_id(current_user.id.to_i)
   end
 
   def request_admin

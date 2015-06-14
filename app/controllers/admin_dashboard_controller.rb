@@ -6,6 +6,8 @@ class AdminDashboardController < ApplicationController
     @total_project = Project.all.count
     @total_users   = User.all.count
     @last_five_project = Project.limit(5).order(created_at: :desc)
+    @admin_users = Admin.all
+    @last_five_users = User.last
   end
 
   def projects
@@ -51,6 +53,7 @@ class AdminDashboardController < ApplicationController
   end
 
   def settings
+    @maintenance_status = AdminSetting.where(:option_name => 'site_maintenance_mode',:option_value => 1).count > 0 ? 1: 0
 
   end
 

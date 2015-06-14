@@ -18,8 +18,12 @@
                     active
                   mode, Press below button to Enable/Disable website
                 %p.text-right
-                  %a#maintenance-mode.button.tiny{"data-maintenance"=>0}
-                    Maintenance Off
+                  %a#maintenance-mode.button.tiny{"data-maintenance"=> @maintenance_status.to_i}
+                    Maintenance Mode
+                    - if @maintenance_status.to_i == 1
+                      ON
+                    - else
+                      OFF
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){
