@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_one :user_project_detail
   has_many :user_ratings
   has_many :admin_notifications
-  has_many :transactions
+  # has_many :transactions
   has_attached_file :profile_image
   validates_attachment_content_type :profile_image, :content_type => /\Aimage\/.*\Z/
 end

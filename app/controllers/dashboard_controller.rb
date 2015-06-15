@@ -99,7 +99,11 @@ class DashboardController < ApplicationController
   end
 
   def my_status
-    @user_project_status = UserProjectDetail.find_by_user_id(current_user.id.to_i)
+    @user_project_status     =  UserProjectDetail.find_by_user_id(current_user.id.to_i)
+    @transactions_credit     =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'credit').limit(20)
+    @transactions_debit      =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'debit').limit(20)
+    @user_transaction_credit =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'credit').sum(:amount)
+    @user_transaction_debit  =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'debit').sum(:amount)
   end
 
   def request_admin

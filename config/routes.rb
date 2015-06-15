@@ -124,7 +124,7 @@ Rails.application.routes.draw do
 
   get 'transaction/add_money_new'
   post 'transaction/add_money'
-
+  get 'transaction/add_money_receipt'
   get 'dashboard/projects_history'
 
   post 'dashboard/request_admin/:project', to:'dashboard#request_admin'

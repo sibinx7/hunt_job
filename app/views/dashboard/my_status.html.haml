@@ -28,14 +28,14 @@
                     $
                     = @user_project_status.user_lost_money
                   %td
-                    $10
+                    = "$#{@user_transaction_credit}"
                   %td
-                    $10
+                    = "$#{@user_transaction_debit}"
                   %td
                     $
-                    = (@user_project_status.user_income - @user_project_status.user_lost_money)
+                    = (@user_project_status.user_income + @user_transaction_credit) - (@user_project_status.user_lost_money + @user_transaction_debit)
                     %br
-                    - if @user_project_status.user_income < @user_project_status.user_lost_money
+                    - if (@user_project_status.user_income + @user_transaction_credit) < (@user_project_status.user_lost_money + @user_transaction_debit)
                       %p.alert.alert-box.negative-balance
                         You have -ve balance. You should add some money to continue your account
           %hr
@@ -57,13 +57,19 @@
                           %th
                             Date
                       %tbody
-                        %tr
-                          %td
-                            16253126
-                          %td
-                            $23
-                          %th
-                            Date
+                        - if @transactions_credit.count > 0
+                          - @transactions_credit.each do |credit|
+                            %tr
+                              %td
+                                = credit.transaction_id
+                              %td
+                                = "$#{credit.amount}"
+                              %td
+                                = credit.created_at
+                        - else
+                          %tr
+                            %td{:colspan => 3 }
+                              No Transaction yet
                     .clearfix
                     .load-more
                       %a.text-center
@@ -86,13 +92,19 @@
                           %th
                             Date
                       %tbody
-                        %tr
-                          %td
-                            16253126
-                          %td
-                            $23
-                          %th
-                            Date
+                        - if @transactions_debit.count > 0
+                          - @transactions_debit.each do |debit|
+                            %tr
+                              %td
+                                = debit.transaction_id
+                              %td
+                                = "$#{debit.amount}"
+                              %th
+                                = debit.created_at
+                        - else
+                          %tr
+                            %td{:colspan => 3 }
+                              No Transaction Yet
                     .clearfix
                     .load-more
                       %a.text-center

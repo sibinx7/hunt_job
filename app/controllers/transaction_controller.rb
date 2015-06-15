@@ -10,13 +10,14 @@ class TransactionController < ApplicationController
   def add_money
     @add_credit = Transaction.create(transaction_params)
     if @add_credit.save
-
+      redirect_to :controller => 'transaction',:action => 'add_money_receipt',:transaction_id=>@add_credit.id
     else
-
+      redirect_to transaction_add_money_new_url
     end
   end
   def add_money_receipt
-
+    @receipt = Transaction.find(params[:transaction_id])
+    render 'dashboard/add_fund_receipt'
   end
   private
   def transaction_params
