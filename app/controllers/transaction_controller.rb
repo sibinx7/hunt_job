@@ -3,8 +3,6 @@ class TransactionController < ApplicationController
   def add_money_new
     @transaction = Transaction.new
     @bank_accounts = BankAccount.where(:user_id => current_user.id.to_i)
-
-    puts @bank_accounts.inspect
     render 'dashboard/add_money_new'
   end
   def add_money
@@ -16,6 +14,26 @@ class TransactionController < ApplicationController
     end
   end
   def add_money_receipt
+    @receipt = Transaction.find(params[:transaction_id])
+    render 'dashboard/add_fund_receipt'
+  end
+
+
+  def withdraw_money_new
+    @transaction = Transaction.new
+    @bank_accounts = BankAccount.where(:user_id => current_user.id.to_i)
+    render 'dashboard/withdraw_money_new'
+  end
+  def withdraw_money
+    @widthdraw = Transaction.create(transaction_params)
+    if @widthdraw.save
+      redirect_to :controller => 'transaction',:action => 'withdraw_receipt',:transaction_id => @widthdraw.id
+    else
+      redirect_to transaction
+    end
+  end
+
+  def withdraw_receipt
     @receipt = Transaction.find(params[:transaction_id])
     render 'dashboard/add_fund_receipt'
   end

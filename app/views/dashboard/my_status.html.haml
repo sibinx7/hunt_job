@@ -79,8 +79,7 @@
                 .withdraw-money
                   %h3
                     Withdraw Money
-                    %a.right.button.tiny
-                      Withdraw
+                    = link_to "Withdraw Money",transaction_withdraw_money_new_url,:class => "button right tiny"
                   .result-table
                     %table
                       %thead
@@ -99,7 +98,7 @@
                                 = debit.transaction_id
                               %td
                                 = "$#{debit.amount}"
-                              %th
+                              %td
                                 = debit.created_at
                         - else
                           %tr

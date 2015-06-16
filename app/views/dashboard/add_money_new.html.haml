@@ -10,7 +10,7 @@
               = simple_form_for @transaction, url: transaction_add_money_url  do |f|
                 = f.hidden_field :user_id, value: current_user.id.to_i
                 = f.hidden_field :transaction_type, value: "credit"
-                = f.hidden_field :transaction_id, value: (1_000_000 + Random.rand(10_000_000 - 1_000_000))
+                = f.hidden_field :transaction_id, value: (1_000_000 + Random.rand(1_00_000_000 - 10_000_000))
                 = f.input :amount, label: "Please enter amount of money ( in $ )",input_html:{placeholder: "Enter amount"}
                 = f.input :bank_account_id, collection:@bank_accounts,prompt:"Choose bank account"
                 = f.button :submit ,"Add Fund",class: 'button right tiny'

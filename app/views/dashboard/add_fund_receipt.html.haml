@@ -24,6 +24,14 @@
                     = "$ #{@receipt.amount}"
                 %tr
                   %td
+                    Trnsaction Type
+                  %td
+                    -if @receipt.transaction_type == "credit"
+                      Credit
+                    -else
+                      Debit
+                %tr
+                  %td
                     Bank
                   %td
                     = @receipt.bank_transaction.name
