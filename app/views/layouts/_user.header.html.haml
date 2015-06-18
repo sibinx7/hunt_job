@@ -20,9 +20,7 @@
                   %li
                     = link_to '<span class="fa fa-folder-o"></span>&nbsp;My Projects'.html_safe,projects_path
                   %li
-                    %a{:href=>'#'}
-                      %span.fa.fa-book
-                      Income
+                    = link_to '<span class="fa fa-book"></span>&nbsp;Income'.html_safe, dashboard_my_income_url
                   - if  not user_signed_in?
                     %li.sign-in
                       = link_to "Sign In",new_user_session_path

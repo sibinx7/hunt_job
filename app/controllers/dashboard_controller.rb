@@ -106,7 +106,7 @@ class DashboardController < ApplicationController
     @user_transaction_debit  =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'debit').sum(:amount)
   end
   def my_income
-
+    @projects = Project.where(:assigned_to => current_user.id.to_i, :status => [1,2]).order(completed_date: :desc)
   end
   def request_admin
     if current_user.id.to_i == params[:user].to_i

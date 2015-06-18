@@ -1,0 +1,58 @@
+.dashboard-wrapper
+  .row
+    .small-12.columns
+      .dashboard-inner.custom-container
+        %h3.p-title
+          My Income
+        %section
+          .result-table
+            %table
+              %thead
+                %tr
+                  %th Project Name
+                  %th Status
+                  %th Income
+              %tbody
+                -if @projects.count > 0
+                  - @projects.each_with_index do |project,index|
+                    %tr
+                      %td
+                        = project.title
+                      %td
+                        = project.status.to_i == 1 ? "Completed": "Lost"
+                      %td
+                        = project.status.to_i == 1 ? "": "-"
+                        $
+                        %span.project-costs{"data-income-sign"=> project.status.to_i == 1 ? "+": "-"}
+                          = project.bids.where(:user_id => current_user.id.to_i)[0].bid
+                  %tfoot
+                    %tr
+                      %td{:colspan => 2}
+                        Net Income
+                      %td
+                        $
+                        %span.total-value
+                          0
+                - else
+                  %tr
+                    %td{colspan: 3}
+                      Nothing found
+- content_for :extra_js do
+  :javascript
+    $(document).ready(function(){
+      var totalIncome = 0
+      var projectCost = 0
+      $('.project-costs').each(function(){
+        projectCost = parseInt($(this).html())
+        console.log(projectCost)
+        var sign = $(this).attr('data-income-sign')
+        if( sign == "+"){
+          totalIncome = totalIncome + projectCost
+        }else if(sign == "-"){
+          totalIncome = totalIncome - projectCost
+        }
+      })
+      console.log(totalIncome)
+      $('.total-value').html(totalIncome)
+    })
+
