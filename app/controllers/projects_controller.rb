@@ -105,6 +105,7 @@ class ProjectsController < InheritedResources::Base
       @bid_user = User.find(params[:bid_user])
       @project = Project.find(params[:project_id])
       @project.close = 1
+      @project.completed_date = Time.now
       project_status_flag = ""
       # status 1 means completed and 2 means lost, we close project for both case
       if params[:type] == "project_complete"

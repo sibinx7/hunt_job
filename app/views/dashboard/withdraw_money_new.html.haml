@@ -7,10 +7,35 @@
         %section.body
           .row
             .small-12.medium-8.large-6.columns
+              .panel
+                Maximum Withdraw money :  $
+                %span.available-money
+                  = @available_money
+
               = simple_form_for @transaction,url:transaction_withdraw_money_url do |f|
                 = f.hidden_field :user_id, value: current_user.id.to_i
                 = f.hidden_field :transaction_type, value: "debit"
                 = f.hidden_field :transaction_id, value: (1_000_000 + Random.rand(1_00_000_000 - 10_000_000))
                 = f.input :amount , label: "Please enter amount of money in $",input_html: {placeholder: "Enter amount"}
                 = f.input :bank_account_id, collection: @bank_accounts, prompt: "Choose bank account"
-                = f.button :submit, "Withdraw Money", class:"button right tiny"
+                = f.button :submit, "Withdraw Money", class:"button right tiny", id:"withdraw-button"
+
+- content_for :extra_js do
+  :javascript
+    $(window).load(function(){
+      var availableMoney = parseInt($('.available-money').html())
+      if(availableMoney < 5){
+        $('#withdraw-button').attr('disabled','disabled')
+      }
+    })
+    $(document).ready(function(){
+      var availableMoney = parseInt($('.available-money').html())
+      $('#transaction_amount').on('change keyup',function(){
+        var enteredValue = $(this).val()
+        if(enteredValue > availableMoney){
+          $('#withdraw-button').attr('disabled','disabled')
+        }else{
+          $('#withdraw-button').removeAttr('disabled')
+        }
+      })
+    })

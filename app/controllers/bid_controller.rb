@@ -233,6 +233,7 @@ class BidController < ApplicationController
     # Once we save mark project as lost one
     @project.status = 2
     @project.close = 1
+    @project.combination = Time.now
     @project.save
     puts "-------------------Project saved ------- skip error"
     # Update Project User table that Project lost

@@ -105,7 +105,9 @@ class DashboardController < ApplicationController
     @user_transaction_credit =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'credit').sum(:amount)
     @user_transaction_debit  =  Transaction.where(:user_id => current_user.id.to_i,:transaction_type => 'debit').sum(:amount)
   end
+  def my_income
 
+  end
   def request_admin
     if current_user.id.to_i == params[:user].to_i
       @admin_notification = AdminNotification.new

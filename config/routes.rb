@@ -122,6 +122,7 @@ Rails.application.routes.draw do
 
   get 'dashboard/my_status'
 
+  get 'dashboard/my_income'
   get 'transaction/add_money_new'
   post 'transaction/add_money'
   get 'transaction/add_money_receipt'

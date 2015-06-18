@@ -21,14 +21,39 @@
                   Lost Money
             %tbody
               - if !@projects.empty?
-                - (1..10).each_with_index do |project|
+                - (@projects).each_with_index do |project|
                   %tr
-                    %td 1
-                    %td Lolepsum
-                    %td Completed
-                    %td 20 Days
-                    %td 100$
-                    %td 10%
+                    %td=project.id
+                    %td=project.description.html_safe
+                    %td
+                      - if project.status.to_i == 1
+                        Completed
+                      - elsif project.status.to_i == 0
+                        Ongoing
+                      - elsif project.status.to_i == 2
+                        Lost
+                      - else
+                        Lost
+                    %td
+                      = distance_of_time_in_words(project.created_at,project.completed_date)
+                    %td
+                      - if project.bids.where(:status => 1).count() > 0
+                        $
+                        - c_money = 0
+                        - project.bids.where(:status => 1).each do |cost|
+                          - c_money = c_money + cost.bid
+                          = c_money
+                      - else
+                        $ 0
+                    %td
+                      - if project.bids.where(:status => 0).count() > 0
+                        $
+                        - c_money = 0
+                        - project.bids.where(:status => 0).each do |cost|
+                          - c_money = c_money + cost.bid
+                          = c_money
+                      - else
+                        $ 0
               - else
                 %tr
                   %td{:colspan=>6}
