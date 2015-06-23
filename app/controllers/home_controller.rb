@@ -31,11 +31,11 @@ class HomeController < ApplicationController
 
   private
   def check_maintenance
-    puts "I am here"
     @check_maintenance = AdminSetting.where(:option_name => 'site_maintenance_mode',:option_value => 1)
-    if @check_maintenance.count > 0
-      redirect_to "/maintenance.html"
+    unless @check_maintenance.empty?
+      if @check_maintenance.count > 0
+        redirect_to "/maintenance.html"
+      end
     end
-
   end
 end

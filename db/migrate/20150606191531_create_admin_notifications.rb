@@ -5,7 +5,7 @@ class CreateAdminNotifications < ActiveRecord::Migration
       t.text :message
       t.integer :project_id
       t.string :category
-      t.integer :admin_id 
+      t.integer :admin_id
       t.timestamps
     end
   end
