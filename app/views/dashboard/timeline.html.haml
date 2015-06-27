@@ -3,20 +3,24 @@
     .small-12.columns
       .dashboard-inner.custom-container
         %h2.p-title History
-        .history-wrapper
-          - @notifications.each do |n|
-            .history-box
-              .date-box
-                = n.created_at.to_time.strftime("%B %e, %Y")
-              %h4
-                = n.title
-              %article
-                = n.content.html_safe
-              %p
-                %label.label
-                  ="Project ID :  #{n.project_id}"
-              .clearfix
-                = link_to "Read More", n.link ,:class => 'right'
-        .row
-          .small-12.columns
-            = will_paginate @notifications,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination",renderer: FoundationPagination::Rails
+        - if @notifications.count > 0
+          .history-wrapper
+            - @notifications.each do |n|
+              .history-box
+                .date-box
+                  = n.created_at.to_time.strftime("%B %e, %Y")
+                %h4
+                  = n.title
+                %article
+                  = n.content.html_safe
+                %p
+                  %label.label
+                    ="Project ID :  #{n.project_id}"
+                .clearfix
+                  = link_to "Read More", n.link ,:class => 'right'
+          .row
+            .small-12.columns
+              = will_paginate @notifications,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination",renderer: FoundationPagination::Rails
+        - else
+          .panel
+            You have no timeline activities

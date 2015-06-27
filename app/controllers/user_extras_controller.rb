@@ -23,6 +23,7 @@ class UserExtrasController < ApplicationController
       @user.name = params[:user][:name]
       @user.username = params[:user][:username]
       @user.country  = params[:user][:country]
+      @user.user_info = params[:user][:user_info]
       @user.save
     end
     return redirect_to user_extras_add_user_info_url(:id=>params[:id])

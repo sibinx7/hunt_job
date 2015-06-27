@@ -20,24 +20,34 @@
                   %th
                     Net Balance
               %tbody
-                %tr
-                  %td
-                    $
-                    = @user_project_status.user_income
-                  %td
-                    $
-                    = @user_project_status.user_lost_money
-                  %td
-                    = "$#{@user_transaction_credit}"
-                  %td
-                    = "$#{@user_transaction_debit}"
-                  %td
-                    $
-                    = (@user_project_status.user_income + @user_transaction_credit) - (@user_project_status.user_lost_money + @user_transaction_debit)
-                    %br
-                    - if (@user_project_status.user_income + @user_transaction_credit) < (@user_project_status.user_lost_money + @user_transaction_debit)
-                      %p.alert.alert-box.negative-balance
-                        You have -ve balance. You should add some money to continue your account
+                - unless @user_project_status.nil?
+                  %tr
+                    %td
+                      $
+                      = @user_project_status.user_income.present? ? @user_project_status.user_income : 0
+                    %td
+                      $
+                      = @user_project_status.user_lost_money.present? ?  @user_project_status.user_lost_money : 0
+                    %td
+                      = "$#{@user_transaction_credit?@user_transaction_credit:0}"
+                    %td
+                      = "$#{@user_transaction_debit?@user_transaction_debit:0}"
+                    %td
+                      - if @user_project_status.user_income && @user_project_status.user_lost_money
+                        $
+                        = (@user_project_status.user_income + @user_transaction_credit?@user_transaction_credit:0) - (@user_project_status.user_lost_money + @user_transaction_debit?@user_transaction_debit:0)
+                        %br
+                        - if (@user_project_status.user_income + @user_transaction_credit?@user_transaction_credit:0) < (@user_project_status.user_lost_money + @user_transaction_debit?@user_transaction_debit:0)
+                          %p.alert.alert-box.negative-balance
+                            You have -ve balance. You should add some money to continue your account
+                      - else
+                        %p
+                          You have no transactions
+                - else
+                  %tr
+                    %td{colspan:5}
+                      You have no transaction
+
           %hr
           .user-transaction
             .row

@@ -29,8 +29,7 @@
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require tag-it.min
-//= require turbolinks
-//= require jquery.materialripple
+//= require dropzone.min
 //= require ckeditor/init
 
 

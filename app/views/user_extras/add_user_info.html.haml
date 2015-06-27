@@ -13,15 +13,23 @@
                 We want to here your name, username and your resident country.
               = form_for @user, url:{controller: 'user_extras', action: 'save_user_info',id:current_user.id} do |f|
                 .row
-                  .small-12.medium-6.large-6.columns
+                  .small-12.medium-12.large-10.columns
                     =f.text_field :name,:placeholder=>"Name"
                 .row
-                  .small-12.medium-6.large-6.columns
+                  .small-12.medium-12.large-10.columns
                     =f.text_field :username,:placeholder => "Username"
                 .row
-                  .small-12.medium-6.large-6.columns
-                    =f.country_select :country, :placeholder => "Country"
+                  .small-12.medium-12.large-10.columns
+                    = f.label :user_info,"Tell Something about you!"
+                    = f.cktext_area :user_info,:placeholder => "Tell Something About Your"
                 .row
-                  .small-12.medium-6.large-6.columns
+                  .small-12.columns.margin-top-15
+                .row
+                  .small-12.medium-12.large-10.columns
+                    =f.country_select :country, :placeholder => "Country"
+
+                .row
+                  .small-12.medium-12.large-10.columns
                     =f.submit "Save", :class => "button tiny right alert"
+
 

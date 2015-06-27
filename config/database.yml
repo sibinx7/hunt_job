@@ -51,8 +51,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: postgresql
-  password: postgresql
   host: localhost
   database: jobs_production
   username: jobs

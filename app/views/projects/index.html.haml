@@ -21,54 +21,53 @@
                   = link_to "Project without Bid",:controller => 'projects',:action => 'index',:sort=>"nobid"
         .row
           .small-12.columns
-            %table
-              %thead
-                %tr
-                  %th{:width=>120} Title
-                  %th{:width=>300} Description
-                  %th Skills
-                  %th Min budget
-                  %th Max budget
-                  %th{:width=>80} Duration
-                  %th{:colspan=>1,:width=>120}
-                    Action/ User Rating
-
-              %tbody
-                - if not  @projects.empty?
-                  - @projects.each_with_index do |project,index|
-                    %tr
-                      %td
-                        = link_to project.title, project
-                      %td{:width=>400}= project.description.first(100).html_safe
-                      %td{:width=>140}
-                        %ul.ul-skills
-                          - @projectArray[index]['skills'].each_with_index do |s,index|
-                            %li
-                              = s.name
-                      %td= project.min_budget
-                      %td= project.max_budget
-                      %td= project.close_date
-                      %td
-                        %ul.my-project-action
-                          - if project.status == nil
-                            %li
-                              = link_to 'Edit', edit_project_path(project),:class => 'edit'
-                            %li
-                              = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' },:class => 'delete'
-                          - else
-                            - unless project.user_rating.present?
-                              %li
-                                = link_to "Rate Developer",{:controller => 'user_ratings',:action => 'new',:project_id=>project.id},:class => 'rate rate-developer'
-                            - else
-                              %li
-                                - (1..project.user_rating.rating).each_with_index do |rating,index|
-                                  %span.fa.fa-star
-                                .clearfix
-                                = link_to "Edit Rating",edit_user_rating_url(project.user_rating),:class => 'edit'
-                - else
+            .result-table
+              %table
+                %thead
                   %tr
-                    %td{:colspan => 7}
-                      Nothing found Please create/ add Projects....
+                    %th Title
+                    %th Skills
+                    %th Min budget
+                    %th Max budget
+                    %th{:width=>80} Duration
+                    %th{:colspan=>1,:width=>120}
+                      Action/ User Rating
+
+                %tbody
+                  - if not  @projects.empty?
+                    - @projects.each_with_index do |project,index|
+                      %tr
+                        %td
+                          = link_to project.title, project
+                        %td{:width=>140}
+                          %ul.ul-skills
+                            - @projectArray[index]['skills'].each_with_index do |s,index|
+                              %li
+                                = s.name
+                        %td= project.min_budget
+                        %td= project.max_budget
+                        %td= project.close_date
+                        %td
+                          %ul.my-project-action
+                            - if project.status == nil
+                              %li
+                                = link_to 'Edit', edit_project_path(project),:class => 'edit'
+                              %li
+                                = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' },:class => 'delete'
+                            - else
+                              - unless project.user_rating.present?
+                                %li
+                                  = link_to "Rate Developer",{:controller => 'user_ratings',:action => 'new',:project_id=>project.id},:class => 'rate rate-developer'
+                              - else
+                                %li
+                                  - (1..project.user_rating.rating).each_with_index do |rating,index|
+                                    %span.fa.fa-star
+                                  .clearfix
+                                  = link_to "Edit Rating",edit_user_rating_url(project.user_rating),:class => 'edit'
+                  - else
+                    %tr
+                      %td{:colspan => 7}
+                        Nothing found Please create/ add Projects....
         .row
           .small-12.columns
             = will_paginate @projects,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails

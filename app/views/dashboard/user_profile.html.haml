@@ -1,0 +1,33 @@
+
+.row
+  .small-12.columns
+    .user-area
+      .row
+        .white-panel
+          .row
+            .small-12.medium-4.columns
+              .user-image
+                - if current_user.profile_image_file_name?
+                  = image_tag @user.profile_image.url
+                -else
+                  %img{:src=>"#{image_path("default_profile.png")}"}
+            .small-12.medium-8.columns
+              .user-details
+                %h1
+                  = @user.name
+                %h3
+                  %small
+                    @
+                    = @user.username
+                .rating
+                  - if 1 == 1
+                    .user-rating-total
+                      .rating-star{style:"width:30%"}
+                  - else
+                    No rating Yet
+                %section.margin-top-15
+                  = @user.user_info.html_safe
+
+          %hr
+          .row
+            .small-12.column

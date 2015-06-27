@@ -61,7 +61,7 @@ class DashboardController < ApplicationController
   end
 
   def user_profile
-
+    @user = User.find(params[:user])
   end
   def settings
   end

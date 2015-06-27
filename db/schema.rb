@@ -27,17 +27,17 @@ ActiveRecord::Schema.define(version: 20150614125455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "option_name"
-    t.string   "option_value"
+    t.integer  "option_value"
   end
 
   create_table "admins", force: true do |t|
-    t.string   "email",                             default: "",  null: false
-    t.string   "encrypted_password",                default: "",  null: false
-    t.string   "admin_type",             limit: 11, default: "0"
+    t.string   "email",                  default: "",  null: false
+    t.string   "encrypted_password",     default: "",  null: false
+    t.string   "type",                   default: "0"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,   null: false
+    t.integer  "sign_in_count",          default: 0,   null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20150614125455) do
     t.string   "assigned_to"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",         limit: 1
+    t.string   "status"
     t.boolean  "close"
     t.datetime "completed_date"
   end
@@ -161,17 +161,12 @@ ActiveRecord::Schema.define(version: 20150614125455) do
     t.string "name"
   end
 
-  create_table "skills_users", force: true do |t|
-    t.integer "skill_id"
-    t.integer "user_id"
-  end
-
   create_table "transactions", force: true do |t|
     t.integer  "user_id"
-    t.integer  "user_bank_id"
-    t.string   "bank_name"
+    t.integer  "bank_account_id"
     t.integer  "amount"
     t.integer  "transaction_id"
+    t.string   "transaction_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -179,9 +174,9 @@ ActiveRecord::Schema.define(version: 20150614125455) do
   create_table "user_project_details", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_completed"
-    t.integer  "project_ongoing"
-    t.integer  "project_lost"
-    t.integer  "user_income",       default: 0
+    t.integer  "project_ongoing",   default: 0
+    t.integer  "project_lost",      default: 0
+    t.integer  "user_income",       default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_lost_money"
@@ -225,5 +220,10 @@ ActiveRecord::Schema.define(version: 20150614125455) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_skills", force: true do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+  end
 
 end

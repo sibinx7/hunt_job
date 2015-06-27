@@ -1,3 +1,9 @@
+- unless @projects.nil? || @projects.count < 1
+  .row
+    .small-12.columns
+      %p
+        = @projects.count
+        Results found
 .row
   .small-12.columns
     .result-table.margin-bottom-15
@@ -6,8 +12,6 @@
           %tr
             %th
               Project Name
-            %th{:class=>"hide-for-small-only"}
-              Description
             %th
               Bids
             %th
@@ -17,14 +21,11 @@
             %th
               End
         %tbody
-
           -if not  @projects.blank?
             - @projects.each do |project|
               %tr
                 %td{:width=>'200px'}
                   = link_to project.title,:controller => 'dashboard',:action => 'project',:project=>project.id
-                %td{:class=>"hide-for-small-only"}
-                  = project.description.first(100).html_safe
                 %td
                   = project.bids.count
                 %td

@@ -17,7 +17,6 @@
                     .fallback
                       = f.file_field :profile_image
 = content_for :extra_js do
-  = javascript_include_tag 'dropzone.min'
   :javascript
     $(document).ready(function(){
       Dropzone.autoDiscover = false;

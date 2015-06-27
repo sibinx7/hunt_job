@@ -12,15 +12,12 @@
               %span
         %section.top-bar-section
           %ul.right
-            %li.active
-              %a{:href=>'#'}
-                Home
-            %li
-              %a{:href=>'#'}
-                About
-            %li
-              %a{:href=>'#'}
-                Contact
+            %li{class: ("active" if @page == "home")}
+              = link_to "Home",home_index_url
+            %li{class: ("active" if @page == "about")}
+              = link_to "About", home_about_url
+            %li{class: ("active" if @page == "contact")}
+              = link_to "Contact", home_contact_url
             - if  not user_signed_in?
               %li.sign-in
                 %a{:href=>"/users/sign_in"}

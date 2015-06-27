@@ -7,18 +7,26 @@
         %section.body
           .row
             .small-12.medium-8.large-6.columns
-              .panel
-                Maximum Withdraw money :  $
-                %span.available-money
-                  = @available_money
-
-              = simple_form_for @transaction,url:transaction_withdraw_money_url do |f|
-                = f.hidden_field :user_id, value: current_user.id.to_i
-                = f.hidden_field :transaction_type, value: "debit"
-                = f.hidden_field :transaction_id, value: (1_000_000 + Random.rand(1_00_000_000 - 10_000_000))
-                = f.input :amount , label: "Please enter amount of money in $",input_html: {placeholder: "Enter amount"}
-                = f.input :bank_account_id, collection: @bank_accounts, prompt: "Choose bank account"
-                = f.button :submit, "Withdraw Money", class:"button right tiny", id:"withdraw-button"
+              -if @bank_accounts.count > 0
+                - if  @available_money.nil? || @available_money <= 0
+                  .panel
+                    Maximum Withdraw money :  $
+                    %span.available-money
+                      = @available_money
+                  = simple_form_for @transaction,url:transaction_withdraw_money_url do |f|
+                    = f.hidden_field :user_id, value: current_user.id.to_i
+                    = f.hidden_field :transaction_type, value: "debit"
+                    = f.hidden_field :transaction_id, value: (1_000_000 + Random.rand(1_00_000_000 - 10_000_000))
+                    = f.input :amount , label: "Please enter amount of money in $",input_html: {placeholder: "Enter amount"}
+                    = f.input :bank_account_id, collection: @bank_accounts, prompt: "Choose bank account"
+                    = f.button :submit, "Withdraw Money", class:"button right tiny", id:"withdraw-button"
+                - else
+                  .panel
+                    YOu haven't enough money to transfer. Do some projects or add fund to your account.
+              - else
+                .panel
+                  We don't find any bank account assossiated with this account, Please goto your dashboard and add Bank details
+                  = link_to "Dashboard", user_extras_user_info_url(:id => current_user.id)
 
 - content_for :extra_js do
   :javascript

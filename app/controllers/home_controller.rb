@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_action :check_maintenance
   def index
+    @page = "home"
     if user_signed_in?
       redirect_to dashboard_index_url
     end
@@ -11,9 +12,11 @@ class HomeController < ApplicationController
   end
 
   def about
+    @page = "about"
   end
 
   def contact
+    @page = "contact"
   end
 
   def get_secret_key

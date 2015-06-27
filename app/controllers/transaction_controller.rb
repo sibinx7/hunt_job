@@ -47,10 +47,17 @@ class TransactionController < ApplicationController
   end
   private
   def available_money_to_withdraw
+    available_money = 0
+    credited_money = 0
+    debited_Money = 0
     @project_income = UserProjectDetail.find_by_user_id(current_user.id.to_i)
-    @user_add_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "credit").sum(:amount)
-    @user_withdraw_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "debit").sum(:amount)
-    available_money = (@project_income.user_income.to_i - @project_income.user_lost_money.to_i) + (@user_add_money.to_i - @user_withdraw_money.to_i) - 5
+    unless @project_income.nil?
+      @user_add_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "credit").sum(:amount)
+      credited_money = @user_add_money.present? ? @user_add_money : 0
+      @user_withdraw_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "debit").sum(:amount)
+      debited_Money = @user_withdraw_money.present? ? @user_withdraw_money : 0
+      available_money = ((@project_income.user_income.present? ? @project_income.user_income.to_i : 0) - (@project_income.user_lost_money.present? ? @project_income.user_lost_money.to_i : 0)) + (credited_money.to_i - debited_Money.to_i) - 5
+    end
     return available_money
   end
 
