@@ -4,6 +4,7 @@ class AdminDashboardController < ApplicationController
   before_action :authenticate_admin!
   def index
     @total_project = Project.all.count
+    @project_last_month = Project.where('created_at > ?',Date.today - 1.month)
     @total_users   = User.all.count
     @last_five_project = Project.limit(5).order(created_at: :desc)
     @admin_users = Admin.all

@@ -15,30 +15,34 @@
               = link_to "Popular",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"popular"}
             %dd.hide-for-small-only{:class => ("active" if (params[:sort]=="new"))}
               = link_to "New",{:controller => 'admin_dashboard',:action => 'user_database',:sort=>"new"}
-
-      %section.body
-        .admin-user-database-users
-          - @users_database.each_with_index do |user|
-            .small-6.medium-4.large-3.columns.admin-user-database-each-user
-              .user-info
-                .user-rating
-                  %span.fa.fa-star
-                .user-image
-                  - if user.profile_image_file_name?
-                    = image_tag user.profile_image.url
-                  -else
-                    %img{:src=>"#{image_path("default_profile.png")}"}
-                %h5.user-name.text-center
-                  = user.name
-                %section.user-extra
-                  =link_to "@"+user.username,'#',:class => 'left username'
-                  =link_to ISO3166::Country[user.country],"#",:class => 'right country'
-                %section.user-description
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend tempus quam,
-                  nec laoreet nisi maximus vel. Praesent dictum sapien rhoncus felis ultricies,
-                  in tempus massa dignissim. Pellentesque posuere sed mi ut tincidunt.
-                  Etiam nec nulla ac leo pretium semper
-      .clearfix
-      %footer
-        .pagination-wrapper
-          = will_paginate @users_database,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
+      -if @users_database.count > 0
+        %section.body
+          .admin-user-database-users
+            - @users_database.each_with_index do |user|
+              .small-6.medium-4.large-3.columns.admin-user-database-each-user
+                .user-info
+                  .user-rating
+                    %span.fa.fa-star
+                  .user-image
+                    - if user.profile_image_file_name?
+                      = image_tag user.profile_image.url
+                    -else
+                      %img{:src=>"#{image_path("default_profile.png")}"}
+                  %h5.user-name.text-center
+                    = user.name
+                  %section.user-extra
+                    =link_to "@"+user.username,'#',:class => 'left username'
+                    =link_to ISO3166::Country[user.country],"#",:class => 'right country'
+                  %section.user-description
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend tempus quam,
+                    nec laoreet nisi maximus vel. Praesent dictum sapien rhoncus felis ultricies,
+                    in tempus massa dignissim. Pellentesque posuere sed mi ut tincidunt.
+                    Etiam nec nulla ac leo pretium semper
+        .clearfix
+        %footer
+          .pagination-wrapper
+            = will_paginate @users_database,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
+      -else
+        %section.body
+          .panel
+            No users in database

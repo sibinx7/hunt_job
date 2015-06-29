@@ -62,6 +62,7 @@ class DashboardController < ApplicationController
 
   def user_profile
     @user = User.find(params[:user])
+    @projects = Project.where(:assigned_to => @user.id)
   end
   def settings
   end

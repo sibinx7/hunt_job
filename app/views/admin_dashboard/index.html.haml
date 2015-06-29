@@ -6,7 +6,7 @@
           .admin-quick-main
             .admin-quick-note
               %p
-                %b 18
+                %b= @project_last_month.count
                 Project has been posted on
                 %b last 30 days.
           .admin-quick-footer
@@ -19,7 +19,7 @@
           .admin-quick-main
             .admin-quick-note
               %p
-                %b 22
+                %b=@total_users
                 active users use this platform for freelance works
           .admin-quick-footer
             %h5

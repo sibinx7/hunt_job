@@ -29,5 +29,20 @@
                   = @user.user_info.html_safe
 
           %hr
+          .
           .row
             .small-12.column
+              .ratings
+                - if @projects.count > 0
+                  .rating-outer
+                    - @projects.each_with_index do |project|
+                      .rating
+                        = project.title
+                        .box
+                          = project.user_rating.rating
+                          by
+                          - rated_by  = User.find(project.user_rating)
+                          = link_to "#{rated_by.name}",:controller => 'dashboard',:action => 'user_profile',:id=> rated_by.id
+                -else
+                  %p
+                    No Projects and Ratings

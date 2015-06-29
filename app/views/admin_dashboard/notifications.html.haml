@@ -5,30 +5,34 @@
         %h3
           Notifications
       %section
-        .notifications
-          .small-12.column
-            .notification-wrapper
-              - @notifications.each do |notification|
-                .notification
-                  .each-notification.small-12.columns.medium-6.large-6{class:cycle('left-side not-xs','medium-offset-6 large-offset-6 right-side not-xs')}
-                    %header
-                      .user
-                        %h4.name
-                          = notification.user.name
-                          .tag.right
-                            = notification.category.upcase
-                      .date
-                        %small On
-                        = notification.created_at.strftime("%A, %b %e, %Y")
-                        .right.solution
-                          = link_to "Solve Issues",:controller => 'admin_notification',:action => 'resolve_notification',:request=>notification.id,:project=>notification.project_id
-                    %section
-                      %p
-                        = notification.message
-        .notification-pagination
-          .pagination-wrapper.text-center
-            = will_paginate @notifications,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
-
+        -if @notifications.count > 0
+          .notifications
+            .small-12.column
+              .notification-wrapper
+                - @notifications.each do |notification|
+                  .notification
+                    .each-notification.small-12.columns.medium-6.large-6{class:cycle('left-side not-xs','medium-offset-6 large-offset-6 right-side not-xs')}
+                      %header
+                        .user
+                          %h4.name
+                            = notification.user.name
+                            .tag.right
+                              = notification.category.upcase
+                        .date
+                          %small On
+                          = notification.created_at.strftime("%A, %b %e, %Y")
+                          .right.solution
+                            = link_to "Solve Issues",:controller => 'admin_notification',:action => 'resolve_notification',:request=>notification.id,:project=>notification.project_id
+                      %section
+                        %p
+                          = notification.message
+          .notification-pagination
+            .pagination-wrapper.text-center
+              = will_paginate @notifications,:previous_label=>"«",:next_label => "»",:class=>"text-center custom-pagination" ,renderer: FoundationPagination::Rails
+        - else
+          %p
+            .small-12.columns
+              No notifications yet
 
 
 
