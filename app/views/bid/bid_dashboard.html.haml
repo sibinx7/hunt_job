@@ -192,7 +192,7 @@
                                           Request Payment
                                     - unless m.status
                                       %a.button.margin-right-10.success.tiny.right.complete-milestone{:id=>"complete-percentage-#{m.id}","disabled"=> m.percentage.to_i !=100,"data-milestone-id"=>m.id,"data-milestone-creator"=>"#{@bids.user_id}"}
-                                        ="#{m.percentage != nil ? m.percentage : 0} Completed"
+                                        ="#{m.percentage != nil ? m.percentage : 0} Completed, Confirm it"
                                 -elsif current_user.id.to_i == @project_owner.id.to_i
                                   .small-12.columns
                                     .panel

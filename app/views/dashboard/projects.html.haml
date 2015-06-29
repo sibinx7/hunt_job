@@ -12,10 +12,6 @@
             .result-area
               = render 'dashboard/results'
 
-- content_for :extra_css do
-  - stylesheet_link_tag 'jquery.tagit.css','tagit.ui-zendesk.css'
-
-
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){

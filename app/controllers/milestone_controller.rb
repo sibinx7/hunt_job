@@ -8,7 +8,7 @@ class MilestoneController < ApplicationController
       @milestone.percentage = params[:m_progress]
       if @milestone.save
         @bid = Bid.find(params[:bid_id])
-        @bid.percentage = Milestone.average(:percentage,:conditions => {:id=>params[:m_id]})
+        @bid.percentage = Milestone.where(:bid_id => params[:bid_id]).average(:percentage)
         @bid.save
       end
       render json:{"message"=>"Updated","status"=>"success"}

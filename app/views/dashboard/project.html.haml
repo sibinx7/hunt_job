@@ -51,7 +51,7 @@
                       .each-bid.margin-bottom-15
                         .inner-each-bid
                           .profile-image
-                            - if @project_bid_users[index].profile_image.url
+                            - if @project_bid_users[index].profile_image.url && @project_bid_users[index].profile_image.url != "/profile_images/original/missing.png"
                               = image_tag @project_bid_users[index].profile_image.url
                             - else
                               = image_tag 'default_profile.png'

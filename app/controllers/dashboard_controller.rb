@@ -26,9 +26,9 @@ class DashboardController < ApplicationController
     puts @max_range.inspect
     puts @min_range.inspect
     if @skills == nil && @search_keyword == nil && @min_budget == nil && @max_budget == nil
-      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil).order('created_at DESC')
+      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil).where.not(:creator => current_user.id.to_i).order('created_at DESC')
     else
-      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil)
+      @projects = Project.paginate(:page => params[:page],:per_page => 10).where(:close=>nil, :status => nil).where.not(:creator => current_user.id.to_i)
       if @skills != nil && @skills != ""
         @skills_text = @skills
         @skills = @skills.split(',')
@@ -83,7 +83,9 @@ class DashboardController < ApplicationController
   def payments
 
   end
-
+  def payment_details
+    @project = Project.find(params[:project])
+  end
 
   def pending_projects
     @project = Project.where('status' => 0,'assigned_to' => current_user.id).paginate(:per_page=>10,:page=>params[:page])
