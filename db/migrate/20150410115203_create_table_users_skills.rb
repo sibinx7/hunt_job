@@ -1,6 +1,6 @@
 class CreateTableUsersSkills < ActiveRecord::Migration
   def change
-    create_table :users_skills do |t|
+    create_table :skills_users do |t|
       t.integer :user_id
       t.integer :skill_id
     end

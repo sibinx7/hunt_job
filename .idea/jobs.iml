@@ -196,14 +196,12 @@
     <orderEntry type="library" scope="PROVIDED" name="bourbon (v4.2.3, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.7.7, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ckeditor (v4.1.2@289251, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="climate_control (v0.0.3, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cocaine (v0.5.7, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.0.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.4.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.9.1.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="countries (v0.11.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="country_select (v2.2.0@fad7c1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="currencies (v0.4.2, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v3.5.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, ruby-2.1.5-p273) [gem]" level="application" />
@@ -241,7 +239,6 @@
     <orderEntry type="library" scope="PROVIDED" name="oauth2 (v1.0.0, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth (v1.2.2, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-facebook (v2.0.1, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="omniauth-github (v1.1.2@45f2fc, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-google (v1.0.2, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-google-oauth2 (v0.2.6, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-gplus (v2.0.1, ruby-2.1.5-p273) [gem]" level="application" />

@@ -21,10 +21,16 @@
                 .small-12.columns
                   %h4.my-skills
                     My Skills
-                  %ul.my-skill-box
-                    - @userSkills.each do |f|
-                      %li{"data-skill-id"=>f.id}
-                        = f.name
+                  -unless @userSkills.blank?
+                    %ul.my-skill-box
+                      - @userSkills.each do |f|
+                        %li{"data-skill-id"=>f.id}
+                          = f.name
+                  - else
+                  %p
+                    You don't have any skills. Please add skills
+                    %small
+                      Add more skills to get more projects
           .small-12.medium-4.large-3.columns{"data-equalizer-watch"=>""}
             = render 'dashboard/quick_view'
 - content_for :extra_js do
