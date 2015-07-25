@@ -139,6 +139,7 @@ Rails.application.routes.draw do
 
   # Admin Dashboard section
 
+  get 'web/admin', to: 'admin_dashboard#index'
   get 'admin_dashboard/index'
   get 'admin_dashboard/projects'
   get 'admin_dashboard/project'

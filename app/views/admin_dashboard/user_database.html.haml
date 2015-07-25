@@ -29,10 +29,11 @@
                     -else
                       %img{:src=>"#{image_path("default_profile.png")}"}
                   %h5.user-name.text-center
-                    = user.name
+                    = user.name.present? ? user.name : "Unknown"
                   %section.user-extra
-                    =link_to "@"+user.username,'#',:class => 'left username'
-                    =link_to ISO3166::Country[user.country],"#",:class => 'right country'
+                    =link_to "@ #{user.username.present? ? user.name : 'Default'}",'#',:class => 'left username'
+                    - if user.country.present?
+                      =link_to ISO3166::Country[user.country],"#",:class => 'right country'
                   %section.user-description
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend tempus quam,
                     nec laoreet nisi maximus vel. Praesent dictum sapien rhoncus felis ultricies,

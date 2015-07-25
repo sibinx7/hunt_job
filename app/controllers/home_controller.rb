@@ -30,14 +30,17 @@ class HomeController < ApplicationController
     render :json => {:super_admin_key => super_admin_key}
   end
   def maintenance
+
   end
 
   private
   def check_maintenance
     @check_maintenance = AdminSetting.where(:option_name => 'site_maintenance_mode',:option_value => 1)
     unless @check_maintenance.empty?
-      if @check_maintenance.count > 0
+      if @check_maintenance.count.to_i == 1
         redirect_to "/maintenance.html"
+      else
+        redirect_to :controller => 'home', :action => 'index'
       end
     end
   end

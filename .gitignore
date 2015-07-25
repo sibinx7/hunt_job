@@ -21,6 +21,14 @@ git # See https://help.github.com/articles/ignoring-files for more about ignorin
 /.idea
 /.git
 .idea/workspace.xml
+.idea/jobs.iml
 /.idea/workspace.xml
+/.idea/*
+.idea/*
+tmp/*
+log/*
+.idea\*
+
+
 
 
