@@ -21,6 +21,8 @@ class TransactionController < ApplicationController
 
   def withdraw_money_new
     @available_money = available_money_to_withdraw
+    puts "-"*200
+    puts @available_money.inspect
     @transaction = Transaction.new
     @bank_accounts = BankAccount.where(:user_id => current_user.id.to_i)
     render 'dashboard/withdraw_money_new'
@@ -57,8 +59,23 @@ class TransactionController < ApplicationController
       @user_withdraw_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "debit").sum(:amount)
       debited_Money = @user_withdraw_money.present? ? @user_withdraw_money : 0
       available_money = ((@project_income.user_income.present? ? @project_income.user_income.to_i : 0) - (@project_income.user_lost_money.present? ? @project_income.user_lost_money.to_i : 0)) + (credited_money.to_i - debited_Money.to_i) - 5
+    else
+      @user_add_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "credit").sum(:amount)
+      credited_money = @user_add_money.present? ? @user_add_money : 0
+      @user_withdraw_money = Transaction.where(:user_id => current_user.id.to_i,:transaction_type => "debit").sum(:amount)
+      debited_Money = @user_withdraw_money.present? ? @user_withdraw_money : 0
+      puts "*"*100
+
+      puts credited_money.inspect
+      puts debited_Money.inspect
+
+      puts "*"*100
+      available_money =   (credited_money.to_i - debited_Money.to_i) - 5
+
+      puts available_money.inspect
+
     end
-    return available_money
+    return available_money.to_i
   end
 
   def transaction_params

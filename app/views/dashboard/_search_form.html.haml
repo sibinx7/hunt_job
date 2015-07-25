@@ -28,27 +28,39 @@
 - content_for :extra_js do
   :javascript
     $(document).ready(function(){
-        var min_value = parseInt("#{@min_budget}")
-        var max_value = parseInt("#{@max_budget}")
-        var lower_value = parseInt("#{@min_range.blank?? @min_budget:@min_range}")
-        var upper_value = parseInt("#{@max_range.blank? ? @max_budget:@max_range}")
+        var min_value = rziu(parseInt("#{@min_budget.present? ? @min_budget : 0}"))
+        var max_value = rziu(parseInt("#{@max_budget.present? ? @max_budget : 0}"))
+        var lower_value = rziu(parseInt("#{@min_range.blank?? (@min_budget.present? ? @min_budget :0) : (@min_range.present? ? @min_range : 0)}"))
+        var upper_value = rziu(parseInt("#{@max_range.blank? ? (@max_budget.present? ? @max_budget : 0) : (@max_range.present? ? @max_range: 0)}"))
+        console.log(min_value+max_value)
         MinMaxBudgetSlider(min_value,max_value,lower_value,upper_value);
     })
      function MinMaxBudgetSlider(min_budget,max_budget,lower_value,upper_value){
       $( "#slider-range" ).slider({
         range: true,
-        min: typeof min_budget!="undefined"?min_budget:0,
-        max: typeof max_budget!="undefined"?max_budget:1000,
+        min: typeof min_budget!="undefined"?rziu(min_budget):0,
+        max: typeof max_budget!="undefined"?rziu(max_budget):1000,
         values: [ lower_value, upper_value ],
         slide: function( event, ui ) {
-          $( "#min-range" ).val(ui.values[0]);
-          $( "#max-range" ).val(ui.values[1]);
-          $( "#min-range-value" ).html(ui.values[0]+'$');
-          $( "#max-range-value" ).html(ui.values[1]+'$');
+          $( "#min-range" ).val(rziu(ui.values[0]));
+          $( "#max-range" ).val(rziu(ui.values[1]));
+          $( "#min-range-value" ).html(rziu(ui.values[0])+'$');
+          $( "#max-range-value" ).html(rziu(ui.values[1])+'$');
         }
       });
       $( "#min-range" ).val($( "#slider-range" ).slider( "values", 0 ));
       $( "#max-range" ).val($( "#slider-range" ).slider( "values", 1 ));
       $( "#min-range-value" ).html($( "#slider-range" ).slider( "values", 0 )+'$');
       $( "#max-range-value" ).html($( "#slider-range" ).slider( "values", 1 )+'$');
+    }
+
+    // Return Zero If Undefined
+    function rziu(v){
+
+      if (typeof(v)!="undefined" && v!="NaN"){
+        return v
+      }else{
+        return "0"
+      }
+      return "0"
     }
