@@ -48,19 +48,13 @@ Rails.application.routes.draw do
 
 
 
-  get 'skills/index'
+  resource :skill do 
+    collection do 
+      get 'json_view'
+    end 
+  end 
 
-  post 'skills/create'
 
-  get 'skills/store'
-
-  get 'skills/edit'
-
-  get 'skills/update'
-
-  get 'skills/delete'
-
-  get 'skills/json_view'
 
   # Add Extra information  for users table
   get 'user_extras/user_info'
@@ -72,9 +66,13 @@ Rails.application.routes.draw do
   resources :services
 
   mount Ckeditor::Engine => '/ckeditor'
-  resources :projects
+  resources :projects do 
+    collection do 
+      post 'project_status'
+    end 
+  end 
 
-  post 'projects/project_status'
+  
 
   devise_for :users
              # :controllers => {:omniauth_callbacks => "omniauth_callbacks"}

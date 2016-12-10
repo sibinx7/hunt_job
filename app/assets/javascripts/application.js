@@ -12,20 +12,7 @@
 // about supported directives.
 //= require jquery.js
 
-//= require foundation/foundation
-//= require foundation/foundation.abide
-//= require foundation/foundation.accordion
-//= require foundation/foundation.alert
-//= require foundation/foundation.clearing
-//= require foundation/foundation.dropdown
-//= require foundation/foundation.equalizer
-//= require foundation/foundation.interchange
-//= require foundation/foundation.reveal
-//= require foundation/foundation.slider
-//= require foundation/foundation.tab
-//= require foundation/foundation.tooltip
-//= require foundation/foundation.offcanvas
-
+//= require foundation
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require tag-it.min
@@ -38,4 +25,4 @@
 //= require parsley
 //= require comparison
 
-$(function(){ $(document).foundation(); });
+$(document).foundation();
