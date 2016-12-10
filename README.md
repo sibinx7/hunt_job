@@ -1,6 +1,9 @@
-# Jags Jobs website #
+# Jags HuntJob #
 
-Jobs is job posting website develop in ruby on rails. This project use mysql, common gems
+
+## !Warning : Internal Hobby Project ## 
+
+Jobs is job posting website develop in ruby on rails. This project use Postgres, common gems
 
 ### Jobs website is sample project to learn rails framework ###
 
@@ -10,7 +13,7 @@ Jobs is job posting website develop in ruby on rails. This project use mysql, co
 
 ### How do I get set up? ###
 
-* Latest Ruby and Rails
+* Latest Ruby and Rails, 5+
 * Configuration
 * Dependencies
 * Database configuration
@@ -25,5 +28,6 @@ Jobs is job posting website develop in ruby on rails. This project use mysql, co
 
 ### Who do I talk to? ###
 
-* Sibin Xavier
+* Sibin Xavier , *[Github](https://github.com/sibinx7)*
 * Other community or team contact
+* *[Jags](http://www/jags.in.net)*
