@@ -30,5 +30,8 @@ log/*
 .idea\*
 
 
+.vagrant 
+Vagrantfile 
+
 
 

@@ -161,6 +161,11 @@ ActiveRecord::Schema.define(version: 20150614125455) do
     t.string "name"
   end
 
+  create_table "skills_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+  end
+
   create_table "transactions", force: true do |t|
     t.integer  "user_id"
     t.integer  "bank_account_id"
@@ -220,10 +225,5 @@ ActiveRecord::Schema.define(version: 20150614125455) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_skills", force: true do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
-  end
 
 end
