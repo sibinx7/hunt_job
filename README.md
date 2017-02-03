@@ -8,8 +8,12 @@ Jobs is job posting website develop in ruby on rails. This project use Postgres,
 ### HuntJob website is a sample project to learn rails framework 
 
 * Quick summary
-* Version 1.0
+* Version 1.0.0
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Learn React JS and Angular 2 
+* Learn Payment Gateways 
+* Learn Background Jobs 
+* Learn cache 
 
 ### How do I get set up? 
 

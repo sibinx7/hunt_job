@@ -24,42 +24,44 @@ gem 'jbuilder'
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
- gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
+gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
 
 # Additional gems for website Authentication, haml, simple form, Active admin
 
 # Basic authentication
- gem 'devise'
+gem 'devise'
 
 # Haml support
- gem 'haml'
- gem "haml-rails"
+gem 'haml'
+gem "haml-rails"
 
 # Simple form
- gem 'simple_form'
+gem 'simple_form'
 
 # Foundation gem
- gem 'foundation-rails'
+gem 'foundation-rails'
  # gem 'foundation-rails'
  # gem 'zurb-foundation', '~> 4.3.2'
 
 # Fontawesome
- gem "font-awesome-rails"
+gem "font-awesome-rails"
 
 # Authentication with social media
 
- gem 'omniauth-github'
- gem 'omniauth-facebook'
- gem 'omniauth-twitter'
- gem 'omniauth-google'
- gem 'omniauth-google-oauth2'
- gem 'omniauth-gplus', '~> 2.0'
- gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-github'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-gplus', '~> 2.0'
+gem 'omniauth-linkedin-oauth2'
+
+gem 'ckeditor'
+gem 'paperclip'
+
+gem 'country_select'
+gem 'will_paginate-foundation'
 
 
- gem 'ckeditor'
- gem 'paperclip'
-
- gem 'country_select'
- gem 'will_paginate-foundation'
-
+# Background Job 
+gem 'sidekiq'
