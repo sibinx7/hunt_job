@@ -1,0 +1,26 @@
+{
+  "name": "jobs",
+  "version": "2.0.0",
+  "description": "Hunt Job is a rails application to learn Background Jobs, Payment Gateways, React and Other frontend Frameworks",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/jagsit/jobs.git"
+  },
+  "keywords": [
+    "React",
+    "Rails",
+    "Payment",
+    "Background",
+    "Jobs"
+  ],
+  "author": "Sibin Xavier",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/jagsit/jobs#readme"
+}
