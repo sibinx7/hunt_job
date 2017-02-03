@@ -1,9 +1,10 @@
 # Jags HuntJob #
 
-
 ## !Warning : Internal Hobby Project  
 
-Jobs is job posting website develop in ruby on rails. This project use Postgres, common gems
+Jobs is job posting website develop in ruby on rails. This project use Postgres, common gems, Frontend frameworks.
+This Project to learn new technologies and to show on interviews. Please suggest coding standards and errors if you have 
+time 
 
 ### HuntJob website is a sample project to learn rails framework 
 
