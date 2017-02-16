@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails 5 application to learn new features.
 
-Things you may want to cover:
+>
+This is a todo application to learn Ruby on Rails. Application created 2 years ago to learn ruby on rails.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Foundation 
+- Device 
+- Sidekiq 
+- Action cable 
+- Ember JS / React JS / Any other latest Javascript 
