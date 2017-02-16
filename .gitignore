@@ -29,3 +29,7 @@ Vagrantfile
 
 
 
+node_modules
+bower_modules
+.idea 
+.vagrant 
