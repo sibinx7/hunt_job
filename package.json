@@ -1,0 +1,32 @@
+{
+  "name": "jobs",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sibinx7/hunt_job.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sibinx7/hunt_job/issues"
+  },
+  "homepage": "https://github.com/sibinx7/hunt_job#readme",
+  "dependencies": {
+    "dropzone": "^4.3.0",
+    "momentjs": "^2.0.0",
+    "slick-carousel": "^1.6.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1"
+  }
+}
